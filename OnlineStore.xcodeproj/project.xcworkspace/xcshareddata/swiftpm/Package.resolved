@@ -1,0 +1,33 @@
+{
+  "originHash" : "f47133cff7a3151eee019d40eb0d4cb38a341d3b7ff0ce32cee6ede6258d1ba9",
+  "pins" : [
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "state" : {
+        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
+        "version" : "7.11.0"
+      }
+    },
+    {
+      "identity" : "route",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/timonity/Route",
+      "state" : {
+        "revision" : "d4e38bd27a1a04a675e1d222e7695da651a1e682",
+        "version" : "0.9.1"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
+      }
+    }
+  ],
+  "version" : 3
+}
