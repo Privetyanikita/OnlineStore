@@ -35,6 +35,14 @@
 		8493BB5F2BCEBF1D00E239B4 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB5E2BCEBF1D00E239B4 /* FirebaseRemoteConfigSwift */; };
 		8493BB612BCEBF1D00E239B4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB602BCEBF1D00E239B4 /* FirebaseStorage */; };
 		8493BB632BCEBF1D00E239B4 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB622BCEBF1D00E239B4 /* FirebaseStorageCombine-Community */; };
+		8493BB6B2BCEC08200E239B4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */; };
+		8493BB6D2BCEC0A800E239B4 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB6C2BCEC0A800E239B4 /* LogInView.swift */; };
+		8493BB6F2BCEC10000E239B4 /* LogInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB6E2BCEC10000E239B4 /* LogInModel.swift */; };
+		8493BB742BCEC15C00E239B4 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB732BCEC15C00E239B4 /* SingUpViewController.swift */; };
+		8493BB762BCEC16D00E239B4 /* SingUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB752BCEC16C00E239B4 /* SingUpView.swift */; };
+		8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB772BCEC17C00E239B4 /* SingUpModel.swift */; };
+		8493BB7D2BCEC37D00E239B4 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB7C2BCEC37D00E239B4 /* FirebaseManager.swift */; };
+		8493BB7F2BCEC39800E239B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB7E2BCEC39800E239B4 /* NetworkManager.swift */; };
 		84D7BE7D2BCD8F9500936C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BE7C2BCD8F9500936C69 /* AppDelegate.swift */; };
 		84D7BE7F2BCD8F9500936C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BE7E2BCD8F9500936C69 /* SceneDelegate.swift */; };
 		84D7BE862BCD8F9800936C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D7BE852BCD8F9800936C69 /* Assets.xcassets */; };
@@ -65,6 +73,14 @@
 
 /* Begin PBXFileReference section */
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		8493BB6C2BCEC0A800E239B4 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		8493BB6E2BCEC10000E239B4 /* LogInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModel.swift; sourceTree = "<group>"; };
+		8493BB732BCEC15C00E239B4 /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
+		8493BB752BCEC16C00E239B4 /* SingUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpView.swift; sourceTree = "<group>"; };
+		8493BB772BCEC17C00E239B4 /* SingUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpModel.swift; sourceTree = "<group>"; };
+		8493BB7C2BCEC37D00E239B4 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		8493BB7E2BCEC39800E239B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		84D7BE792BCD8F9500936C69 /* OnlineStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlineStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D7BE7C2BCD8F9500936C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D7BE7E2BCD8F9500936C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +157,108 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		8493BB642BCEBFE400E239B4 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB652BCEC00200E239B4 /* LogIn */,
+				8493BB662BCEC00D00E239B4 /* SingUp */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		8493BB652BCEC00200E239B4 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB692BCEC02C00E239B4 /* Model */,
+				8493BB682BCEC02600E239B4 /* View */,
+				8493BB672BCEC01B00E239B4 /* ViewController */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		8493BB662BCEC00D00E239B4 /* SingUp */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB722BCEC11600E239B4 /* Model */,
+				8493BB712BCEC11000E239B4 /* View */,
+				8493BB702BCEC10600E239B4 /* ViewController */,
+			);
+			path = SingUp;
+			sourceTree = "<group>";
+		};
+		8493BB672BCEC01B00E239B4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8493BB682BCEC02600E239B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB6C2BCEC0A800E239B4 /* LogInView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8493BB692BCEC02C00E239B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB6E2BCEC10000E239B4 /* LogInModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8493BB702BCEC10600E239B4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB732BCEC15C00E239B4 /* SingUpViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8493BB712BCEC11000E239B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB752BCEC16C00E239B4 /* SingUpView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8493BB722BCEC11600E239B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB772BCEC17C00E239B4 /* SingUpModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8493BB792BCEC2F300E239B4 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB7A2BCEC30C00E239B4 /* Network */,
+				8493BB7B2BCEC34B00E239B4 /* Firebase */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		8493BB7A2BCEC30C00E239B4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB7E2BCEC39800E239B4 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8493BB7B2BCEC34B00E239B4 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				8493BB7C2BCEC37D00E239B4 /* FirebaseManager.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		84D7BE702BCD8F9500936C69 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +280,7 @@
 			children = (
 				84D7BE902BCD909100936C69 /* App */,
 				84D7BE922BCD90FE00936C69 /* Modules */,
+				8493BB792BCEC2F300E239B4 /* Manager */,
 				84D7BE912BCD90A100936C69 /* SupportFile */,
 			);
 			path = OnlineStore;
@@ -189,6 +308,7 @@
 		84D7BE922BCD90FE00936C69 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8493BB642BCEBFE400E239B4 /* Authorization */,
 				369AE5142BCEA461009157D6 /* TabBar */,
 				84D7BE932BCDA43E00936C69 /* Home */,
 				84D7BE942BCDA45A00936C69 /* Search Result */,
@@ -520,18 +640,26 @@
 				84D7BEAC2BCDA8C700936C69 /* SearchModel.swift in Sources */,
 				84D7BEA82BCDA8A000936C69 /* SerchViewController.swift in Sources */,
 				84D7BEC42BCDAA2800936C69 /* WhishListViewController.swift in Sources */,
+				8493BB742BCEC15C00E239B4 /* SingUpViewController.swift in Sources */,
 				84D7BEBF2BCDA9E500936C69 /* CartViewController.swift in Sources */,
 				84D7BECD2BCDAB1300936C69 /* ProfileViewController.swift in Sources */,
+				8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */,
+				8493BB6D2BCEC0A800E239B4 /* LogInView.swift in Sources */,
 				84D7BEB32BCDA93E00936C69 /* DetailView.swift in Sources */,
 				84D7BE7D2BCD8F9500936C69 /* AppDelegate.swift in Sources */,
+				8493BB7F2BCEC39800E239B4 /* NetworkManager.swift in Sources */,
 				84D7BECF2BCDAB4000936C69 /* ProfileView.swift in Sources */,
 				84D7BEBD2BCDA9C000936C69 /* CartView.swift in Sources */,
+				8493BB7D2BCEC37D00E239B4 /* FirebaseManager.swift in Sources */,
+				8493BB6B2BCEC08200E239B4 /* LogInViewController.swift in Sources */,
 				84D7BEA02BCDA7FD00936C69 /* HomeView.swift in Sources */,
 				84D7BED12BCDAB5000936C69 /* ProfileModel.swift in Sources */,
+				8493BB762BCEC16D00E239B4 /* SingUpView.swift in Sources */,
 				84D7BEBB2BCDA9B300936C69 /* CartModel.swift in Sources */,
 				369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */,
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,
 				84D7BE7F2BCD8F9500936C69 /* SceneDelegate.swift in Sources */,
+				8493BB6F2BCEC10000E239B4 /* LogInModel.swift in Sources */,
 				84D7BEA22BCDA85200936C69 /* HomeViewController.swift in Sources */,
 				84D7BEC62BCDAA4100936C69 /* WishView.swift in Sources */,
 			);
