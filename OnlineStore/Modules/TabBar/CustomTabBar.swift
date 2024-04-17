@@ -21,7 +21,7 @@ final class CustomTabBar: UITabBarController {
     private func generateTabBar(){
         let homeVC = HomeViewController()
         let wishListVC = WhishListViewController()
-        let profileVC = OnbordingViewController()
+        let profileVC = ProfileViewController()
         setUPVC(title: "Home", image: UIImage(named: "Home"), vc: homeVC)
         setUPVC(title: "Wishlist", image: UIImage(named: "Heart"), vc: wishListVC)
         setUPVC(title: "Account", image: UIImage(named: "Profile"), vc: profileVC)
