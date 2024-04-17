@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		362AF01D2BD00212002D74FF /* OnbordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF01C2BD00212002D74FF /* OnbordingModel.swift */; };
+		362AF01F2BD0022A002D74FF /* OnbordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF01E2BD0022A002D74FF /* OnbordingViewController.swift */; };
+		362AF0212BD0023F002D74FF /* OnbordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0202BD0023F002D74FF /* OnbordingCell.swift */; };
+		362AF0232BD00277002D74FF /* UIPageControl + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0222BD00277002D74FF /* UIPageControl + ext.swift */; };
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
 		369AE5282BCFCB67009157D6 /* CompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5272BCFCB67009157D6 /* CompositionalLayout.swift */; };
 		369AE52A2BCFCBB8009157D6 /* UIimageView + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5292BCFCBB8009157D6 /* UIimageView + ext.swift */; };
@@ -86,6 +90,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		362AF01C2BD00212002D74FF /* OnbordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingModel.swift; sourceTree = "<group>"; };
+		362AF01E2BD0022A002D74FF /* OnbordingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingViewController.swift; sourceTree = "<group>"; };
+		362AF0202BD0023F002D74FF /* OnbordingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbordingCell.swift; sourceTree = "<group>"; };
+		362AF0222BD00277002D74FF /* UIPageControl + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageControl + ext.swift"; sourceTree = "<group>"; };
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		369AE5272BCFCB67009157D6 /* CompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayout.swift; sourceTree = "<group>"; };
 		369AE5292BCFCBB8009157D6 /* UIimageView + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIimageView + ext.swift"; sourceTree = "<group>"; };
@@ -186,6 +194,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		362AF0182BD00002002D74FF /* Onbording */ = {
+			isa = PBXGroup;
+			children = (
+				362AF01B2BD00034002D74FF /* Model */,
+				362AF01A2BD00029002D74FF /* View */,
+				362AF0192BD00018002D74FF /* ViewController */,
+			);
+			path = Onbording;
+			sourceTree = "<group>";
+		};
+		362AF0192BD00018002D74FF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				362AF01E2BD0022A002D74FF /* OnbordingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		362AF01A2BD00029002D74FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				362AF0202BD0023F002D74FF /* OnbordingCell.swift */,
+				362AF0222BD00277002D74FF /* UIPageControl + ext.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		362AF01B2BD00034002D74FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				362AF01C2BD00212002D74FF /* OnbordingModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		369AE5142BCEA461009157D6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +428,7 @@
 		84D7BE922BCD90FE00936C69 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				362AF0182BD00002002D74FF /* Onbording */,
 				8493BB642BCEBFE400E239B4 /* Authorization */,
 				369AE5142BCEA461009157D6 /* TabBar */,
 				84D7BE932BCDA43E00936C69 /* Home */,
@@ -717,6 +761,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				362AF0212BD0023F002D74FF /* OnbordingCell.swift in Sources */,
 				369AE5392BCFCD1F009157D6 /* CategoriesCell.swift in Sources */,
 				369AE52E2BCFCC00009157D6 /* HomeSearchBar.swift in Sources */,
 				84D7BEC82BCDAA6000936C69 /* WishModel.swift in Sources */,
@@ -735,6 +780,8 @@
 				369AE52A2BCFCBB8009157D6 /* UIimageView + ext.swift in Sources */,
 				8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */,
 				8493BB6D2BCEC0A800E239B4 /* LogInView.swift in Sources */,
+				362AF0232BD00277002D74FF /* UIPageControl + ext.swift in Sources */,
+				362AF01F2BD0022A002D74FF /* OnbordingViewController.swift in Sources */,
 				84D7BEB32BCDA93E00936C69 /* DetailView.swift in Sources */,
 				84D7BE7D2BCD8F9500936C69 /* AppDelegate.swift in Sources */,
 				369AE5282BCFCB67009157D6 /* CompositionalLayout.swift in Sources */,
@@ -755,6 +802,7 @@
 				369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */,
 				369AE5402BCFCDBB009157D6 /* HomeCollectionView.swift in Sources */,
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,
+				362AF01D2BD00212002D74FF /* OnbordingModel.swift in Sources */,
 				84D7BE7F2BCD8F9500936C69 /* SceneDelegate.swift in Sources */,
 				8493BB6F2BCEC10000E239B4 /* LogInModel.swift in Sources */,
 				369AE53C2BCFCD5A009157D6 /* ProductCell.swift in Sources */,

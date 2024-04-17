@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addViews()
+        setViews()
         layoutViews()
         setUPDelegates()
         setupDataSource()
@@ -79,6 +79,7 @@ extension HomeViewController{
             case .categories(let categoriesModel):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.resuseID, for: indexPath) as? CategoriesCell else { return UICollectionViewCell() }
                 cell.configCell(categoryLabelText: categoriesModel.name, image: categoriesModel.image)
+                self.selectedCategory == indexPath ?  cell.setSelectedBorder() : cell.setDefaultBorder()
                 return cell
             case .products(let productModel):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.resuseID, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
@@ -139,20 +140,7 @@ private extension HomeViewController{
 }
 
 // MARK: - UICollectionViewDelegate
-extension HomeViewController: UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let item = diffableDataSource?.itemIdentifier(for: indexPath) else {return}
-        switch item{
-        case .searchBar:
-            break
-        case .categories(_):
-            let cell = cell as? CategoriesCell
-            self.selectedCategory == indexPath ?  cell?.setSelectedBorder() : cell?.setDefaultBorder()
-        case .products(_):
-            break
-        }
-    }
-    
+extension HomeViewController: UICollectionViewDelegate{    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = diffableDataSource?.itemIdentifier(for: indexPath) else {return}
         switch item{
@@ -170,7 +158,7 @@ extension HomeViewController: UICollectionViewDelegate{
 
 // MARK: - Constraints
 private extension HomeViewController{
-    func addViews(){
+    func setViews(){
         [
             collectionView,
         ].forEach { view.addSubview($0) }
