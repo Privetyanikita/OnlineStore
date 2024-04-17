@@ -14,7 +14,7 @@ class TermsView: UIView {
     
     private let termsLabel: UILabel = {
         let termsLabel = UILabel()
-        termsLabel.font = .systemFont(ofSize: 24, weight: .regular)
+        termsLabel.font = Font.getFont(.medium, size: 24)
         termsLabel.textColor = .darkGray
         termsLabel.textAlignment = .left
         termsLabel.text = "Terms & Conditions"
@@ -33,7 +33,7 @@ class TermsView: UIView {
     private let termsText: UITextView = {
         let termsText = UITextView()
         termsText.isEditable = false
-        termsText.font = .systemFont(ofSize: 14, weight: .regular)
+        termsText.font = Font.getFont(.regular, size: 14)
         termsText.textColor = .darkGray
         termsText.textAlignment = .justified
         

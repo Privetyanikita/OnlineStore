@@ -7,29 +7,37 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
-
+class CartViewController: BaseViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Your Cart"
+        hookUpNavBarButtons()
     }
-    
+
     override func loadView() {
         super.loadView()
-        let cartView = CartView()
-        cartView.tableViewHandler = self
         view = CartView()
     }
     
-}
-
-extension CartViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+    override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
+       CustomNavigationBarConfiguration(
+        title: Text.cart,
+        withSearchTextField: false,
+        isSetupBackButton: true,
+        rightButtons: [.shoppingCart])
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    private func hookUpNavBarButtons() {
+        customNavigationBar.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        customNavigationBar.shoppingCartButton.addTarget(self, action: #selector(shoppingCartButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func backButtonTapped() {
+        print(">> BACK BTN tapped")
+    }
+    
+    @objc private func shoppingCartButtonTapped() {
+        print(">> SHOPPING CART BTN tapped")
     }
     
 }

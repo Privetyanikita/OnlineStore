@@ -6,9 +6,3 @@
 //
 
 import UIKit
-
-struct Product {
-    let name: String
-    let photo: UIImage
-    let price: Double
-}

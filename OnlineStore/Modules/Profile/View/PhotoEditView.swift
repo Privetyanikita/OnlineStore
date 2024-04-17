@@ -33,7 +33,7 @@ class PhotoEditView: UIView {
     
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        titleLabel.font = Font.getFont(.medium, size: 24)
         titleLabel.textColor = .darkGray
         titleLabel.textAlignment = .center
         titleLabel.text = "Change your picture"
@@ -43,7 +43,7 @@ class PhotoEditView: UIView {
     
     private let separator: UIView = {
         let separator = UIView()
-        separator.backgroundColor = .customLightGray
+        separator.backgroundColor = .customLightGrey
         
         return separator
     }()
@@ -141,13 +141,13 @@ extension UIButton {
     }
  
     private func setupEditPhotoButtonUI(title: String, leftPicName: String, color: UIColor) {
-        backgroundColor = .customLightGray
+        backgroundColor = .customLightGrey
         layer.cornerRadius = 12
         let leftPic = UIImageView()
         leftPic.image = UIImage(systemName: leftPicName)
         leftPic.tintColor = color
         let buttonTitle = UILabel()
-        buttonTitle.font = .systemFont(ofSize: 16, weight: .medium)
+        buttonTitle.font = Font.getFont(.medium, size: 16)
         buttonTitle.textColor = color
         buttonTitle.textAlignment = .left
         buttonTitle.text = title
@@ -155,14 +155,20 @@ extension UIButton {
         addSubview(buttonTitle)
         subviews.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
         
-        NSLayoutConstraint.activate([
-            leftPic.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
-            leftPic.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            leftPic.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            heightAnchor.constraint(equalToConstant: 60),
-            buttonTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
-            buttonTitle.leadingAnchor.constraint(equalTo: leftPic.trailingAnchor, constant: 18)
-        ])
+        snp.makeConstraints { make in
+            make.height.equalTo(60)
+        }
+        
+        leftPic.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().offset(18)
+        }
+        
+        buttonTitle.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(leftPic.snp.trailing).offset(18)
+        }
+        
     }
 }
 

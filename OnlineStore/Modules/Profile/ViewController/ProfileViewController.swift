@@ -7,15 +7,18 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: BaseViewController {
     
     private var user = User(name: "User Name", mail: "newuser@gmail.com", password: "12345678")
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Profile"
+    override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
+       CustomNavigationBarConfiguration(
+        title: Text.profile,
+        withSearchTextField: false,
+        isSetupBackButton: false,
+        rightButtons: [])
     }
-    
+
     override func loadView() {
         super.loadView()
         setupView()

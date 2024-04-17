@@ -13,7 +13,7 @@ class CartView: UIView {
     
     private let deliveryLabel: UILabel = {
         let deliveryLabel = UILabel()
-        deliveryLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        deliveryLabel.font = Font.getFont(.regular, size: 14)
         deliveryLabel.textColor = .darkGray
         deliveryLabel.textAlignment = .left
         deliveryLabel.text = "Delivery to"
@@ -23,7 +23,7 @@ class CartView: UIView {
     
     private let locationLabel: UILabel = {
         let locationLabel = UILabel()
-        locationLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        locationLabel.font = Font.getFont(.regular, size: 14)
         locationLabel.textColor = .darkGray
         locationLabel.textAlignment = .right
         locationLabel.text = "Salatiga City, Central Java"
@@ -47,14 +47,14 @@ class CartView: UIView {
     
     private let separator: UIView = {
         let separator = UIView()
-        separator.backgroundColor = .customLightGray
+        separator.backgroundColor = .customLightGrey
         
         return separator
     }()
     
     private let summaryLabel: UILabel = {
         let summaryLabel = UILabel()
-        summaryLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        summaryLabel.font = Font.getFont(.medium, size: 16)
         summaryLabel.textColor = .darkGray
         summaryLabel.textAlignment = .left
         summaryLabel.text = "Order Summary"
@@ -64,7 +64,7 @@ class CartView: UIView {
     
     private let totalLabel: UILabel = {
         let totalLabel = UILabel()
-        totalLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        totalLabel.font = Font.getFont(.regular, size: 14)
         totalLabel.textColor = .darkGray
         totalLabel.textAlignment = .left
         totalLabel.text = "Totals"
@@ -74,10 +74,10 @@ class CartView: UIView {
     
     private let sumLabel: UILabel = {
         let sumLabel = UILabel()
-        sumLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        sumLabel.font = Font.getFont(.regular, size: 14)
         sumLabel.textColor = .darkGray
         sumLabel.textAlignment = .right
-        sumLabel.text = "$ "
+        sumLabel.text = "$ 100"
         
         return sumLabel
     }()

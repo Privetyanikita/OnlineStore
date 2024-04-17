@@ -36,7 +36,7 @@ class ProfileView: UIView {
     
     private let nameField: UITextField = {
         let nameField = UITextField()
-        nameField.font = .systemFont(ofSize: 16, weight: .medium)
+        nameField.font = Font.getFont(.medium, size: 16)
         nameField.textColor = .darkGray
         
         return nameField
@@ -44,7 +44,7 @@ class ProfileView: UIView {
     
     private let mailField: UITextField = {
         let mailField = UITextField()
-        mailField.font = .systemFont(ofSize: 14, weight: .regular)
+        mailField.font = Font.getFont(.regular, size: 14)
         mailField.textColor = .gray
         
         return mailField
@@ -53,7 +53,7 @@ class ProfileView: UIView {
     private let passwordField: UITextField = {
         let passwordField = UITextField()
         passwordField.isSecureTextEntry = true
-        passwordField.font = .systemFont(ofSize: 14, weight: .regular)
+        passwordField.font = Font.getFont(.regular, size: 14)
         passwordField.textColor = .gray
         
         return passwordField
@@ -120,7 +120,7 @@ class ProfileView: UIView {
         
         profileImage.snp.makeConstraints { make in
             make.width.height.equalTo(100)
-            make.top.equalTo(safeAreaLayoutGuide).offset(14)
+            make.top.equalTo(safeAreaLayoutGuide).offset(58)
             make.leading.equalToSuperview().offset(28)
         }
         
@@ -142,7 +142,6 @@ class ProfileView: UIView {
             make.bottom.equalTo(safeAreaLayoutGuide).inset(22)
         }
         
-        layoutIfNeeded()
     }
     
     @objc private func editImageButtonTapped(_ sender: UIButton) {
@@ -174,10 +173,10 @@ extension UIButton {
     }
     
     private func setupUIForProfileButton(title: String, rightPicName: String) {
-        backgroundColor = .customLightGray
+        backgroundColor = .customLightGrey
         layer.cornerRadius = 12
         let buttonTitle = UILabel()
-        buttonTitle.font = .systemFont(ofSize: 16, weight: .semibold)
+        buttonTitle.font = Font.getFont(.semiBold, size: 16)
         buttonTitle.textColor = .gray
         buttonTitle.textAlignment = .left
         buttonTitle.text = title
@@ -188,13 +187,19 @@ extension UIButton {
         addSubview(rightIndicator)
         subviews.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
         
-        NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 56),
-            buttonTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
-            buttonTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            rightIndicator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            rightIndicator.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            rightIndicator.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
-        ])
+        snp.makeConstraints { make in
+            make.height.equalTo(56)
+        }
+        
+        buttonTitle.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+        }
+        
+        rightIndicator.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.top.bottom.equalToSuperview().inset(16)
+        }
+        
     }
 }
