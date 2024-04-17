@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
         window?.rootViewController = CustomTabBar()
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
