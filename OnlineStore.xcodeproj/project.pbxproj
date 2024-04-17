@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
+		833EE2682BCEEA7C0011BC4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2672BCEEA7C0011BC4F /* Constants.swift */; };
+		833EE26C2BCEF5C60011BC4F /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */; };
+		833EE26F2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE26E2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift */; };
+		833EE2722BCEF8F50011BC4F /* UIButton + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2712BCEF8F50011BC4F /* UIButton + Ext.swift */; };
+		833EE2742BCF012A0011BC4F /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2732BCF012A0011BC4F /* BackButton.swift */; };
+		833EE2782BCF06740011BC4F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2772BCF06740011BC4F /* BaseViewController.swift */; };
+		833EE27A2BCF0CCC0011BC4F /* UISearchBar + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2792BCF0CCC0011BC4F /* UISearchBar + Ext.swift */; };
+		833EE27C2BCF0CF70011BC4F /* UIImage + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE27B2BCF0CF70011BC4F /* UIImage + Ext.swift */; };
+		833EE27E2BCF0F430011BC4F /* UIView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE27D2BCF0F430011BC4F /* UIView + Ext.swift */; };
 		8493BB2F2BCEBF1D00E239B4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB2E2BCEBF1D00E239B4 /* FirebaseAnalytics */; };
 		8493BB312BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB302BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion */; };
 		8493BB332BCEBF1D00E239B4 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB322BCEBF1D00E239B4 /* FirebaseAnalyticsSwift */; };
@@ -73,6 +82,15 @@
 
 /* Begin PBXFileReference section */
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		833EE2672BCEEA7C0011BC4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		833EE26E2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarButton.swift; sourceTree = "<group>"; };
+		833EE2712BCEF8F50011BC4F /* UIButton + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Ext.swift"; sourceTree = "<group>"; };
+		833EE2732BCF012A0011BC4F /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		833EE2772BCF06740011BC4F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		833EE2792BCF0CCC0011BC4F /* UISearchBar + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar + Ext.swift"; sourceTree = "<group>"; };
+		833EE27B2BCF0CF70011BC4F /* UIImage + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage + Ext.swift"; sourceTree = "<group>"; };
+		833EE27D2BCF0F430011BC4F /* UIView + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView + Ext.swift"; sourceTree = "<group>"; };
 		8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8493BB6C2BCEC0A800E239B4 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		8493BB6E2BCEC10000E239B4 /* LogInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModel.swift; sourceTree = "<group>"; };
@@ -155,6 +173,60 @@
 				369AE5162BCEA54C009157D6 /* CustomTabBar.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		833EE2692BCEF5770011BC4F /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				833EE2762BCF065E0011BC4F /* Base */,
+				833EE2752BCF01300011BC4F /* BackButton */,
+				833EE26D2BCEF7C70011BC4F /* CustomNavigationBarButton */,
+				833EE26A2BCEF58F0011BC4F /* CustomNavigationBar */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		833EE26A2BCEF58F0011BC4F /* CustomNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */,
+			);
+			path = CustomNavigationBar;
+			sourceTree = "<group>";
+		};
+		833EE26D2BCEF7C70011BC4F /* CustomNavigationBarButton */ = {
+			isa = PBXGroup;
+			children = (
+				833EE26E2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift */,
+			);
+			path = CustomNavigationBarButton;
+			sourceTree = "<group>";
+		};
+		833EE2702BCEF8B40011BC4F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				833EE27D2BCF0F430011BC4F /* UIView + Ext.swift */,
+				833EE2712BCEF8F50011BC4F /* UIButton + Ext.swift */,
+				833EE2792BCF0CCC0011BC4F /* UISearchBar + Ext.swift */,
+				833EE27B2BCF0CF70011BC4F /* UIImage + Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		833EE2752BCF01300011BC4F /* BackButton */ = {
+			isa = PBXGroup;
+			children = (
+				833EE2732BCF012A0011BC4F /* BackButton.swift */,
+			);
+			path = BackButton;
+			sourceTree = "<group>";
+		};
+		833EE2762BCF065E0011BC4F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				833EE2772BCF06740011BC4F /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		8493BB642BCEBFE400E239B4 /* Authorization */ = {
@@ -278,6 +350,8 @@
 		84D7BE7B2BCD8F9500936C69 /* OnlineStore */ = {
 			isa = PBXGroup;
 			children = (
+				833EE2702BCEF8B40011BC4F /* Extensions */,
+				833EE2692BCEF5770011BC4F /* CustomViews */,
 				84D7BE902BCD909100936C69 /* App */,
 				84D7BE922BCD90FE00936C69 /* Modules */,
 				8493BB792BCEC2F300E239B4 /* Manager */,
@@ -301,6 +375,7 @@
 				84D7BE852BCD8F9800936C69 /* Assets.xcassets */,
 				84D7BE872BCD8F9800936C69 /* LaunchScreen.storyboard */,
 				84D7BE8A2BCD8F9800936C69 /* Info.plist */,
+				833EE2672BCEEA7C0011BC4F /* Constants.swift */,
 			);
 			path = SupportFile;
 			sourceTree = "<group>";
@@ -633,16 +708,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				833EE27C2BCF0CF70011BC4F /* UIImage + Ext.swift in Sources */,
 				84D7BEC82BCDAA6000936C69 /* WishModel.swift in Sources */,
 				84D7BEB62BCDA95900936C69 /* DetailModel.swift in Sources */,
 				84D7BE9D2BCDA7C900936C69 /* HomeModel.swift in Sources */,
 				84D7BEAA2BCDA8B200936C69 /* SerchView.swift in Sources */,
 				84D7BEAC2BCDA8C700936C69 /* SearchModel.swift in Sources */,
+				833EE2782BCF06740011BC4F /* BaseViewController.swift in Sources */,
+				833EE26C2BCEF5C60011BC4F /* CustomNavigationBar.swift in Sources */,
+				833EE27E2BCF0F430011BC4F /* UIView + Ext.swift in Sources */,
+				833EE2742BCF012A0011BC4F /* BackButton.swift in Sources */,
+				833EE2682BCEEA7C0011BC4F /* Constants.swift in Sources */,
 				84D7BEA82BCDA8A000936C69 /* SerchViewController.swift in Sources */,
 				84D7BEC42BCDAA2800936C69 /* WhishListViewController.swift in Sources */,
 				8493BB742BCEC15C00E239B4 /* SingUpViewController.swift in Sources */,
 				84D7BEBF2BCDA9E500936C69 /* CartViewController.swift in Sources */,
 				84D7BECD2BCDAB1300936C69 /* ProfileViewController.swift in Sources */,
+				833EE2722BCEF8F50011BC4F /* UIButton + Ext.swift in Sources */,
 				8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */,
 				8493BB6D2BCEC0A800E239B4 /* LogInView.swift in Sources */,
 				84D7BEB32BCDA93E00936C69 /* DetailView.swift in Sources */,
@@ -651,8 +733,10 @@
 				84D7BECF2BCDAB4000936C69 /* ProfileView.swift in Sources */,
 				84D7BEBD2BCDA9C000936C69 /* CartView.swift in Sources */,
 				8493BB7D2BCEC37D00E239B4 /* FirebaseManager.swift in Sources */,
+				833EE27A2BCF0CCC0011BC4F /* UISearchBar + Ext.swift in Sources */,
 				8493BB6B2BCEC08200E239B4 /* LogInViewController.swift in Sources */,
 				84D7BEA02BCDA7FD00936C69 /* HomeView.swift in Sources */,
+				833EE26F2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift in Sources */,
 				84D7BED12BCDAB5000936C69 /* ProfileModel.swift in Sources */,
 				8493BB762BCEC16D00E239B4 /* SingUpView.swift in Sources */,
 				84D7BEBB2BCDA9B300936C69 /* CartModel.swift in Sources */,
