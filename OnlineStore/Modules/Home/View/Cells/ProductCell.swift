@@ -14,7 +14,7 @@ enum AddToCartCellEvent {
 }
 
 class ProductCell: UICollectionViewCell {
-    static let resuseID = "ProductCell"
+    static let resuseID = String(describing: ProductCell.self)
     var onButtonTap: ((AddToCartCellEvent) -> Void)?
 
     private let productImage: UIImageView = {

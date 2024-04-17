@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchbarCell: UICollectionViewCell {
-    static let resuseID = "SearchbarCell"
+    static let resuseID = String(describing: SearchbarCell.self)
     
     private let searchBar = HomeSearchBar()
     

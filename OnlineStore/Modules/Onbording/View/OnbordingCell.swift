@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class OnbordingCell: UICollectionViewCell {
-    static let resuseID = "OnbordingCell"
+    static let resuseID = String(describing: OnbordingCell.self)
     
     private let titleLabel: UILabel = {
         let label = UILabel()

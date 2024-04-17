@@ -12,7 +12,7 @@ protocol HeaderProductsViewDelegate: AnyObject {
 }
 
 class HeaderProductsView: UICollectionReusableView {
-    static let resuseID = "HeaderProductsView"
+    static let resuseID = String(describing: HeaderProductsView.self)
     
     weak var delegate: HeaderProductsViewDelegate?
     

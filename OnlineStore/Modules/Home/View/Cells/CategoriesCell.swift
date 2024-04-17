@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 class CategoriesCell: UICollectionViewCell {
-    static let resuseID = "CategoriesCell"
+    static let resuseID = String(describing: CategoriesCell.self)
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
