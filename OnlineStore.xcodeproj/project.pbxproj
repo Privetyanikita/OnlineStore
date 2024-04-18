@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
+		524655562BD1982700A40E07 /* Model in Resources */ = {isa = PBXBuildFile; fileRef = 524655552BD1982700A40E07 /* Model */; };
 		833EE2682BCEEA7C0011BC4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2672BCEEA7C0011BC4F /* Constants.swift */; };
 		833EE26C2BCEF5C60011BC4F /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */; };
 		833EE26F2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE26E2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift */; };
@@ -100,6 +101,7 @@
 
 /* Begin PBXFileReference section */
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		524655552BD1982700A40E07 /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Model; sourceTree = "<group>"; };
 		833EE2672BCEEA7C0011BC4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		833EE26E2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarButton.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				8493BB7E2BCEC39800E239B4 /* NetworkManager.swift */,
+				524655552BD1982700A40E07 /* Model */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				524655562BD1982700A40E07 /* Model in Resources */,
 				84D7BE862BCD8F9800936C69 /* Assets.xcassets in Resources */,
 				84D7BE892BCD8F9800936C69 /* Base in Resources */,
 			);
