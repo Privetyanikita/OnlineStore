@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<SectionModel, ItemModel>?
     
@@ -51,6 +51,17 @@ class HomeViewController: UIViewController {
         let view = HomeCollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
+    
+    
+    override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
+       CustomNavigationBarConfiguration(
+        title: "",
+        withSearchTextField: false,
+        withLocationView: true,
+        isSetupBackButton: false,
+        rightButtons: [.shoppingCart, .notification])
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,7 +179,7 @@ private extension HomeViewController{
         view.backgroundColor = .white
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
+            make.top.equalTo(customNavigationBar.snp.bottom).offset(8)
             make.bottom.equalToSuperview()
         }
     }
