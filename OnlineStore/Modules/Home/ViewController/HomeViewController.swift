@@ -45,6 +45,7 @@ class HomeViewController: BaseViewController {
     
     private var selectedCategory: IndexPath = .init()
     
+    
     private let collectionView: HomeCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -125,7 +126,7 @@ extension HomeViewController{
             guard kind == UICollectionView.elementKindSectionHeader else { return nil }
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderProductsView.resuseID, for: indexPath) as? HeaderProductsView else { return nil }
             let section = self.sections[indexPath.section]
-            header.configureHeader(sectionTitle: section.title)
+            header.configureHeader(sectionTitle: section.title, type: .home)
             header.delegate = self
             return header
         }
@@ -199,7 +200,7 @@ private extension HomeViewController{
     }
 }
 // MARK: - HeaderProductsViewDelegate
-extension HomeViewController: HeaderProductsViewDelegate{
+extension HomeViewController: HeaderProductsDelegate{
     func choseFiltration(filterType: FilterModel) {
         switch filterType{
         case .nameAlphabet:
