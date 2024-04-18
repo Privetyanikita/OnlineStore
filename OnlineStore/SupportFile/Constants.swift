@@ -17,8 +17,13 @@ enum Image {
     static let alarmClock = UIImage(named: "alarm") 
     static let bell = UIImage(systemName: "bell")
     static let systemCart = UIImage(systemName: "cart")
+    static let chevronDown = UIImage(systemName: "chevron.down")
+    
 }
 
 enum Text {
     static let detailsProduct = "Details product"
+    static let deliveryAddress = "Delivery address"
+    static let profile = "Profile"
+    static let cart = "Your Cart"
 }

@@ -53,13 +53,16 @@ class HomeViewController: BaseViewController {
         return view
     }()
     
+    
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
-        CustomNavigationBarConfiguration(
-            title: Titles.title,
-            withSearchTextField: false,
-            isSetupBackButton: false,
-            rightButtons: [.shoppingCart, .notification])
+       CustomNavigationBarConfiguration(
+        title: "",
+        withSearchTextField: false,
+        withLocationView: true,
+        isSetupBackButton: false,
+        rightButtons: [.shoppingCart, .notification])
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,7 +197,7 @@ private extension HomeViewController{
         view.backgroundColor = .white
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(62)
+            make.top.equalTo(customNavigationBar.snp.bottom).offset(8)
             make.bottom.equalToSuperview()
         }
     }
