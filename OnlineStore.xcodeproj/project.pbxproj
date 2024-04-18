@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		362AF0252BD113FA002D74FF /* SectionSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0242BD113FA002D74FF /* SectionSearchModel.swift */; };
+		362AF0272BD11557002D74FF /* SearchResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0262BD11557002D74FF /* SearchResultCollectionView.swift */; };
+		362AF02D2BD12777002D74FF /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF02C2BD12777002D74FF /* SearchResultCell.swift */; };
+		362AF02F2BD12DB6002D74FF /* HeaderSavesSerches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF02E2BD12DB6002D74FF /* HeaderSavesSerches.swift */; };
+		362AF0322BD135E3002D74FF /* SectionsSavesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0312BD135E3002D74FF /* SectionsSavesModel.swift */; };
+		362AF0342BD136C4002D74FF /* SavesSearchesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0332BD136C4002D74FF /* SavesSearchesCollectionView.swift */; };
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
 		833EE2682BCEEA7C0011BC4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2672BCEEA7C0011BC4F /* Constants.swift */; };
 		833EE26C2BCEF5C60011BC4F /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */; };
@@ -84,7 +90,7 @@
 		84D7BE892BCD8F9800936C69 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 84D7BE882BCD8F9800936C69 /* Base */; };
 		84D7BEA82BCDA8A000936C69 /* SerchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEA72BCDA8A000936C69 /* SerchViewController.swift */; };
 		84D7BEAA2BCDA8B200936C69 /* SerchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEA92BCDA8B200936C69 /* SerchView.swift */; };
-		84D7BEAC2BCDA8C700936C69 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEAB2BCDA8C700936C69 /* SearchModel.swift */; };
+		84D7BEAC2BCDA8C700936C69 /* SavesSerchesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEAB2BCDA8C700936C69 /* SavesSerchesModel.swift */; };
 		84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEB02BCDA92B00936C69 /* DetailViewController.swift */; };
 		84D7BEB32BCDA93E00936C69 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEB22BCDA93E00936C69 /* DetailView.swift */; };
 		84D7BEB62BCDA95900936C69 /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEB52BCDA95900936C69 /* DetailModel.swift */; };
@@ -104,6 +110,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		362AF0242BD113FA002D74FF /* SectionSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSearchModel.swift; sourceTree = "<group>"; };
+		362AF0262BD11557002D74FF /* SearchResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionView.swift; sourceTree = "<group>"; };
+		362AF02C2BD12777002D74FF /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		362AF02E2BD12DB6002D74FF /* HeaderSavesSerches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSavesSerches.swift; sourceTree = "<group>"; };
+		362AF0312BD135E3002D74FF /* SectionsSavesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSavesModel.swift; sourceTree = "<group>"; };
+		362AF0332BD136C4002D74FF /* SavesSearchesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavesSearchesCollectionView.swift; sourceTree = "<group>"; };
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		833EE2672BCEEA7C0011BC4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
@@ -165,7 +177,7 @@
 		84D7BE8A2BCD8F9800936C69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D7BEA72BCDA8A000936C69 /* SerchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerchViewController.swift; sourceTree = "<group>"; };
 		84D7BEA92BCDA8B200936C69 /* SerchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerchView.swift; sourceTree = "<group>"; };
-		84D7BEAB2BCDA8C700936C69 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		84D7BEAB2BCDA8C700936C69 /* SavesSerchesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavesSerchesModel.swift; sourceTree = "<group>"; };
 		84D7BEB02BCDA92B00936C69 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		84D7BEB22BCDA93E00936C69 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		84D7BEB52BCDA95900936C69 /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
@@ -222,6 +234,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		362AF0302BD13470002D74FF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				362AF02E2BD12DB6002D74FF /* HeaderSavesSerches.swift */,
+				362AF02C2BD12777002D74FF /* SearchResultCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		369AE5142BCEA461009157D6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,7 +658,10 @@
 		84D7BEA52BCDA87200936C69 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				362AF0302BD13470002D74FF /* Cells */,
 				84D7BEA92BCDA8B200936C69 /* SerchView.swift */,
+				362AF0262BD11557002D74FF /* SearchResultCollectionView.swift */,
+				362AF0332BD136C4002D74FF /* SavesSearchesCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -645,7 +669,9 @@
 		84D7BEA62BCDA87900936C69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				84D7BEAB2BCDA8C700936C69 /* SearchModel.swift */,
+				84D7BEAB2BCDA8C700936C69 /* SavesSerchesModel.swift */,
+				362AF0242BD113FA002D74FF /* SectionSearchModel.swift */,
+				362AF0312BD135E3002D74FF /* SectionsSavesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -868,7 +894,7 @@
 				84C0ABC12BD02FE1009076B2 /* FilterModel.swift in Sources */,
 				84C0ABC62BD02FE1009076B2 /* HeaderProductsView.swift in Sources */,
 				84D7BEAA2BCDA8B200936C69 /* SerchView.swift in Sources */,
-				84D7BEAC2BCDA8C700936C69 /* SearchModel.swift in Sources */,
+				84D7BEAC2BCDA8C700936C69 /* SavesSerchesModel.swift in Sources */,
 				833EE2782BCF06740011BC4F /* BaseViewController.swift in Sources */,
 				84C0ABBE2BD02FE1009076B2 /* Label + ext.swift in Sources */,
 				833EE26C2BCEF5C60011BC4F /* CustomNavigationBar.swift in Sources */,
@@ -879,6 +905,7 @@
 				84C0ABD72BD03015009076B2 /* UIPageControl + ext.swift in Sources */,
 				84D7BEA82BCDA8A000936C69 /* SerchViewController.swift in Sources */,
 				84D7BEC42BCDAA2800936C69 /* WhishListViewController.swift in Sources */,
+				362AF0342BD136C4002D74FF /* SavesSearchesCollectionView.swift in Sources */,
 				8493BB742BCEC15C00E239B4 /* SingUpViewController.swift in Sources */,
 				84D7BEBF2BCDA9E500936C69 /* CartViewController.swift in Sources */,
 				84C0ABC72BD02FE1009076B2 /* ProductCell.swift in Sources */,
@@ -897,6 +924,7 @@
 				8493BB7F2BCEC39800E239B4 /* NetworkManager.swift in Sources */,
 				84D7BECF2BCDAB4000936C69 /* ProfileView.swift in Sources */,
 				84C0ABCA2BD02FE1009076B2 /* HomeSearchBar.swift in Sources */,
+				362AF02F2BD12DB6002D74FF /* HeaderSavesSerches.swift in Sources */,
 				84D7BEBD2BCDA9C000936C69 /* CartView.swift in Sources */,
 				8493BB7D2BCEC37D00E239B4 /* FirebaseManager.swift in Sources */,
 				833EE27A2BCF0CCC0011BC4F /* UISearchBar + Ext.swift in Sources */,
@@ -906,13 +934,17 @@
 				84C0ABDC2BD158C1009076B2 /* TermsViewController.swift in Sources */,
 				84D7BED12BCDAB5000936C69 /* ProfileModel.swift in Sources */,
 				84C0ABCB2BD02FE1009076B2 /* HomeView.swift in Sources */,
+				362AF02D2BD12777002D74FF /* SearchResultCell.swift in Sources */,
 				8493BB8B2BCEF6D600E239B4 /* FontEnum.swift in Sources */,
 				8493BB762BCEC16D00E239B4 /* SingUpView.swift in Sources */,
 				84D7BEBB2BCDA9B300936C69 /* CartModel.swift in Sources */,
 				369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */,
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,
 				84C0ABE02BD158E1009076B2 /* TermsView.swift in Sources */,
+				362AF0252BD113FA002D74FF /* SectionSearchModel.swift in Sources */,
 				84C0ABC32BD02FE1009076B2 /* ItemModel.swift in Sources */,
+				362AF0272BD11557002D74FF /* SearchResultCollectionView.swift in Sources */,
+				362AF0322BD135E3002D74FF /* SectionsSavesModel.swift in Sources */,
 				84D7BE7F2BCD8F9500936C69 /* SceneDelegate.swift in Sources */,
 				84C0ABC22BD02FE1009076B2 /* HomeModel.swift in Sources */,
 				8493BB6F2BCEC10000E239B4 /* LogInModel.swift in Sources */,

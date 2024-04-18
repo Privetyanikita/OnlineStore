@@ -7,14 +7,24 @@
 
 import UIKit
 import SnapKit
-protocol HeaderProductsViewDelegate: AnyObject {
+
+enum HeaderType{
+    case home
+    case searchResult
+}
+
+protocol HeaderProductsViewDelegate {
+    func changeHeaderTitle(serchWord: String)
+}
+
+protocol HeaderProductsDelegate: AnyObject {
     func choseFiltration(filterType: FilterModel)
 }
 
 class HeaderProductsView: UICollectionReusableView {
     static let resuseID = String(describing: HeaderProductsView.self)
     
-    weak var delegate: HeaderProductsViewDelegate?
+    weak var delegate: HeaderProductsDelegate?
     
     private let filters: [FilterModel] = FilterModel.allCases
     
@@ -117,7 +127,20 @@ class HeaderProductsView: UICollectionReusableView {
         }
     }
     
-    func configureHeader(sectionTitle: String){
+    func configureHeader(sectionTitle: String, type: HeaderType){
         headerLabel.text = sectionTitle
+        switch type{
+        case .home:
+            break
+        case .searchResult:
+            headerLabel.textColor = .lightGray
+            headerLabel.font = Font.getFont(.regular, size: 14)
+        }
+    }
+}
+// MARK: - HeaderProductsViewDelegate
+extension HeaderProductsView: HeaderProductsViewDelegate{
+    func changeHeaderTitle(serchWord: String) {
+        headerLabel.text = "Search result for " + serchWord
     }
 }

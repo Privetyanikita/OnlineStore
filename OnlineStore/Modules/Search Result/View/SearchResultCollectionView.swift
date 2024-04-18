@@ -1,20 +1,19 @@
 //
-//  MainCollectionView.swift
+//  SearchResultCollectionView.swift
 //  OnlineStore
 //
-//  Created by Polina on 17.04.2024.
+//  Created by Polina on 18.04.2024.
 //
-
 
 import UIKit
 
-final class HomeCollectionView: UICollectionView{
-    private var sections: [SectionModel] =  SectionModel.allCases
+final class SearchResultCollectionView: UICollectionView{
+    private var sections: [SectionSearchModel] =  SectionSearchModel.allCases
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-           configCollectionView()
-           registerCells()
+        configCollectionView()
+        registerCells()
     }
     
     required init?(coder: NSCoder) {
@@ -30,8 +29,6 @@ final class HomeCollectionView: UICollectionView{
     }
     
     private func registerCells(){
-        register(SearchbarCell.self, forCellWithReuseIdentifier: SearchbarCell.resuseID)
-        register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.resuseID)
         register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.resuseID)
         register(HeaderProductsView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderProductsView.resuseID)
     }
@@ -40,30 +37,11 @@ final class HomeCollectionView: UICollectionView{
         UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
             guard let self else { return nil }
             let section = sections[sectionIndex]
-            
             switch section{
-            case .categories:
-                return createCategoriesSection()
-            case .products:
+            case .searchResult:
                 return createProductsSection()
-            case .searchbar:
-                return createSearchBar()
             }
         }
-    }
-    
-    private func createSearchBar() -> NSCollectionLayoutSection{
-        let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
-        let group = CompositionalLayout.createGroup(alignment: .horizontal, width:  .fractionalWidth(1), height: .absolute(40), subitems: [item])
-        let section = CompositionalLayout.createSection(group: group, scrollBehavior: .none, groupSpacing: 0, leading: 8, trailing: 8, top: 0, bottom: 0, supplementary: nil)
-        return section
-    }
-    
-    private func createCategoriesSection() -> NSCollectionLayoutSection{
-        let item = CompositionalLayout.createItem(width: .fractionalWidth(0.2), height: .fractionalHeight(1), spacing: 4)
-        let group = CompositionalLayout.createGroup(alignment: .horizontal, width:  .fractionalWidth(1), height: .fractionalHeight(0.1), subitems: [item])
-        let section = CompositionalLayout.createSection(group: group, scrollBehavior: .none, groupSpacing: 4, leading: 12, trailing: 12, top: 24, bottom: 14, supplementary: nil)
-        return section
     }
     
     private func createProductsSection() -> NSCollectionLayoutSection{
@@ -77,3 +55,4 @@ final class HomeCollectionView: UICollectionView{
         .init(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
     }
 }
+

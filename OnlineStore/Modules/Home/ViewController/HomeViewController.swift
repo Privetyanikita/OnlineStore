@@ -28,15 +28,15 @@ class HomeViewController: BaseViewController {
     ]
     
     private var categories: [CategoriesModel] = [
-            .init(id: 1, name: "Clothes", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 2, name: "Toys", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 3, name: "Electronocs", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 4, name: "School", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 5, name: "All", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 6, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 7, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 8, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 9, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 1, name: "Clothes", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 2, name: "Toys", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 3, name: "Electronocs", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 4, name: "School", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 5, name: "All", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 6, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 7, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 8, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 9, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
     ]
     
     private var categArray: [ItemModel] = []
@@ -44,6 +44,7 @@ class HomeViewController: BaseViewController {
     private var sections: [SectionModel] = SectionModel.allCases
     
     private var selectedCategory: IndexPath = .init()
+    
     
     private let collectionView: HomeCollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,6 +66,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hookUpNavBarButtons()
         setViews()
         layoutViews()
         setUPDelegates()
@@ -74,8 +76,24 @@ class HomeViewController: BaseViewController {
         applyDiffableSnapShot()
     }
     
-    private func setUPDelegates(){
+    func setUPDelegates(){
         collectionView.delegate = self
+    }
+    
+}
+// MARK: - SetUP NavBar
+private extension HomeViewController{
+    func hookUpNavBarButtons() {
+        customNavigationBar.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
+        customNavigationBar.shoppingCartButton.addTarget(self, action: #selector(shoppingCartButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func notificationsButtonTapped() {
+        print(">> NOTIFICATIONS BTN tapped")
+    }
+    
+    @objc func shoppingCartButtonTapped() {
+        print(">> SHOPPING CART BTN tapped")
     }
 }
 // MARK: - ConfigDiffableDataSource
@@ -111,7 +129,7 @@ extension HomeViewController{
             guard kind == UICollectionView.elementKindSectionHeader else { return nil }
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderProductsView.resuseID, for: indexPath) as? HeaderProductsView else { return nil }
             let section = self.sections[indexPath.section]
-            header.configureHeader(sectionTitle: section.title)
+            header.configureHeader(sectionTitle: section.title, type: .home)
             header.delegate = self
             return header
         }
@@ -151,7 +169,7 @@ private extension HomeViewController{
 }
 
 // MARK: - UICollectionViewDelegate
-extension HomeViewController: UICollectionViewDelegate{    
+extension HomeViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = diffableDataSource?.itemIdentifier(for: indexPath) else {return}
         switch item{
@@ -185,7 +203,7 @@ private extension HomeViewController{
     }
 }
 // MARK: - HeaderProductsViewDelegate
-extension HomeViewController: HeaderProductsViewDelegate{
+extension HomeViewController: HeaderProductsDelegate{
     func choseFiltration(filterType: FilterModel) {
         switch filterType{
         case .nameAlphabet:

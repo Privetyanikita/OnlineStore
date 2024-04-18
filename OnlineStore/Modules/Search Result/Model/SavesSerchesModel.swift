@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct SavesSerchesModel: Hashable{
+    let id = UUID()
+    let saveSearch: String
+}
