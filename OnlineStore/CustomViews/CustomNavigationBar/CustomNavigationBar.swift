@@ -11,6 +11,7 @@ import SnapKit
 struct CustomNavigationBarConfiguration {
     var title: String = ""
     var withSearchTextField: Bool = false
+    var withLocationView: Bool = false
     var isSetupBackButton: Bool
     var rightButtons: [CustomNavigationBarButtons]
 }
@@ -18,7 +19,6 @@ struct CustomNavigationBarConfiguration {
 
 protocol SetupCustomNavBarProtocol {
     var customNavigationBar: CustomNavigationBar { get set }
-    func setupCustomNavBarOnView()
 }
 
 
@@ -57,7 +57,8 @@ final class CustomNavigationBarImplementation: UIView, CustomNavigationBar {
         return label
     }()
     
-    var backButton: UIButton = BackButton(type: .system)
+    let backButton: UIButton = BackButton(type: .system)
+    let locationView = LocationView()
     let shoppingCartButton = CustomNavigationBarButton(typeButton: .shoppingCart)
     let notificationButton = CustomNavigationBarButton(typeButton: .notification)
     let searchTextField: UISearchBar = {
@@ -87,11 +88,11 @@ final class CustomNavigationBarImplementation: UIView, CustomNavigationBar {
             make.height.equalTo(44)
         }
         
-        let countOfRightButton = (isSetupBackButton) ? 1 : 0
+        let countOfLeftButton = (isSetupBackButton) ? 1 : 0
         
         titleLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().inset(8+8*(countOfRightButton+1)+27*countOfRightButton)
+            make.leading.equalToSuperview().inset(8+8*(countOfLeftButton+1)+27*countOfLeftButton)
             make.trailing.equalToSuperview().inset(8+8*(countOfLeftButtons+1)+27*countOfLeftButtons)
         }
     }
@@ -164,8 +165,27 @@ final class CustomNavigationBarImplementation: UIView, CustomNavigationBar {
     }
     
     
+    private func setupLocationView(_ withLocationView: Bool,
+                                _ rightButtonsCount: Int,
+                                _ withBackButton: Bool
+                                                        ) {
+        if withLocationView {
+            addSubview(locationView)
+            locationView.snp.makeConstraints { make in
+                make.top.bottom.equalToSuperview().inset(5)
+                make.trailing.equalToSuperview().inset(8+12*(rightButtonsCount+1)+27*rightButtonsCount)
+                if withBackButton {
+                    make.leading.equalToSuperview().inset(50)
+                } else {
+                    make.leading.equalToSuperview().inset(16)
+                }
+            }
+        }
+    }
+    
+    
     func setupConfiguration(_ configuration: CustomNavigationBarConfiguration?) {
-        guard let configuration else { return }
+        guard var configuration else { return }
         
         backgroundColor = .systemBackground
         
@@ -177,7 +197,8 @@ final class CustomNavigationBarImplementation: UIView, CustomNavigationBar {
                        configuration.rightButtons.count,
                        configuration.isSetupBackButton
         )
+        setupLocationView(configuration.withLocationView,
+                          configuration.rightButtons.count,
+                          configuration.isSetupBackButton)
     }
-    
-   
 }
