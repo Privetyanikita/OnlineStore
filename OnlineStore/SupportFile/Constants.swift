@@ -24,4 +24,6 @@ enum Image {
 enum Text {
     static let detailsProduct = "Details product"
     static let deliveryAddress = "Delivery address"
+    static let profile = "Profile"
+    static let cart = "Your Cart"
 }
