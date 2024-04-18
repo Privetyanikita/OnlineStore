@@ -5,4 +5,11 @@
 //  Created by NikitaKorniuk   on 15.04.24.
 //
 
-import Foundation
+import UIKit
+
+struct User {
+    var name: String?
+    let mail: String
+    let password: String
+    var photo: UIImage?
+}

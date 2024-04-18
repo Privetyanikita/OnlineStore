@@ -74,6 +74,10 @@
 		84C0ABD62BD03015009076B2 /* OnbordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABCF2BD03015009076B2 /* OnbordingCell.swift */; };
 		84C0ABD72BD03015009076B2 /* UIPageControl + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABD02BD03015009076B2 /* UIPageControl + ext.swift */; };
 		84C0ABD82BD03015009076B2 /* OnbordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABD22BD03015009076B2 /* OnbordingViewController.swift */; };
+		84C0ABDA2BD158B2009076B2 /* PhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABD92BD158B2009076B2 /* PhotoEditViewController.swift */; };
+		84C0ABDC2BD158C1009076B2 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABDB2BD158C1009076B2 /* TermsViewController.swift */; };
+		84C0ABDE2BD158DA009076B2 /* PhotoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABDD2BD158D9009076B2 /* PhotoEditView.swift */; };
+		84C0ABE02BD158E1009076B2 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABDF2BD158E1009076B2 /* TermsView.swift */; };
 		84D7BE7D2BCD8F9500936C69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BE7C2BCD8F9500936C69 /* AppDelegate.swift */; };
 		84D7BE7F2BCD8F9500936C69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BE7E2BCD8F9500936C69 /* SceneDelegate.swift */; };
 		84D7BE862BCD8F9800936C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D7BE852BCD8F9800936C69 /* Assets.xcassets */; };
@@ -149,6 +153,10 @@
 		84C0ABCF2BD03015009076B2 /* OnbordingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnbordingCell.swift; sourceTree = "<group>"; };
 		84C0ABD02BD03015009076B2 /* UIPageControl + ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPageControl + ext.swift"; sourceTree = "<group>"; };
 		84C0ABD22BD03015009076B2 /* OnbordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnbordingViewController.swift; sourceTree = "<group>"; };
+		84C0ABD92BD158B2009076B2 /* PhotoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditViewController.swift; sourceTree = "<group>"; };
+		84C0ABDB2BD158C1009076B2 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		84C0ABDD2BD158D9009076B2 /* PhotoEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditView.swift; sourceTree = "<group>"; };
+		84C0ABDF2BD158E1009076B2 /* TermsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		84D7BE792BCD8F9500936C69 /* OnlineStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlineStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D7BE7C2BCD8F9500936C69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D7BE7E2BCD8F9500936C69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -717,6 +725,8 @@
 		84D7BEC92BCDAA6C00936C69 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				84C0ABD92BD158B2009076B2 /* PhotoEditViewController.swift */,
+				84C0ABDB2BD158C1009076B2 /* TermsViewController.swift */,
 				84D7BECC2BCDAB1300936C69 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
@@ -725,6 +735,8 @@
 		84D7BECA2BCDAA8700936C69 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84C0ABDF2BD158E1009076B2 /* TermsView.swift */,
+				84C0ABDD2BD158D9009076B2 /* PhotoEditView.swift */,
 				84D7BECE2BCDAB4000936C69 /* ProfileView.swift */,
 			);
 			path = View;
@@ -873,6 +885,7 @@
 				84D7BECD2BCDAB1300936C69 /* ProfileViewController.swift in Sources */,
 				833EE2722BCEF8F50011BC4F /* UIButton + Ext.swift in Sources */,
 				8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */,
+				84C0ABDA2BD158B2009076B2 /* PhotoEditViewController.swift in Sources */,
 				84C0ABC42BD02FE1009076B2 /* SectionModel.swift in Sources */,
 				84C0ABC02BD02FE1009076B2 /* UIimageView + ext.swift in Sources */,
 				84C0ABBF2BD02FE1009076B2 /* UIImage + ext.swift in Sources */,
@@ -890,6 +903,7 @@
 				8493BB6B2BCEC08200E239B4 /* LogInViewController.swift in Sources */,
 				84C0ABD82BD03015009076B2 /* OnbordingViewController.swift in Sources */,
 				833EE26F2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift in Sources */,
+				84C0ABDC2BD158C1009076B2 /* TermsViewController.swift in Sources */,
 				84D7BED12BCDAB5000936C69 /* ProfileModel.swift in Sources */,
 				84C0ABCB2BD02FE1009076B2 /* HomeView.swift in Sources */,
 				8493BB8B2BCEF6D600E239B4 /* FontEnum.swift in Sources */,
@@ -897,6 +911,7 @@
 				84D7BEBB2BCDA9B300936C69 /* CartModel.swift in Sources */,
 				369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */,
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,
+				84C0ABE02BD158E1009076B2 /* TermsView.swift in Sources */,
 				84C0ABC32BD02FE1009076B2 /* ItemModel.swift in Sources */,
 				84D7BE7F2BCD8F9500936C69 /* SceneDelegate.swift in Sources */,
 				84C0ABC22BD02FE1009076B2 /* HomeModel.swift in Sources */,
@@ -904,6 +919,7 @@
 				84D7BEC62BCDAA4100936C69 /* WishView.swift in Sources */,
 				833EE2832BD121DE0011BC4F /* LocationView.swift in Sources */,
 				84C0ABBD2BD02FE1009076B2 /* CompositionalLayout.swift in Sources */,
+				84C0ABDE2BD158DA009076B2 /* PhotoEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
