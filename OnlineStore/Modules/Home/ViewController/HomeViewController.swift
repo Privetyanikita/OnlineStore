@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<SectionModel, ItemModel>?
     
@@ -28,15 +28,15 @@ class HomeViewController: UIViewController {
     ]
     
     private var categories: [CategoriesModel] = [
-            .init(id: 1, name: "Clothes", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 2, name: "Toys", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 3, name: "Electronocs", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 4, name: "School", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 5, name: "All", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 6, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 7, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 8, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-            .init(id: 9, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 1, name: "Clothes", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 2, name: "Toys", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 3, name: "Electronocs", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 4, name: "School", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 5, name: "All", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 6, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 7, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 8, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
+        .init(id: 9, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
     ]
     
     private var categArray: [ItemModel] = []
@@ -52,8 +52,17 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
+        CustomNavigationBarConfiguration(
+            title: Titles.title,
+            withSearchTextField: false,
+            isSetupBackButton: false,
+            rightButtons: [.shoppingCart, .notification])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        hookUpNavBarButtons()
         setViews()
         layoutViews()
         setUPDelegates()
@@ -63,8 +72,24 @@ class HomeViewController: UIViewController {
         applyDiffableSnapShot()
     }
     
-    private func setUPDelegates(){
+    func setUPDelegates(){
         collectionView.delegate = self
+    }
+    
+}
+// MARK: - SetUP NavBar
+private extension HomeViewController{
+    func hookUpNavBarButtons() {
+        customNavigationBar.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
+        customNavigationBar.shoppingCartButton.addTarget(self, action: #selector(shoppingCartButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func notificationsButtonTapped() {
+        print(">> NOTIFICATIONS BTN tapped")
+    }
+    
+    @objc func shoppingCartButtonTapped() {
+        print(">> SHOPPING CART BTN tapped")
     }
 }
 // MARK: - ConfigDiffableDataSource
@@ -140,7 +165,7 @@ private extension HomeViewController{
 }
 
 // MARK: - UICollectionViewDelegate
-extension HomeViewController: UICollectionViewDelegate{    
+extension HomeViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = diffableDataSource?.itemIdentifier(for: indexPath) else {return}
         switch item{
@@ -168,7 +193,7 @@ private extension HomeViewController{
         view.backgroundColor = .white
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(62)
             make.bottom.equalToSuperview()
         }
     }

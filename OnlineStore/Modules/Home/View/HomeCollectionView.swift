@@ -68,7 +68,7 @@ final class HomeCollectionView: UICollectionView{
     
     private func createProductsSection() -> NSCollectionLayoutSection{
         let item = CompositionalLayout.createItem(width: .fractionalWidth(0.5), height: .fractionalHeight(1), spacing: 4)
-        let group = CompositionalLayout.createGroup(alignment: .horizontal, width: .fractionalWidth(1), height: .fractionalHeight(0.28), subitems: [item])
+        let group = CompositionalLayout.createGroup(alignment: .horizontal, width: .fractionalWidth(1), height: .fractionalHeight(0.3), subitems: [item])
         let section = CompositionalLayout.createSection(group: group, scrollBehavior: .none, groupSpacing: 0, leading: 12, trailing: 12, top: 12, bottom: 8,  supplementary: [createHeader()])
         return section
     }

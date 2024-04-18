@@ -26,3 +26,8 @@ struct ProductsModel: Hashable{
     let price: Int
     var isLiked: Bool
 }
+
+enum Titles{
+    static let title = "Delivery Address"
+    static let subTitle = "Salatiga City, Central Java"
+}

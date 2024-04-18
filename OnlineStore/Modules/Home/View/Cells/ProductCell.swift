@@ -51,6 +51,7 @@ class ProductCell: UICollectionViewCell {
     
     private let wishListButton: UIButton = {
         let button = UIButton()
+        button.tintColor = UIColor(named: "CustomGreen")
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -88,17 +89,19 @@ class ProductCell: UICollectionViewCell {
     }
     
     private func setUpViews(){
-        addButton.addTarget(nil, action: #selector(tappedAddToCart), for: .touchUpInside)
-        wishListButton.addTarget(nil, action: #selector(tappedWishList), for: .touchUpInside)
+        addButton.addTarget(nil, action: #selector(tappedAddToCart(_:)), for: .touchUpInside)
+        wishListButton.addTarget(nil, action: #selector(tappedWishList(_:)), for: .touchUpInside)
     }
     
-    @objc private func tappedAddToCart(){
+    @objc private func tappedAddToCart(_ sender: UIButton){
         let event = AddToCartCellEvent.addToCartTapped
+        sender.animate(deep: .small)
         onButtonTap?(event)
     }
     
-    @objc private func tappedWishList(){
+    @objc private func tappedWishList(_ sender: UIButton){
         let event = AddToCartCellEvent.addToWishList
+        sender.animate(deep: .medium)
         onButtonTap?(event)
     }
     
@@ -122,14 +125,14 @@ class ProductCell: UICollectionViewCell {
         
         productImage.snp.makeConstraints { make in
             make.trailing.leading.top.equalToSuperview()
-            make.height.equalTo(112)
+            make.height.equalTo(contentView.snp.height).multipliedBy(0.52)
         }
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(productImage.snp.bottom).offset(13)
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
-            make.height.equalTo(12)
+            make.height.equalTo(15)
         }
         
         priceLabel.snp.makeConstraints { make in
@@ -140,16 +143,17 @@ class ProductCell: UICollectionViewCell {
         }
         
         addButton.snp.makeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom).offset(11)
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalTo(wishListButton.snp.trailing).offset(4)
             make.bottom.equalToSuperview().offset(-13)
-            make.height.equalTo(31)
         }
         
         wishListButton.snp.makeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom).offset(11)
             make.bottom.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
-            make.width.height.equalTo(31)
+            make.width.equalTo(addButton.snp.height)
         }
     }
 }
@@ -177,7 +181,6 @@ extension ProductCell{
         } else if let isLiked = isLiked{
             let favoriteImage: UIImage? = isLiked ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
             wishListButton.setBackgroundImage(favoriteImage, for: .normal)
-            wishListButton.tintColor = .green
         }
     }
     
