@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Route
 
 class HomeViewController: BaseViewController {
     
@@ -63,7 +64,6 @@ class HomeViewController: BaseViewController {
         rightButtons: [.shoppingCart, .notification])
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         hookUpNavBarButtons()
@@ -74,6 +74,12 @@ class HomeViewController: BaseViewController {
         prodArray = products.map { .products($0)}
         categArray = categories.prefix(5).map { .categories($0)}
         applyDiffableSnapShot()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
     }
     
     func setUPDelegates(){
@@ -179,6 +185,7 @@ extension HomeViewController: UICollectionViewDelegate{
             updateProductsSection(categoryNumber: indexPath.item)
         case .products(let product):
             print("tapped Products \(product)") // идем на детальный экран
+            router.push(DetailViewController(),animated: true)
         case .searchBar:
             break
         }
@@ -232,5 +239,8 @@ extension HomeViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
         print(searchText) // переход на экран с поиском
+        router.push(SearchViewController(searchWord: searchText),animated: true)
     }
 }
+
+
