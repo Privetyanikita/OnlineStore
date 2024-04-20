@@ -13,6 +13,8 @@
 		362AF02F2BD12DB6002D74FF /* HeaderSavesSerches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF02E2BD12DB6002D74FF /* HeaderSavesSerches.swift */; };
 		362AF0322BD135E3002D74FF /* SectionsSavesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0312BD135E3002D74FF /* SectionsSavesModel.swift */; };
 		362AF0342BD136C4002D74FF /* SavesSearchesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362AF0332BD136C4002D74FF /* SavesSearchesCollectionView.swift */; };
+		366939B72BD295E4002A6549 /* UIViewController + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B62BD295E4002A6549 /* UIViewController + ext.swift */; };
+		366939B92BD29846002A6549 /* StoreManagerDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B82BD29846002A6549 /* StoreManagerDefaults.swift */; };
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
 		833EE2682BCEEA7C0011BC4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE2672BCEEA7C0011BC4F /* Constants.swift */; };
 		833EE26C2BCEF5C60011BC4F /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */; };
@@ -123,6 +125,8 @@
 		362AF02E2BD12DB6002D74FF /* HeaderSavesSerches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSavesSerches.swift; sourceTree = "<group>"; };
 		362AF0312BD135E3002D74FF /* SectionsSavesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSavesModel.swift; sourceTree = "<group>"; };
 		362AF0332BD136C4002D74FF /* SavesSearchesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavesSearchesCollectionView.swift; sourceTree = "<group>"; };
+		366939B62BD295E4002A6549 /* UIViewController + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + ext.swift"; sourceTree = "<group>"; };
+		366939B82BD29846002A6549 /* StoreManagerDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManagerDefaults.swift; sourceTree = "<group>"; };
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		833EE2672BCEEA7C0011BC4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		833EE26B2BCEF5C60011BC4F /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
@@ -257,6 +261,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		366939BA2BD2B1F3002A6549 /* StoreManager */ = {
+			isa = PBXGroup;
+			children = (
+				366939B82BD29846002A6549 /* StoreManagerDefaults.swift */,
+			);
+			path = StoreManager;
+			sourceTree = "<group>";
+		};
 		369AE5142BCEA461009157D6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +312,7 @@
 				833EE2712BCEF8F50011BC4F /* UIButton + Ext.swift */,
 				833EE2792BCF0CCC0011BC4F /* UISearchBar + Ext.swift */,
 				833EE27B2BCF0CF70011BC4F /* UIImage + Ext.swift */,
+				366939B62BD295E4002A6549 /* UIViewController + ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -409,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				CB5E1A512BD3B7BC006B827F /* Cart */,
+				366939BA2BD2B1F3002A6549 /* StoreManager */,
 				8493BB7A2BCEC30C00E239B4 /* Network */,
 				8493BB7B2BCEC34B00E239B4 /* Firebase */,
 			);
@@ -952,6 +966,7 @@
 				84C0ABC72BD02FE1009076B2 /* ProductCell.swift in Sources */,
 				84D7BECD2BCDAB1300936C69 /* ProfileViewController.swift in Sources */,
 				833EE2722BCEF8F50011BC4F /* UIButton + Ext.swift in Sources */,
+				366939B92BD29846002A6549 /* StoreManagerDefaults.swift in Sources */,
 				8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */,
 				84C0ABDA2BD158B2009076B2 /* PhotoEditViewController.swift in Sources */,
 				84C0ABC42BD02FE1009076B2 /* SectionModel.swift in Sources */,
@@ -985,6 +1000,7 @@
 				369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */,
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,
 				84C0ABE02BD158E1009076B2 /* TermsView.swift in Sources */,
+				366939B72BD295E4002A6549 /* UIViewController + ext.swift in Sources */,
 				362AF0252BD113FA002D74FF /* SectionSearchModel.swift in Sources */,
 				84C0ABC32BD02FE1009076B2 /* ItemModel.swift in Sources */,
 				362AF0272BD11557002D74FF /* SearchResultCollectionView.swift in Sources */,

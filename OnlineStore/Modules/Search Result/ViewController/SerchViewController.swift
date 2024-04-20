@@ -28,12 +28,7 @@ class SearchViewController: BaseViewController {
         .init(id: 11, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 500, isLiked: false),
         .init(id: 12, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 600, isLiked: false),
     ]
-    
-    private var saveSearches: [SavesSerchesModel] = [ // при инициализации подтягиваем UserDefaults
-        .init(saveSearch: "Phone"),
-        .init(saveSearch: "Laptop"),
-        .init(saveSearch: "PC"),
-    ]
+    private var saveSearches: [SavesSerchesModel] = []
     
     private var sectionsSearchResult: [SectionSearchModel] = SectionSearchModel.allCases
     private var sectionsSavesReserches: [SectionsSavesModel] =  SectionsSavesModel.allCases
@@ -74,6 +69,7 @@ class SearchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        saveHistorySearchWord(searchWord: searchWord)
         hookUpNavBar()
         setViews()
         layoutViews()
@@ -81,6 +77,12 @@ class SearchViewController: BaseViewController {
         setupDataSourceResult()
         setupDataSourceSaves()
         applySnapShotResults(products: products)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
     }
     
     private func setUPDelegates(){
@@ -91,6 +93,43 @@ class SearchViewController: BaseViewController {
     private func hideCollectionView(isHideSavesCollection: Bool, isHideResultCollection: Bool){
         collectionViewSerchSaves.isHidden = isHideSavesCollection
         collectionViewSearchResult.isHidden = isHideResultCollection
+    }
+    
+    private func saveHistory(saveType: SaveSearchHistory, savesSerches: [SavesSerchesModel], serchToSave: String, id: UUID?) -> [SavesSerchesModel]{
+        var historySearches  = savesSerches
+        let objectToSave = SavesSerchesModel(saveSearch: serchToSave)
+        switch saveType{
+        case .saveSearchWordResult:
+            historySearches.append(objectToSave)
+            StoreManager.shared.saveCustomData(object: historySearches,
+                                               forKey: .saveSearches)
+            return historySearches
+        case .deleteOne:
+            if let index = historySearches.firstIndex(where: { $0.id == id }) {
+                historySearches.remove(at: index)
+                StoreManager.shared.saveCustomData(object: historySearches,
+                                                   forKey: .saveSearches)
+                return historySearches
+            }
+            return historySearches
+        case .deleteAll:
+            historySearches = []
+            StoreManager.shared.remove(forKey: .saveSearches)
+            return historySearches
+        }
+    }
+    
+    private func saveHistorySearchWord(searchWord: String){
+        StoreManager.shared.getCustomData(forKey: .saveSearches) { (savedSearches: [SavesSerchesModel]?) in
+            if let savedSearches = savedSearches {
+                self.saveSearches = savedSearches
+                self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
+                StoreManager.shared.saveCustomData(object: self.saveSearches, 
+                                                   forKey: .saveSearches)
+            } else {
+                self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
+            }
+        }
     }
 }
 
@@ -108,6 +147,7 @@ private extension SearchViewController{
     
     @objc private func backButtonTapped() {
         print(">> BACK BTN tapped")
+        router.back()
     }
 }
 // MARK: - ConfigDiffableDataSource
@@ -152,7 +192,8 @@ private extension SearchViewController{
                 cell.onButtonTap = { event in
                     switch event{
                     case .delete:
-                        self.deleteOneSavesSearch(withId: itemIdentifier.id)
+                        self.saveSearches = self.saveHistory(saveType: .deleteOne, savesSerches: self.saveSearches, serchToSave: "", id: itemIdentifier.id)
+                        self.applySnapShotSaves()
                     }
                 }
                 return cell
@@ -187,26 +228,13 @@ private extension SearchViewController{
         }
     }
 }
-// MARK: - Delete SavesSerches Methods
-extension SearchViewController{
-    func deleteOneSavesSearch(withId id: UUID) {
-        if let index = saveSearches.firstIndex(where: { $0.id == id }) {
-            saveSearches.remove(at: index)
-            applySnapShotSaves()
-        }
-    }
-    
-    func deleteAllSavesSearch() {
-        saveSearches = []
-        applySnapShotSaves()
-    }
-}
 // MARK: - UICollectionViewDelegate
 extension SearchViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == collectionViewSearchResult{
             guard let item = diffableDataSourceResult?.itemIdentifier(for: indexPath) else { return }
-            print(item) // переход на детальный экран
+            print(item) 
+            router.push(DetailViewController(),animated: true) // переход на детальный экран
         } else if collectionView == collectionViewSerchSaves {
             guard let item = diffableDataSourceSaves?.itemIdentifier(for: indexPath) else { return }
             customNavigationBar.searchTextField.text = item.saveSearch
@@ -239,7 +267,8 @@ extension SearchViewController: HeaderProductsDelegate{
 // MARK: - HeaderSearchResultDelegate
 extension SearchViewController: HeaderSavesSerchesDelegate{
     func cancelButtontapped() {
-        deleteAllSavesSearch()
+        saveSearches = saveHistory(saveType: .deleteAll, savesSerches: saveSearches, serchToSave: "", id: nil)
+        applySnapShotSaves()
     }
 }
 // MARK: - UISearchBarDelegate
@@ -253,8 +282,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text
         if let searchText{
-            //сохранить searchText в UserDefaults и подтянуть новые сохранения в saveSearches
-            saveSearches.append(SavesSerchesModel(saveSearch: searchText))
+            saveSearches = saveHistory(saveType: .saveSearchWordResult, savesSerches: saveSearches, serchToSave: searchText, id: nil)  //cохраняем в UserDefaults
             headerDelegate?.changeHeaderTitle(serchWord: searchText)
             //запрос в сеть передаем searchText
         }

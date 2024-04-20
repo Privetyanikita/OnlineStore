@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct SavesSerchesModel: Hashable{
-    let id = UUID()
+struct SavesSerchesModel: Hashable, Codable{
+    var id = UUID()
     let saveSearch: String
+}
+
+enum SaveSearchHistory{
+    case saveSearchWordResult
+    case deleteOne
+    case deleteAll
 }

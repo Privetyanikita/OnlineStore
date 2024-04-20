@@ -125,11 +125,10 @@ class ProductCell: UICollectionViewCell {
         
         productImage.snp.makeConstraints { make in
             make.trailing.leading.top.equalToSuperview()
-            make.height.equalTo(contentView.snp.height).multipliedBy(0.52)
+            make.bottom.lessThanOrEqualTo(nameLabel.snp.top).offset(-13)
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(productImage.snp.bottom).offset(13)
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
             make.height.equalTo(15)
@@ -139,21 +138,21 @@ class ProductCell: UICollectionViewCell {
             make.top.equalTo(nameLabel.snp.bottom).offset(4)
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
-            make.height.equalTo(17)
+            make.bottom.lessThanOrEqualTo(addButton.snp.top).offset(-11)
         }
         
         addButton.snp.makeConstraints { make in
-            make.top.equalTo(priceLabel.snp.bottom).offset(11)
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalTo(wishListButton.snp.trailing).offset(4)
             make.bottom.equalToSuperview().offset(-13)
+            make.height.greaterThanOrEqualTo(18)
         }
         
         wishListButton.snp.makeConstraints { make in
-            make.top.equalTo(priceLabel.snp.bottom).offset(11)
             make.bottom.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
             make.width.equalTo(addButton.snp.height)
+            make.height.greaterThanOrEqualTo(18)
         }
     }
 }
@@ -179,13 +178,13 @@ extension ProductCell{
                 make.leading.equalToSuperview().offset(13)
             }
         } else if let isLiked = isLiked{
-            let favoriteImage: UIImage? = isLiked ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+            let favoriteImage: UIImage? = isLiked ? UIImage(named: "HeartTapped") : UIImage(named: "Heart")
             wishListButton.setBackgroundImage(favoriteImage, for: .normal)
         }
     }
     
     func setImageForWishListButton(isLiked: Bool){
-        let favoriteImage: UIImage? = isLiked ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        let favoriteImage: UIImage? = isLiked ? UIImage(named: "HeartTapped") : UIImage(named: "Heart")
         wishListButton.setBackgroundImage(favoriteImage, for: .normal)
     }
 }

@@ -20,12 +20,15 @@ final class CustomTabBar: UITabBarController {
     
     private func generateTabBar(){
         let homeVC = HomeViewController()
+        let navHome = UINavigationController(rootViewController: homeVC)
         let wishListVC = WhishListViewController()
+        let navWish = UINavigationController(rootViewController: wishListVC)
         let profileVC = ProfileViewController()
+        let navProfile = UINavigationController(rootViewController: profileVC)
         setUPVC(title: "Home", image: UIImage(named: "Home"), vc: homeVC)
         setUPVC(title: "Wishlist", image: UIImage(named: "Heart"), vc: wishListVC)
         setUPVC(title: "Account", image: UIImage(named: "Profile"), vc: profileVC)
-        self.setViewControllers([homeVC, wishListVC, profileVC], animated: false)
+        self.setViewControllers([navHome, navWish, navProfile], animated: false)
     }
     
     private func setUPVC( title: String, image: UIImage?, vc: UIViewController){
