@@ -13,8 +13,7 @@ struct SavesSerchesModel: Hashable, Codable{
 }
 
 enum SaveSearchHistory{
-    case saveSerchWordHome
-    case saveSerchWordResult
+    case saveSearchWordResult
     case deleteOne
     case deleteAll
 }
