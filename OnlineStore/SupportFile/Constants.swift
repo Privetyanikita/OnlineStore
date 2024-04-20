@@ -26,4 +26,5 @@ enum Text {
     static let deliveryAddress = "Delivery address"
     static let profile = "Profile"
     static let cart = "Your Cart"
+    static let payment = "Payment method"
 }
