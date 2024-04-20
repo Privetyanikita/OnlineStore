@@ -22,11 +22,17 @@ class DetailViewController: BaseViewController {
     }()
     
     let productTitleView = ProductTitleView()
+    let productDescriptionView = ProductDescriptionView()
+    let productBottomView = ProductBottomView()
+    
+    let scrollView            = UIScrollView()
+    let contentView           = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavBarItems()
+        configureScrollView()
         configureViewController()
+        setupNavBarItems()
     }
 
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
@@ -35,6 +41,24 @@ class DetailViewController: BaseViewController {
         withSearchTextField: false,
         isSetupBackButton: true,
         rightButtons: [.shoppingCart])
+    }
+    
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.delaysContentTouches = false
+        
+        scrollView.snp.makeConstraints({ make in
+            make.top.equalTo(customNavigationBar.snp.bottom).offset(1)
+            make.leading.trailing.bottom.equalToSuperview()
+        })
+        
+        contentView.snp.makeConstraints { make in
+            make.width.equalTo(scrollView.snp.width)
+            make.edges.equalToSuperview()
+        }
     }
     
     
@@ -68,8 +92,11 @@ class DetailViewController: BaseViewController {
     
     private func  configureViewController() {
         view.backgroundColor = .systemBackground
-        view.addSubview(productCollectionView)
-        view.addSubview(productTitleView)
+        
+        contentView.addSubview(productCollectionView)
+        contentView.addSubview(productTitleView)
+        contentView.addSubview(productDescriptionView)
+        contentView.addSubview(productBottomView)
         
         productCollectionView.dataSource = self
         productCollectionView.delegate = self
@@ -82,12 +109,14 @@ class DetailViewController: BaseViewController {
     
     private func configureItems() {
         productTitleView.configure(product: "Air pods max by Apple", price: "$ 1999,99")
+        productDescriptionView.configure(with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
     }
     
     
     private func layoutViews(){
+        
         productCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(customNavigationBar.snp.bottom).offset(1)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(290)
         }
@@ -96,6 +125,21 @@ class DetailViewController: BaseViewController {
             make.top.equalTo(productCollectionView.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
+        }
+        
+        productDescriptionView.snp.makeConstraints { make in
+            make.top.equalTo(productTitleView.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(290)
+        }
+        
+        productBottomView.snp.makeConstraints { make in
+            make.top.equalTo(productDescriptionView.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(100)
+            make.bottom.equalTo(contentView.snp.bottom)
         }
     }
 }
