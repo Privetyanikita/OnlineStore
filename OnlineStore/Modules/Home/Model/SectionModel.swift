@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum SectionModel: CaseIterable, Hashable{
+enum SectionModel: CaseIterable, Hashable {
     case searchbar
     case categories
     case products

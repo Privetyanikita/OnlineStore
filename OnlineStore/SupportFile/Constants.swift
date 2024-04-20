@@ -18,7 +18,8 @@ enum Image {
     static let bell = UIImage(systemName: "bell")
     static let systemCart = UIImage(systemName: "cart")
     static let chevronDown = UIImage(systemName: "chevron.down")
-    
+    static let emptyHeart = UIImage(named: "Heart")
+    static let isLikedHeart = UIImage(named: "liked")
 }
 
 enum Text {

@@ -61,7 +61,7 @@ class HomeViewController: BaseViewController {
         withSearchTextField: false,
         withLocationView: true,
         isSetupBackButton: false,
-        rightButtons: [.shoppingCart, .notification])
+        rightButtons: [.notification, .shoppingCart])
     }
     
     override func viewDidLoad() {
