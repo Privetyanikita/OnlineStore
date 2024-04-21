@@ -10,14 +10,29 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    private var isShowingHomeVC: Bool = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+        self.isShowingHomeVC = authUser == nil ? false : true
+        
         window = UIWindow(windowScene: windowScene)
+        let navViewController = UINavigationController()
+        navViewController.navigationBar.isHidden = true
+        
+        if isShowingHomeVC {
+            let homeViewController = CustomTabBar()
+            navViewController.viewControllers = [homeViewController]
+        } else {
+            print(">> Can't get authenticated user!")
+            //go to ondoarding + login flow
+            let onboardingViewController = OnbordingViewController()
+            navViewController.viewControllers = [onboardingViewController]
+        }
+        window?.rootViewController = navViewController
         window?.makeKeyAndVisible()
-        window?.rootViewController = CustomTabBar()
-
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

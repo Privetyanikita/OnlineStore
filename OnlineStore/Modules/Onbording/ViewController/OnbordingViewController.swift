@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Route
 
 final class OnbordingViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
@@ -106,8 +107,10 @@ private extension OnbordingViewController{
     }
     
     @objc private func tappedButton(){
-        if currentPage == data.count - 1{
+        if currentPage == data.count - 1 {
             print("go to AuthVC") // сохраняем флаг о прохождении онбординга
+            let loginViewController = LogInViewController(state: State(cells: [.emailAddress, .password]))
+            router.replace(with: loginViewController)
         }else{
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
