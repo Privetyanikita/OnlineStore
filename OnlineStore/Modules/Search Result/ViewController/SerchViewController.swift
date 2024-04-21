@@ -69,7 +69,7 @@ class SearchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        saveSearches = saveHistory(saveType: .saveSerchWordHome, savesSerches: saveSearches, serchToSave: searchWord, id: nil)
+        saveHistorySearchWord(searchWord: searchWord)
         hookUpNavBar()
         setViews()
         layoutViews()
@@ -77,14 +77,6 @@ class SearchViewController: BaseViewController {
         setupDataSourceResult()
         setupDataSourceSaves()
         applySnapShotResults(products: products)
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        StoreManager.shared.getCustomData(forKey: .saveSearches) { (savedSearches: [SavesSerchesModel]) in
-            self.saveSearches = savedSearches
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,22 +99,16 @@ class SearchViewController: BaseViewController {
         var historySearches  = savesSerches
         let objectToSave = SavesSerchesModel(saveSearch: serchToSave)
         switch saveType{
-        case .saveSerchWordHome:
+        case .saveSearchWordResult:
             historySearches.append(objectToSave)
-            StoreManager.shared.getCustomData(forKey: .saveSearches) { (savedSearches: [SavesSerchesModel]) in
-                historySearches = savedSearches
-                historySearches.append(objectToSave)
-                StoreManager.shared.saveCustomData(object: historySearches, forKey: .saveSearches)
-            }
-            return historySearches
-        case .saveSerchWordResult:
-            historySearches.append(objectToSave)
-            StoreManager.shared.saveCustomData(object: historySearches, forKey: .saveSearches)
+            StoreManager.shared.saveCustomData(object: historySearches,
+                                               forKey: .saveSearches)
             return historySearches
         case .deleteOne:
             if let index = historySearches.firstIndex(where: { $0.id == id }) {
                 historySearches.remove(at: index)
-                StoreManager.shared.saveCustomData(object: historySearches, forKey: .saveSearches)
+                StoreManager.shared.saveCustomData(object: historySearches,
+                                                   forKey: .saveSearches)
                 return historySearches
             }
             return historySearches
@@ -133,12 +119,16 @@ class SearchViewController: BaseViewController {
         }
     }
     
-    private func saveSearchWord(){
-        saveSearches.append(SavesSerchesModel(saveSearch: self.searchWord))
-        StoreManager.shared.getCustomData(forKey: .saveSearches) { (savedSearches: [SavesSerchesModel]) in
-            self.saveSearches = savedSearches
-            self.saveSearches.append(SavesSerchesModel(saveSearch: self.searchWord))
-            StoreManager.shared.saveCustomData(object: self.saveSearches, forKey: .saveSearches)
+    private func saveHistorySearchWord(searchWord: String){
+        StoreManager.shared.getCustomData(forKey: .saveSearches) { (savedSearches: [SavesSerchesModel]?) in
+            if let savedSearches = savedSearches {
+                self.saveSearches = savedSearches
+                self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
+                StoreManager.shared.saveCustomData(object: self.saveSearches, 
+                                                   forKey: .saveSearches)
+            } else {
+                self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
+            }
         }
     }
 }
@@ -292,7 +282,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text
         if let searchText{
-            saveSearches = saveHistory(saveType: .saveSerchWordResult, savesSerches: saveSearches, serchToSave: searchText, id: nil)  //cохраняем в UserDefaults
+            saveSearches = saveHistory(saveType: .saveSearchWordResult, savesSerches: saveSearches, serchToSave: searchText, id: nil)  //cохраняем в UserDefaults
             headerDelegate?.changeHeaderTitle(serchWord: searchText)
             //запрос в сеть передаем searchText
         }

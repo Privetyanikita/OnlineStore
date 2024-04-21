@@ -51,14 +51,18 @@ final class StoreManager{
         completion(status)
     }
     
-    func getCustomData<T: Decodable>(forKey key: Keys, completion: @escaping (T) -> Void) {
+    func getCustomData<T: Decodable>(forKey key: Keys, completion: @escaping (T?) -> Void) {
         queueStore.async {
             if let savedDataData = self.getSavedObject(forKey: key.rawValue) as? Data{
                 let decoder = JSONDecoder()
                 if let savedData = try? decoder.decode(T.self, from: savedDataData){
                     completion(savedData)
                     print("Done Get")
+                } else{
+                    completion(nil)
                 }
+            }  else{
+                completion(nil)
             }
         }
     }
