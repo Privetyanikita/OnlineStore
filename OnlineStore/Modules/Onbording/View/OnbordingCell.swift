@@ -25,7 +25,7 @@ class OnbordingCell: UICollectionViewCell {
     
     private let imageCart: UIImageView = {
         let imageView = UIImageView()
-        imageView.configImageView(cornerRadius: 12, contentMode: .scaleAspectFill)
+        imageView.configImageView(cornerRadius: 30, contentMode: .scaleAspectFill)
         return imageView
     }()
 
@@ -45,6 +45,12 @@ class OnbordingCell: UICollectionViewCell {
         titleLabel.text = nil
         subTitleLabel.text = nil
         imageCart.image = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageCart.layoutIfNeeded()
+        clip(imageView: imageCart, withRightBottomOffset: 50, cornerRadius: 30)
     }
     
     private func setViews(){
@@ -77,10 +83,59 @@ class OnbordingCell: UICollectionViewCell {
 }
 
 //MARK: - Configure Cell UI Public Method
-extension OnbordingCell{
+extension OnbordingCell {
     func configCell(titleText: String, descriptionText: String, image: UIImage?){
         titleLabel.text = titleText
         subTitleLabel.text = descriptionText
         imageCart.image = image
+    }
+}
+
+
+extension OnbordingCell {
+    
+    private func clip(imageView: UIView, withRightBottomOffset: CGFloat, cornerRadius: CGFloat) {
+        let path = UIBezierPath()
+
+        path.move(to: .init(x: 0, y: 0))
+        
+        path.addLine(to: .init(x: imageView.bounds.size.width, y: 0))
+        
+        path.addLine(to: .init(x: imageView.bounds.size.width, y: (imageView.bounds.size.height - withRightBottomOffset) - cornerRadius))
+        
+        let controlPoint1 = CGPoint(
+            x: imageView.bounds.size.width,
+            y: (imageView.bounds.size.height - withRightBottomOffset) + (cornerRadius / 2))
+        
+        let controlPoint2 = CGPoint(
+            x: imageView.bounds.size.width,
+            y: (imageView.bounds.size.height - withRightBottomOffset) + (cornerRadius * 0.75))
+        
+        path.addCurve(to:
+                .init(x: imageView.bounds.size.width - cornerRadius, y: (imageView.bounds.size.height - withRightBottomOffset) + cornerRadius),
+                      controlPoint1: controlPoint1,
+                      controlPoint2: controlPoint2)
+
+        path.addLine(to: .init(x: cornerRadius, y: imageView.bounds.size.height))
+
+        let controlPoint3 = CGPoint(
+            x: 0 + (cornerRadius / 2),
+            y: imageView.bounds.size.height)
+        
+        let controlPoint4 = CGPoint(
+            x: 0,
+            y: imageView.bounds.size.height - (cornerRadius / 2))
+        
+        path.addCurve(to:
+                .init(x: 0, y: imageView.bounds.size.height - cornerRadius),
+                      controlPoint1: controlPoint3,
+                      controlPoint2: controlPoint4)
+        
+        path.close()
+
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillColor = UIColor.black.cgColor
+        imageView.layer.mask = shapeLayer
     }
 }

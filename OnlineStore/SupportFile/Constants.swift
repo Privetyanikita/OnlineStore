@@ -7,8 +7,9 @@
 
 import UIKit
 
-enum MockData {
-    
+enum Color {
+    static let customGreen = UIColor(named: "CustomGreen")
+    static let customLightGrey = UIColor(named: "CustomLightGrey")
 }
 
 enum Image {
@@ -18,7 +19,8 @@ enum Image {
     static let bell = UIImage(systemName: "bell")
     static let systemCart = UIImage(systemName: "cart")
     static let chevronDown = UIImage(systemName: "chevron.down")
-    
+    static let emptyHeart = UIImage(named: "Heart")
+    static let isLikedHeart = UIImage(named: "liked")
 }
 
 enum Text {
@@ -26,5 +28,8 @@ enum Text {
     static let deliveryAddress = "Delivery address"
     static let profile = "Profile"
     static let cart = "Your Cart"
+    static let descriptionOfProduct = "Description of product"
+    static let addToCart = "Add to Cart"
+    static let buyNow = "Buy Now"
     static let payment = "Payment method"
 }
