@@ -6,3 +6,9 @@
 //
 
 import UIKit
+
+struct CartProduct: Equatable {
+    let product: ProductsModel
+    var count = 1
+    var isChecked: Bool = true
+}

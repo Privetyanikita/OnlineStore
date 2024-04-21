@@ -31,4 +31,5 @@ enum Text {
     static let descriptionOfProduct = "Description of product"
     static let addToCart = "Add to Cart"
     static let buyNow = "Buy Now"
+    static let payment = "Payment method"
 }

@@ -100,6 +100,9 @@ private extension HomeViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        let cartVC = CartViewController()
+        cartVC.modalPresentationStyle = .fullScreen
+        present(cartVC, animated: true)
     }
 }
 // MARK: - ConfigDiffableDataSource
@@ -123,6 +126,7 @@ extension HomeViewController{
                     switch event{
                     case .addToCartTapped:
                         print(productModel.id) //добавить в корзину
+                        CartManager.shared.addProductToCart(productModel)
                     case .addToWishList:
                         break
                     }
@@ -204,7 +208,7 @@ private extension HomeViewController{
         view.backgroundColor = .white
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(customNavigationBar.snp.bottom).offset(8)
+            make.top.equalTo(customNavigationBar.snp.bottom).offset(16)
             make.bottom.equalToSuperview()
         }
     }
