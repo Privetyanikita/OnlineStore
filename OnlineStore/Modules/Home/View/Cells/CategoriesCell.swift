@@ -20,8 +20,7 @@ class CategoriesCell: UICollectionViewCell {
     
     private let categoryImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.configImageView(cornerRadius: 4, contentMode: .scaleAspectFill)
-        //imageView.backgroundColor = .lightGray
+        imageView.configImageView(cornerRadius: 4, contentMode: .scaleAspectFit)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -73,7 +72,9 @@ class CategoriesCell: UICollectionViewCell {
 extension CategoriesCell{
     func configCell(categoryLabelText: String, image: String?){
         categoryLabel.text = categoryLabelText.capitalized
-        if let image = image {
+        if image == "All"{
+            categoryImage.image = UIImage(systemName: "circle.grid.2x2")?.withTintColor(UIColor(named: "CustomGreen") ?? .gray, renderingMode: .alwaysOriginal)
+        } else if let image = image{
             setDefaultImage(imageView: categoryImage)
             categoryImage.kf.indicatorType = .activity
             categoryImage.kf.setImage(with: URL(string: image))

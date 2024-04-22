@@ -11,8 +11,6 @@ import Route
 
 class HomeViewController: BaseViewController {
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<SectionModel, ItemModel>?
-    
     private var products: [ProductsModel] = [
         .init(id: 1, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Aello World", price: 100, isLiked: false),
         .init(id: 2, image: "https://placeimg.com/640/480/any", description: "Cello World", price: 300, isLiked: false),
@@ -42,18 +40,19 @@ class HomeViewController: BaseViewController {
     
     private var categArray: [ItemModel] = []
     private var prodArray: [ItemModel] = []
-    private var sections: [SectionModel] = SectionModel.allCases
     
-    private var selectedCategory: IndexPath = .init()
+    private let homeView = HomeView()
+    private let allGategories: CategoriesModel =  .init(id: 99999, name: "All", image: "All")
     
-    
-    private let collectionView: HomeCollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let view = HomeCollectionView(frame: .zero, collectionViewLayout: layout)
-        return view
-    }()
-    
+    override func loadView() {
+        super.loadView()
+
+        homeView.setUPDelegates(delegateCollectionView: self,
+                                headerDelegate: self,
+                                searchBarDelegate: self,
+                                delegate: self)
+        view = homeView
+    }
     
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
        CustomNavigationBarConfiguration(
@@ -61,19 +60,16 @@ class HomeViewController: BaseViewController {
         withSearchTextField: false,
         withLocationView: true,
         isSetupBackButton: false,
-        rightButtons: [.notification, .shoppingCart])
+        rightButtons: [.shoppingCart, .notification])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hookUpNavBarButtons()
-        setViews()
-        layoutViews()
-        setUPDelegates()
-        setupDataSource()
+        insetAll()
         prodArray = products.map { .products($0)}
         categArray = categories.prefix(5).map { .categories($0)}
-        applyDiffableSnapShot()
+        homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,11 +77,6 @@ class HomeViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
     }
-    
-    func setUPDelegates(){
-        collectionView.delegate = self
-    }
-    
 }
 // MARK: - SetUP NavBar
 private extension HomeViewController{
@@ -100,80 +91,35 @@ private extension HomeViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
-        let cartVC = CartViewController()
-        cartVC.modalPresentationStyle = .fullScreen
-        present(cartVC, animated: true)
     }
 }
-// MARK: - ConfigDiffableDataSource
-extension HomeViewController{
-    private func setupDataSource(){
-        diffableDataSource = .init(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            switch itemIdentifier{
-            case .searchBar:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchbarCell.resuseID, for: indexPath) as? SearchbarCell else { return UICollectionViewCell() }
-                cell.setUpSearchBarDelegate(delegateVC: self)
-                return cell
-            case .categories(let categoriesModel):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.resuseID, for: indexPath) as? CategoriesCell else { return UICollectionViewCell() }
-                cell.configCell(categoryLabelText: categoriesModel.name, image: categoriesModel.image)
-                self.selectedCategory == indexPath ?  cell.setSelectedBorder() : cell.setDefaultBorder()
-                return cell
-            case .products(let productModel):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.resuseID, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
-                cell.configCell(descText: productModel.description, priceText: productModel.price, image: productModel.image, isLiked: nil, isRemoveFavor: true)
-                cell.onButtonTap = { event in
-                    switch event{
-                    case .addToCartTapped:
-                        print(productModel.id) //добавить в корзину
-                        CartManager.shared.addProductToCart(productModel)
-                    case .addToWishList:
-                        break
-                    }
-                }
-                return cell
-            }
-        })
-        
-        diffableDataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
-            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderProductsView.resuseID, for: indexPath) as? HeaderProductsView else { return nil }
-            let section = self.sections[indexPath.section]
-            header.configureHeader(sectionTitle: section.title, type: .home)
-            header.delegate = self
-            return header
+
+// MARK: - Private Methods
+private extension HomeViewController{
+    func insetAll(){
+        if categories.count > 5 {
+            categories.insert(allGategories, at: 4)
         }
     }
     
-    private func applyDiffableSnapShot(){
-        DispatchQueue.main.async { [self] in
-            var snapShot = NSDiffableDataSourceSnapshot<SectionModel, ItemModel>()
-            snapShot.appendSections([.searchbar, .categories, .products])
-            snapShot.appendItems([.searchBar], toSection: .searchbar)
-            snapShot.appendItems(prodArray, toSection: .products)
-            snapShot.appendItems(categArray, toSection: .categories)
-            diffableDataSource?.apply(snapShot, animatingDifferences: true)
-        }
-    }
-}
-// MARK: - Private Methods
-private extension HomeViewController{
     func updateProductsSection(categoryNumber: Int){
         if categoryNumber == 4{
-            categArray = (categArray.count > 5) ? categories.prefix(5).map { .categories($0)} : categories.map { .categories($0)}
-            applyDiffableSnapShot()
+            categArray = (categArray.count > 5) 
+            ? categories.prefix(5).map { .categories($0)}
+            : categories.map { .categories($0)}
+            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
         } else {
             //запрос в сеть
         }
     }
     
-    func selectionCategory(selectedIndexpath: IndexPath){
+    func selectionCategory(selectedIndexpath: IndexPath, collectionView: UICollectionView){
         if selectedIndexpath.item != 4{
             let cell = collectionView.cellForItem(at: selectedIndexpath) as? CategoriesCell
-            let previousCell = collectionView.cellForItem(at: selectedCategory) as? CategoriesCell
+            let previousCell = collectionView.cellForItem(at: homeView.selectedCategory) as? CategoriesCell
             previousCell?.setDefaultBorder()
             cell?.setSelectedBorder()
-            selectedCategory = selectedIndexpath
+            homeView.selectedCategory = selectedIndexpath
         }
     }
 }
@@ -181,11 +127,11 @@ private extension HomeViewController{
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let item = diffableDataSource?.itemIdentifier(for: indexPath) else {return}
+        guard let item = homeView.getItem(index: indexPath) else {return}
         switch item{
         case .categories(let categorie):
             print("tapped Categories \(categorie.name)")
-            selectionCategory(selectedIndexpath: indexPath)
+            selectionCategory(selectedIndexpath: indexPath, collectionView: collectionView)
             updateProductsSection(categoryNumber: indexPath.item)
         case .products(let product):
             print("tapped Products \(product)") // идем на детальный экран
@@ -196,23 +142,6 @@ extension HomeViewController: UICollectionViewDelegate{
     }
 }
 
-// MARK: - Constraints
-private extension HomeViewController{
-    func setViews(){
-        [
-            collectionView,
-        ].forEach { view.addSubview($0) }
-    }
-    
-    func layoutViews(){
-        view.backgroundColor = .white
-        collectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(customNavigationBar.snp.bottom).offset(16)
-            make.bottom.equalToSuperview()
-        }
-    }
-}
 // MARK: - HeaderProductsViewDelegate
 extension HomeViewController: HeaderProductsDelegate{
     func choseFiltration(filterType: FilterModel) {
@@ -221,30 +150,37 @@ extension HomeViewController: HeaderProductsDelegate{
             var productsToSortArray = products
             productsToSortArray.sort { $0.description < $1.description }
             prodArray = productsToSortArray.map { .products($0) }
-            applyDiffableSnapShot()
+            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
         case .priceDescending:
             var productsToSortArray = products
             productsToSortArray.sort { $0.price > $1.price }
             prodArray = productsToSortArray.map { .products($0) }
-            applyDiffableSnapShot()
+            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
         case .noFilter:
             prodArray = products.map { .products($0) }
-            applyDiffableSnapShot()
+            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
         case .priceAscending:
             var productsToSortArray = products
             productsToSortArray.sort { $0.price < $1.price }
             prodArray = productsToSortArray.map { .products($0) }
-            applyDiffableSnapShot()
+            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
         }
     }
 }
-
+// MARK: - UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
         print(searchText) // переход на экран с поиском
         router.push(SearchViewController(searchWord: searchText),animated: true)
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
 }
 
-
+// MARK: - HomeViewDelegateProtocol
+extension HomeViewController: HomeViewDelegateProtocol{
+    func addToCart(item: ProductsModel) {
+        print("Add To Cart Homev \(item)") //добавляем в корзину
+    }
+}

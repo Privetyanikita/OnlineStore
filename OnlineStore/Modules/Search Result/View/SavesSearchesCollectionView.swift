@@ -30,7 +30,7 @@ final class SavesSearchesCollectionView: UICollectionView{
     }
     
     private func registerCells(){
-        register(SearchResultCell.self, forCellWithReuseIdentifier: SearchResultCell.resuseID)
+        register(SearchResultCell.self)
         register(HeaderSavesSerches.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderSavesSerches.resuseID)
     }
     

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCGXbj68bpvVVZw1tgbPNj8XEqt4BUcxtU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>520492814928</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.privetyanikiya.OnlineStore</string>
+	<key>PROJECT_ID</key>
+	<string>onlinemarketplace-59e6c</string>
+	<key>STORAGE_BUCKET</key>
+	<string>onlinemarketplace-59e6c.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:520492814928:ios:ddfc86076ca20964257755</string>
+	<key>DATABASE_URL</key>
+	<string>https://onlinemarketplace-59e6c-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
