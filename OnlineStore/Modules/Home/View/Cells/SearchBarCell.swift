@@ -36,7 +36,7 @@ class SearchbarCell: UICollectionViewCell {
 
 //MARK: - Configure Cell UI Public Method
 extension SearchbarCell{
-    func setUpSearchBarDelegate(delegateVC: UISearchBarDelegate){
+    func setUpSearchBarDelegate(delegateVC: UISearchBarDelegate?){
         searchBar.delegate = delegateVC
     }
 }

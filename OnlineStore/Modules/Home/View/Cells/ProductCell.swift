@@ -89,19 +89,23 @@ class ProductCell: UICollectionViewCell {
     }
     
     private func setUpViews(){
-        addButton.addTarget(nil, action: #selector(tappedAddToCart(_:)), for: .touchUpInside)
-        wishListButton.addTarget(nil, action: #selector(tappedWishList(_:)), for: .touchUpInside)
+        let tapGestureCart = UITapGestureRecognizer(target: self, action: #selector(tappedAddToCart(_:)))
+        let tapGestureWish = UITapGestureRecognizer(target: self, action: #selector(tappedWishList(_:)))
+        addButton.addGestureRecognizer(tapGestureCart)
+        wishListButton.addGestureRecognizer(tapGestureWish)
     }
     
-    @objc private func tappedAddToCart(_ sender: UIButton){
+    @objc private func tappedAddToCart(_ sender: UITapGestureRecognizer){
+        guard let button = sender.view as? UIButton else { return }
         let event = AddToCartCellEvent.addToCartTapped
-        sender.animate(deep: .small)
+        button.animate(deep: .small)
         onButtonTap?(event)
     }
     
-    @objc private func tappedWishList(_ sender: UIButton){
+    @objc private func tappedWishList(_ sender: UITapGestureRecognizer){
+        guard let button = sender.view as? UIButton else { return }
         let event = AddToCartCellEvent.addToWishList
-        sender.animate(deep: .medium)
+        button.animate(deep: .medium)
         onButtonTap?(event)
     }
     
@@ -122,37 +126,40 @@ class ProductCell: UICollectionViewCell {
     }
     
     private func layoutViews(){
-        
+
         productImage.snp.makeConstraints { make in
             make.trailing.leading.top.equalToSuperview()
-            make.bottom.lessThanOrEqualTo(nameLabel.snp.top).offset(-13)
+            make.height.equalToSuperview().multipliedBy(0.5)
         }
-        
+
         nameLabel.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(productImage.snp.bottom).offset(5).priority(.high)
+            make.top.lessThanOrEqualTo(productImage.snp.bottom).offset(11).priority(.high)
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
             make.height.equalTo(15)
         }
-        
+
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(4)
+            make.top.equalTo(nameLabel.snp.bottom).offset(4).priority(.high)
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
-            make.bottom.lessThanOrEqualTo(addButton.snp.top).offset(-11)
+            make.bottom.greaterThanOrEqualTo(addButton.snp.top).offset(-5).priority(.high)
+            make.bottom.lessThanOrEqualTo(addButton.snp.top).offset(-11).priority(.high)
         }
-        
+
         addButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-13)
             make.leading.equalTo(wishListButton.snp.trailing).offset(4)
             make.bottom.equalToSuperview().offset(-13)
-            make.height.greaterThanOrEqualTo(18)
+            make.height.lessThanOrEqualTo(30)
         }
-        
+
         wishListButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-13)
             make.leading.equalToSuperview().offset(13)
             make.width.equalTo(addButton.snp.height)
-            make.height.greaterThanOrEqualTo(18)
+            make.height.lessThanOrEqualTo(30)
         }
     }
 }
