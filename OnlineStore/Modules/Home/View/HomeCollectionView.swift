@@ -30,9 +30,9 @@ final class HomeCollectionView: UICollectionView{
     }
     
     private func registerCells(){
-        register(SearchbarCell.self, forCellWithReuseIdentifier: SearchbarCell.resuseID)
-        register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.resuseID)
-        register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.resuseID)
+        register(SearchbarCell.self)
+        register(CategoriesCell.self)
+        register(ProductCell.self)
         register(HeaderProductsView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderProductsView.resuseID)
     }
     

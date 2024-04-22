@@ -9,8 +9,12 @@ import UIKit
 
 final class SearchResultCollectionView: UICollectionView{
     private var sections: [SectionSearchModel] =  SectionSearchModel.allCases
+    private let shouldCreateHeader: Bool
+    private let groupSpacing: CGFloat
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout, shouldCreateHeader: Bool, groupSpacing: CGFloat) {
+        self.shouldCreateHeader = shouldCreateHeader
+        self.groupSpacing = groupSpacing
         super.init(frame: frame, collectionViewLayout: layout)
         configCollectionView()
         registerCells()
@@ -29,8 +33,10 @@ final class SearchResultCollectionView: UICollectionView{
     }
     
     private func registerCells(){
-        register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.resuseID)
-        register(HeaderProductsView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderProductsView.resuseID)
+        register(ProductCell.self)
+        if shouldCreateHeader{
+            register(HeaderProductsView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderProductsView.resuseID)
+        }
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout{
@@ -47,7 +53,7 @@ final class SearchResultCollectionView: UICollectionView{
     private func createProductsSection() -> NSCollectionLayoutSection{
         let item = CompositionalLayout.createItem(width: .fractionalWidth(0.5), height: .fractionalHeight(1), spacing: 4)
         let group = CompositionalLayout.createGroup(alignment: .horizontal, width: .fractionalWidth(1), height: .fractionalHeight(0.3), subitems: [item])
-        let section = CompositionalLayout.createSection(group: group, scrollBehavior: .none, groupSpacing: 0, leading: 12, trailing: 12, top: 12, bottom: 8,  supplementary: [createHeader()])
+        let section = CompositionalLayout.createSection(group: group, scrollBehavior: .none, groupSpacing: groupSpacing, leading: 12, trailing: 12, top: 12, bottom: 8,  supplementary: shouldCreateHeader ? [createHeader()] : [])
         return section
     }
     
@@ -55,4 +61,3 @@ final class SearchResultCollectionView: UICollectionView{
         .init(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
     }
 }
-
