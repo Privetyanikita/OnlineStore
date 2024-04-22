@@ -21,6 +21,7 @@ class PhotoEditViewController: UIViewController {
         photoEditView.onTakePhotoTap = takePhoto
         photoEditView.onChooseFileTap = chooseFile
         photoEditView.onDeletePhotoTap = deletePhoto
+        photoEditView.onCloseTap = { self.dismiss(animated: true) }
         view = photoEditView
     }
     
