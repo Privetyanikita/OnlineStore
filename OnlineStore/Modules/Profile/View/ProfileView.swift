@@ -80,9 +80,10 @@ class ProfileView: UIView {
         return signOutButton
     }()
     
-    init(user: User) {
+    init(user: ProfileUser) {
         super.init(frame: .zero)
         setupUI(with: user)
+        dismissKeyboardTapGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -97,7 +98,12 @@ class ProfileView: UIView {
         editImageButton.clipsToBounds = true
     }
     
-    private func setupUI(with user: User) {
+    private func dismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing(_:)))
+        addGestureRecognizer(tap)
+    }
+    
+    private func setupUI(with user: ProfileUser) {
         backgroundColor = .white
         if let photo = user.photo {
             profileImage.image = photo
