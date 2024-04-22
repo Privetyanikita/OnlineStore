@@ -42,6 +42,11 @@ final class CustomTabBar: UITabBarController {
         self.tabBar.unselectedItemTintColor = .gray
 
     }
+    
+    
+    deinit {
+        print(">> deinit from CustomTabBar")
+    }
 }
 // MARK: - UITabBarControllerDelegate
 extension CustomTabBar: UITabBarControllerDelegate{
