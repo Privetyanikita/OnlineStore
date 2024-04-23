@@ -33,6 +33,7 @@
 		83708C582BD44186009D71CD /* ProductDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C572BD44186009D71CD /* ProductDescriptionView.swift */; };
 		83708C5A2BD445C2009D71CD /* NSCoder + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C592BD445C2009D71CD /* NSCoder + Ext.swift */; };
 		83708C5C2BD44E3C009D71CD /* ProductBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C5B2BD44E3C009D71CD /* ProductBottomView.swift */; };
+		83708CF42BD7D6F6009D71CD /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708CF32BD7D6F6009D71CD /* DatabaseManager.swift */; };
 		8493BB2F2BCEBF1D00E239B4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB2E2BCEBF1D00E239B4 /* FirebaseAnalytics */; };
 		8493BB312BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB302BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion */; };
 		8493BB332BCEBF1D00E239B4 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB322BCEBF1D00E239B4 /* FirebaseAnalyticsSwift */; };
@@ -162,6 +163,7 @@
 		83708C572BD44186009D71CD /* ProductDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionView.swift; sourceTree = "<group>"; };
 		83708C592BD445C2009D71CD /* NSCoder + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCoder + Ext.swift"; sourceTree = "<group>"; };
 		83708C5B2BD44E3C009D71CD /* ProductBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBottomView.swift; sourceTree = "<group>"; };
+		83708CF32BD7D6F6009D71CD /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8493BB6C2BCEC0A800E239B4 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		8493BB6E2BCEC10000E239B4 /* LogInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModel.swift; sourceTree = "<group>"; };
@@ -223,11 +225,10 @@
 		84D7BEC72BCDAA6000936C69 /* WishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishModel.swift; sourceTree = "<group>"; };
 		84D7BECC2BCDAB1300936C69 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84D7BECE2BCDAB4000936C69 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		84D7BED02BCDAB5000936C69 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		84D7BED02BCDAB5000936C69 /* ProfileUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUser.swift; sourceTree = "<group>"; };
 		84EE8E9C2BD5CDCE008FB910 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		84EE8E9E2BD5CF4F008FB910 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		84EE8EA02BD5D1C4008FB910 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		84D7BED02BCDAB5000936C69 /* ProfileUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUser.swift; sourceTree = "<group>"; };
 		84EE8EA32BD6F115008FB910 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		84EE8EA82BD6F4C6008FB910 /* BaseRegistrationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRegistrationCell.swift; sourceTree = "<group>"; };
 		84EE8EAA2BD6F50B008FB910 /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
@@ -388,6 +389,14 @@
 			path = LocationView;
 			sourceTree = "<group>";
 		};
+		83708CF22BD7D65F009D71CD /* DatabaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				83708CF32BD7D6F6009D71CD /* DatabaseManager.swift */,
+			);
+			path = DatabaseManager;
+			sourceTree = "<group>";
+		};
 		8493BB642BCEBFE400E239B4 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +479,7 @@
 		8493BB792BCEC2F300E239B4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				83708CF22BD7D65F009D71CD /* DatabaseManager */,
 				36651C7D2BD6A14E005ADA14 /* ResultSearch */,
 				CB5E1A512BD3B7BC006B827F /* Cart */,
 				366939BA2BD2B1F3002A6549 /* StoreManager */,
@@ -1099,7 +1109,6 @@
 				84C0ABCB2BD02FE1009076B2 /* HomeView.swift in Sources */,
 				362AF02D2BD12777002D74FF /* SearchResultCell.swift in Sources */,
 				8493BB8B2BCEF6D600E239B4 /* FontEnum.swift in Sources */,
-				8493BB762BCEC16D00E239B4 /* SingUpView.swift in Sources */,
 				84EE8E9F2BD5CF4F008FB910 /* EndPoint.swift in Sources */,
 				84D7BEBB2BCDA9B300936C69 /* CartModel.swift in Sources */,
 				369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */,
@@ -1119,6 +1128,7 @@
 				84C0ABC22BD02FE1009076B2 /* HomeModel.swift in Sources */,
 				8493BB6F2BCEC10000E239B4 /* LogInModel.swift in Sources */,
 				84D7BEC62BCDAA4100936C69 /* WishView.swift in Sources */,
+				83708CF42BD7D6F6009D71CD /* DatabaseManager.swift in Sources */,
 				833EE2832BD121DE0011BC4F /* LocationView.swift in Sources */,
 				84C0ABBD2BD02FE1009076B2 /* CompositionalLayout.swift in Sources */,
 				84C0ABDE2BD158DA009076B2 /* PhotoEditView.swift in Sources */,
