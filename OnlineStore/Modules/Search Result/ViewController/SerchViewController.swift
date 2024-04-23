@@ -11,21 +11,7 @@ class SearchViewController: BaseViewController {
     
     private var searchWord: String
     
-    private var products: [ProductsModel] = [
-        .init(id: 1, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Aello World", price: 100, isLiked: false),
-        .init(id: 2, image: "https://placeimg.com/640/480/any", description: "Cello World", price: 300, isLiked: false),
-        .init(id: 3, image: "https://media.istockphoto.com/id/1380361370/photo/decorative-banana-plant-in-concrete-vase-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=eYADMQ9dXTz1mggdfn_exN2gY61aH4fJz1lfMomv6o4=", description: "Bello World", price: 400, isLiked: false),
-        .init(id: 4, image: "https://api.escuelajs.co", description: "Kello World", price: 200, isLiked: false),
-        .init(id: 5, image: "https://i.imgur.com/Qphac99.jpeg", description: "Pello World", price: 500, isLiked: false),
-        .init(id: 6, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Lello World", price: 600, isLiked: false),
-        .init(id: 7, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Aello World", price: 100, isLiked: false),
-        .init(id: 8, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 200, isLiked: false),
-        .init(id: 9, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 300, isLiked: false),
-        .init(id: 10, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 400, isLiked: false),
-        .init(id: 11, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 500, isLiked: false),
-        .init(id: 12, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 600, isLiked: false),
-    ]
-    
+    private var products: [Product] = .init()
     private let searchView = SearchView()
 
     init(searchWord: String) {
@@ -61,7 +47,7 @@ class SearchViewController: BaseViewController {
         super.viewDidLoad()
         SearchResultManager.shared.saveHistorySearchWord(searchWord: searchWord)
         hookUpNavBar()
-        searchView.applySnapShotResults(products: products) //убрать когда будет запрос в сеть и вызывать уже там когда данные будут получены когда подключу сеть посмотреть будет ли без этого header приходить
+        getProductsByTitle(title: searchWord)
         customNavigationBar.searchTextField.text = searchWord
     }
     
@@ -110,7 +96,7 @@ extension SearchViewController: HeaderProductsDelegate{
         switch filterType{
         case .nameAlphabet:
             var productsToSortArray = products
-            productsToSortArray.sort { $0.description < $1.description }
+            productsToSortArray.sort { $0.title < $1.title }
             searchView.applySnapShotResults(products: productsToSortArray)
         case .priceDescending:
             var productsToSortArray = products
@@ -147,16 +133,33 @@ extension SearchViewController: UISearchBarDelegate {
         if let searchText{
             _ = SearchResultManager.shared.saveHistory(saveType: .saveSearchWordResult, serchToSave: searchText, id: nil)  //cохраняем в UserDefaults
             searchView.headerDelegate?.changeHeaderTitle(serchWord: searchText) // меняем title у header
-            //запрос в сеть передаем searchText
+            getProductsByTitle(title: searchText) //запрос в сеть передаем searchText
         }
         searchView.hideCollectionView(isHideSavesCollection: true,
                                       isHideResultCollection: false)
         searchBar.resignFirstResponder()
     }
 }
+// MARK: - Network
+private extension SearchViewController{
+    func getProductsByTitle(title: String){
+        NetworkManager.shared.searchProductsByTitle(title: title, completion: { result in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                switch result{
+                case .success(let dataByTitle):
+                    products = dataByTitle
+                    searchView.applySnapShotResults(products: products)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        })
+    }
+}
 // MARK: - SearchViewDelegateProtocol
 extension SearchViewController: SearchViewDelegateProtocol{
-    func addToCart(item: ProductsModel) {
+    func addToCart(item: Product) {
         print("item \(item)")
     }
     

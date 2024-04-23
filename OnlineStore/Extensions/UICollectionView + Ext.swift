@@ -18,4 +18,15 @@ extension UICollectionView {
         }
         return cell
     }
+    
+    func registerHeader<T: UICollectionReusableView>(supplementaryViewType: T.Type) {
+        register(supplementaryViewType.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: T.headerIdentifier)
+    }
+    
+    func reuseSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String, type: T.Type, for indexPath: IndexPath) -> T {
+        guard let supplementaryView = dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: T.headerIdentifier, for: indexPath) as? T else {
+            fatalError("Failed to dequeue a supplementary view of type \(T.self)")
+        }
+        return supplementaryView
+    }
 }

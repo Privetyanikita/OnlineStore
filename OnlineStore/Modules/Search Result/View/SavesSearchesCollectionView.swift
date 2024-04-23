@@ -31,7 +31,7 @@ final class SavesSearchesCollectionView: UICollectionView{
     
     private func registerCells(){
         register(SearchResultCell.self)
-        register(HeaderSavesSerches.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderSavesSerches.resuseID)
+        registerHeader(supplementaryViewType: HeaderSavesSerches.self)
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout{
