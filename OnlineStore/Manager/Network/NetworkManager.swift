@@ -29,8 +29,8 @@ struct NetworkManager {
         performRequest(with: url, completion: completion)
     }
     
-    func fetchFilteredProducts(limit: Int? = nil, offset: Int? = nil, category: String? = nil, completion: @escaping (Result<[Product], NetworkError>) -> Void) {
-        let endPoint = EndPoint.getFilteredProducts(limit: limit, offset: offset, category: category)
+    func fetchFilteredProducts(limit: Int? = nil, offset: Int? = nil, categoryId: Int? = nil, completion: @escaping (Result<[Product], NetworkError>) -> Void) {
+        let endPoint = EndPoint.getFilteredProducts(limit: limit, offset: offset, categoryId: categoryId)
         let url = createURL(for: endPoint)
         performRequest(with: url, completion: completion)
     }

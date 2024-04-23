@@ -9,8 +9,8 @@
 import Foundation
 enum ItemModel: Hashable{
     case searchBar
-    case categories(CategoriesModel)
-    case products(ProductsModel)
+    case categories(Category)
+    case products(Product)
 }
 
 struct CategoriesModel: Hashable{

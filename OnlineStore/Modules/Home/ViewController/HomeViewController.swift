@@ -11,38 +11,13 @@ import Route
 
 class HomeViewController: BaseViewController {
     
-    private var products: [ProductsModel] = [
-        .init(id: 1, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Aello World", price: 100, isLiked: false),
-        .init(id: 2, image: "https://placeimg.com/640/480/any", description: "Cello World", price: 300, isLiked: false),
-        .init(id: 3, image: "https://media.istockphoto.com/id/1380361370/photo/decorative-banana-plant-in-concrete-vase-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=eYADMQ9dXTz1mggdfn_exN2gY61aH4fJz1lfMomv6o4=", description: "Bello World", price: 400, isLiked: false),
-        .init(id: 4, image: "https://api.escuelajs.co", description: "Kello World", price: 200, isLiked: false),
-        .init(id: 5, image: "https://i.imgur.com/Qphac99.jpeg", description: "Pello World", price: 500, isLiked: false),
-        .init(id: 6, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Lello World", price: 600, isLiked: false),
-        .init(id: 7, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Aello World", price: 100, isLiked: false),
-        .init(id: 8, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 200, isLiked: false),
-        .init(id: 9, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 300, isLiked: false),
-        .init(id: 10, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 400, isLiked: false),
-        .init(id: 11, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 500, isLiked: false),
-        .init(id: 12, image: "https://i.imgur.com/ZANVnHE.jpeg", description: "Hello World", price: 600, isLiked: false),
-    ]
-    
-    private var categories: [CategoriesModel] = [
-        .init(id: 1, name: "Clothes", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 2, name: "Toys", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 3, name: "Electronocs", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 4, name: "School", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 5, name: "All", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 6, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 7, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 8, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-        .init(id: 9, name: "Mock1", image: "https://i.imgur.com/QkIa5tT.jpeg"),
-    ]
-    
-    private var categArray: [ItemModel] = []
-    private var prodArray: [ItemModel] = []
-    
     private let homeView = HomeView()
-    private let allGategories: CategoriesModel =  .init(id: 99999, name: "All", image: "All")
+    
+    private var products: [Product] = .init()
+    private var categories: [Category] = .init()
+    private var categorySection: [ItemModel] = .init()
+    private var productsSection: [ItemModel] = .init()
+    private let allCategory: Category =  .init(id: 999999999, name: "All", image: "All")
     
     override func loadView() {
         super.loadView()
@@ -66,10 +41,8 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hookUpNavBarButtons()
-        insetAll()
-        prodArray = products.map { .products($0)}
-        categArray = categories.prefix(5).map { .categories($0)}
-        homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
+        getCategories()
+        getAllProducts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,20 +69,20 @@ private extension HomeViewController{
 
 // MARK: - Private Methods
 private extension HomeViewController{
-    func insetAll(){
+    func insertAll(){
         if categories.count > 5 {
-            categories.insert(allGategories, at: 4)
+            categories.insert(allCategory, at: 4)
         }
     }
     
-    func updateProductsSection(categoryNumber: Int){
+    func updateProductsSection(categoryNumber: Int, categoryId: Int){
         if categoryNumber == 4{
-            categArray = (categArray.count > 5) 
+            categorySection = (categorySection.count > 5) 
             ? categories.prefix(5).map { .categories($0)}
             : categories.map { .categories($0)}
-            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
+            homeView.applyDiffableSnapShot(products: productsSection, categories: categorySection)
         } else {
-            //запрос в сеть
+            getProductsByCategory(categoryId: categoryId)
         }
     }
     
@@ -129,10 +102,10 @@ extension HomeViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = homeView.getItem(index: indexPath) else {return}
         switch item{
-        case .categories(let categorie):
-            print("tapped Categories \(categorie.name)")
+        case .categories(let category):
+            print("tapped Categories \(category.name)")
             selectionCategory(selectedIndexpath: indexPath, collectionView: collectionView)
-            updateProductsSection(categoryNumber: indexPath.item)
+            updateProductsSection(categoryNumber: indexPath.item, categoryId: category.id)
         case .products(let product):
             print("tapped Products \(product)") // идем на детальный экран
             router.push(DetailViewController(),animated: true)
@@ -148,22 +121,22 @@ extension HomeViewController: HeaderProductsDelegate{
         switch filterType{
         case .nameAlphabet:
             var productsToSortArray = products
-            productsToSortArray.sort { $0.description < $1.description }
-            prodArray = productsToSortArray.map { .products($0) }
-            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
+            productsToSortArray.sort { $0.title < $1.title }
+            productsSection = productsToSortArray.map { .products($0) }
+            homeView.applyDiffableSnapShot(products: productsSection, categories: categorySection)
         case .priceDescending:
             var productsToSortArray = products
             productsToSortArray.sort { $0.price > $1.price }
-            prodArray = productsToSortArray.map { .products($0) }
-            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
+            productsSection = productsToSortArray.map { .products($0) }
+            homeView.applyDiffableSnapShot(products: productsSection, categories: categorySection)
         case .noFilter:
-            prodArray = products.map { .products($0) }
-            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
+            productsSection = products.map { .products($0) }
+            homeView.applyDiffableSnapShot(products: productsSection, categories: categorySection)
         case .priceAscending:
             var productsToSortArray = products
             productsToSortArray.sort { $0.price < $1.price }
-            prodArray = productsToSortArray.map { .products($0) }
-            homeView.applyDiffableSnapShot(products: prodArray, categories: categArray)
+            productsSection = productsToSortArray.map { .products($0) }
+            homeView.applyDiffableSnapShot(products: productsSection, categories: categorySection)
         }
     }
 }
@@ -171,16 +144,71 @@ extension HomeViewController: HeaderProductsDelegate{
 extension HomeViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else { return }
-        print(searchText) // переход на экран с поиском
-        router.push(SearchViewController(searchWord: searchText),animated: true)
+        router.push(SearchViewController(searchWord: searchText),animated: true) // переход на SearchViewController
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }
 }
 
+// MARK: - Network
+private extension HomeViewController{
+    func getProductsByCategory(categoryId: Int){
+        NetworkManager.shared.fetchFilteredProducts(categoryId: categoryId) { result in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                switch result{
+                case .success(let dataByCategory):
+                    products = dataByCategory
+                    productsSection = products.map { .products($0)}
+                    homeView.applyDiffableSnapShot(products: productsSection,
+                                                   categories: categorySection)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func getAllProducts(){
+        NetworkManager.shared.fetchProducts { result in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                switch result{
+                case .success(let dataAllProducts):
+                    print(dataAllProducts.count)
+                    products = dataAllProducts
+                    productsSection = products.map { .products($0)}
+                    homeView.applyDiffableSnapShot(products: productsSection,
+                                                   categories: categorySection)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func getCategories(){
+        NetworkManager.shared.fetchCategories { result in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                switch result{
+                case .success(let dataCategory):
+                    categories = dataCategory
+                    insertAll()
+                    categorySection = categories.prefix(5).map { .categories($0)}
+                    homeView.applyDiffableSnapShot(products: productsSection,
+                                                   categories: categorySection)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
 // MARK: - HomeViewDelegateProtocol
 extension HomeViewController: HomeViewDelegateProtocol{
-    func addToCart(item: ProductsModel) {
+    func addToCart(item: Product) {
         print("Add To Cart Homev \(item)") //добавляем в корзину
     }
 }

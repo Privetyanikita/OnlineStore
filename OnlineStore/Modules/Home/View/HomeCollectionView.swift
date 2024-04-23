@@ -33,7 +33,7 @@ final class HomeCollectionView: UICollectionView{
         register(SearchbarCell.self)
         register(CategoriesCell.self)
         register(ProductCell.self)
-        register(HeaderProductsView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderProductsView.resuseID)
+        registerHeader(supplementaryViewType: HeaderProductsView.self)
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout{

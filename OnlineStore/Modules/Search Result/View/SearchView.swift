@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchViewDelegateProtocol: AnyObject{
-    func addToCart(item: ProductsModel)
+    func addToCart(item: Product)
     func deleteOneHistorySearch(id: UUID)
 }
 
@@ -22,7 +22,7 @@ final class SearchView: UIView{
     private weak var headerDelegateSaves: HeaderSavesSerchesDelegate?
     private weak var headerDelegateResult: HeaderProductsDelegate?
     
-    private var diffableDataSourceResult: UICollectionViewDiffableDataSource<SectionSearchModel, ProductsModel>?
+    private var diffableDataSourceResult: UICollectionViewDiffableDataSource<SectionSearchModel, Product>?
     private var diffableDataSourceSaves: UICollectionViewDiffableDataSource<SectionsSavesModel, SavesSerchesModel>?
     
     private let sectionsSearchResult: [SectionSearchModel] = SectionSearchModel.allCases
@@ -89,7 +89,7 @@ extension SearchView{
         diffableDataSourceResult = .init(collectionView: collectionViewSearchResult, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(type: ProductCell.self,
                                                           for: indexPath)
-            cell.configCell(descText: itemIdentifier.description, priceText: itemIdentifier.price, image: itemIdentifier.image, isLiked: nil, isRemoveFavor: true)
+            cell.configCell(nameTitle: itemIdentifier.title, priceTitle: itemIdentifier.price, image: itemIdentifier.images[0], isLiked: nil, isRemoveFavor: true)
             cell.onButtonTap = { event in
                 switch event{
                 case .addToCartTapped:
@@ -103,7 +103,7 @@ extension SearchView{
         
         diffableDataSourceResult?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
             guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderProductsView.resuseID, for: indexPath) as? HeaderProductsView else { return nil }
+            let header = collectionView.reuseSupplementaryView(ofKind: kind, type: HeaderProductsView.self, for: indexPath)
             let section = self.sectionsSearchResult[indexPath.section]
             header.configureHeader(sectionTitle: section.title + self.searchWord, type: .searchResult)
             header.delegate = self.headerDelegateResult
@@ -128,7 +128,7 @@ extension SearchView{
         
         diffableDataSourceSaves?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
             guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderSavesSerches.resuseID, for: indexPath) as? HeaderSavesSerches else { return nil }
+            let header = collectionView.reuseSupplementaryView(ofKind: kind, type: HeaderSavesSerches.self, for: indexPath)
             let section = self.sectionsSavesReserches[indexPath.section]
             header.configureHeader(sectionTitle: section.title)
             header.delegate = self.headerDelegateSaves
@@ -160,13 +160,13 @@ extension SearchView{
         return diffableDataSourceSaves?.itemIdentifier(for: index)
     }
     
-    func getItemResult(index: IndexPath)-> ProductsModel?{
+    func getItemResult(index: IndexPath)-> Product?{
         return diffableDataSourceResult?.itemIdentifier(for: index)
     }
     
-    func applySnapShotResults(products: [ProductsModel]){
+    func applySnapShotResults(products: [Product]){
         DispatchQueue.main.async { [self] in
-            var snapShot = NSDiffableDataSourceSnapshot<SectionSearchModel, ProductsModel>()
+            var snapShot = NSDiffableDataSourceSnapshot<SectionSearchModel, Product>()
             snapShot.appendSections([.searchResult])
             snapShot.appendItems(products, toSection: .searchResult)
             diffableDataSourceResult?.apply(snapShot, animatingDifferences: true)
