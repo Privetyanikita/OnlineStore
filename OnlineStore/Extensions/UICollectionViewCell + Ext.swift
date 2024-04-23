@@ -16,3 +16,4 @@ extension UICollectionViewCell{
         type(of: self).reuseIdentifier
     }
 }
+

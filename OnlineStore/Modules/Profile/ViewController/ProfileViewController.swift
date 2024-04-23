@@ -24,6 +24,12 @@ final class ProfileViewController: BaseViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     private func setupView() {
         let profileView = ProfileView(user: user)
         profileView.onEditPhotoTap = goToPhotoEdit

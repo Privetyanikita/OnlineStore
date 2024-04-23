@@ -165,12 +165,11 @@ class ProductCell: UICollectionViewCell {
 }
 //MARK: - Configure Cell UI Public Method
 extension ProductCell{
-    func configCell(descText: String, priceText: Int, image: String?, isLiked: Bool?, isRemoveFavor: Bool){
+    func configCell(nameTitle: String, priceTitle: Int, image: String?, isLiked: Bool?, isRemoveFavor: Bool){
         removeButtonFavorite(isRemove: isRemoveFavor, isLiked: isLiked)
-        nameLabel.text = descText
-        priceLabel.text = String(priceText)
+        nameLabel.text = nameTitle
+        priceLabel.text = String(priceTitle) + " ₽"
         if let image = image {
-            setDefaultImage(imageView: productImage)
             productImage.kf.indicatorType = .activity
             productImage.kf.setImage(with: URL(string: image))
         } else {

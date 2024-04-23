@@ -35,7 +35,7 @@ final class SearchResultCollectionView: UICollectionView{
     private func registerCells(){
         register(ProductCell.self)
         if shouldCreateHeader{
-            register(HeaderProductsView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderProductsView.resuseID)
+            registerHeader(supplementaryViewType: HeaderProductsView.self)
         }
     }
     

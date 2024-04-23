@@ -14,6 +14,8 @@ class CategoriesCell: UICollectionViewCell {
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.configLabel(font: Font.getFont(.regular, size: 12), lines: 1, alignment: .center, color: UIColor.lightGray)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.7
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -75,7 +77,6 @@ extension CategoriesCell{
         if image == "All"{
             categoryImage.image = UIImage(systemName: "circle.grid.2x2")?.withTintColor(UIColor(named: "CustomGreen") ?? .gray, renderingMode: .alwaysOriginal)
         } else if let image = image{
-            setDefaultImage(imageView: categoryImage)
             categoryImage.kf.indicatorType = .activity
             categoryImage.kf.setImage(with: URL(string: image))
         } else {

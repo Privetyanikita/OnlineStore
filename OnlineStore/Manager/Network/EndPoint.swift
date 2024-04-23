@@ -11,7 +11,7 @@ enum EndPoint {
     case getProducts
     case getProductDetails(id: Int)
     case getCategories
-    case getFilteredProducts(limit: Int?, offset: Int?, category: String?)
+    case getFilteredProducts(limit: Int?, offset: Int?, categoryId: Int?)
     case searchProductsByTitle(title: String)
 
     var path: String {
@@ -27,7 +27,7 @@ enum EndPoint {
 
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getFilteredProducts(let limit, let offset, let category):
+        case .getFilteredProducts(let limit, let offset, let categoryId):
             var items = [URLQueryItem]()
             if let limit = limit {
                 items.append(URLQueryItem(name: "limit", value: String(limit)))
@@ -35,8 +35,8 @@ enum EndPoint {
             if let offset = offset {
                 items.append(URLQueryItem(name: "offset", value: String(offset)))
             }
-            if let category = category {
-                items.append(URLQueryItem(name: "category", value: category))
+            if let categoryId = categoryId {
+                items.append(URLQueryItem(name: "categoryId", value: String(categoryId)))
             }
             return items.isEmpty ? nil : items
         case .searchProductsByTitle(let title):

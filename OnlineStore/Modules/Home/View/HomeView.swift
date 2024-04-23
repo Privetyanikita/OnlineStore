@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeViewDelegateProtocol: AnyObject{
-    func addToCart(item: ProductsModel)
+    func addToCart(item: Product)
 }
 
 final class HomeView: UIView{
@@ -28,7 +28,6 @@ final class HomeView: UIView{
         let view = HomeCollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-
     
     init(){
         super.init(frame: .zero)
@@ -51,20 +50,20 @@ private extension HomeView{
                                                               for: indexPath)
                 cell.setUpSearchBarDelegate(delegateVC: self.searchBarDelegate)
                 return cell
-            case .categories(let categoriesModel):
+            case .categories(let category):
                 let cell = collectionView.dequeueReusableCell(type: CategoriesCell.self,
                                                               for: indexPath)
-                cell.configCell(categoryLabelText: categoriesModel.name, image: categoriesModel.image)
+                cell.configCell(categoryLabelText: category.name, image: category.image)
                 self.selectedCategory == indexPath ?  cell.setSelectedBorder() : cell.setDefaultBorder()
                 return cell
-            case .products(let productModel):
+            case .products(let product):
                 let cell = collectionView.dequeueReusableCell(type: ProductCell.self,
                                                               for: indexPath)
-                cell.configCell(descText: productModel.description, priceText: productModel.price, image: productModel.image, isLiked: true, isRemoveFavor: false)
+                cell.configCell(nameTitle: product.title, priceTitle: product.price, image: product.images[0], isLiked: nil, isRemoveFavor: true)
                 cell.onButtonTap = { event in
                     switch event{
                     case .addToCartTapped:
-                        self.delegate?.addToCart(item: productModel)
+                        self.delegate?.addToCart(item: product)
                     case .addToWishList:
                         break
                     }
@@ -75,7 +74,7 @@ private extension HomeView{
         
         diffableDataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
             guard kind == UICollectionView.elementKindSectionHeader else { return nil }
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderProductsView.resuseID, for: indexPath) as? HeaderProductsView else { return nil }
+            let header = collectionView.reuseSupplementaryView(ofKind: kind, type: HeaderProductsView.self, for: indexPath)
             let section = self.sections[indexPath.section]
             header.configureHeader(sectionTitle: section.title, type: .home)
             header.delegate = self.headerDelegate
