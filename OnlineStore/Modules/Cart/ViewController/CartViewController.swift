@@ -72,7 +72,7 @@ class CartViewController: BaseViewController, CartProductTableViewCellDelegate {
     
     @objc private func backButtonTapped() {
         print(">> BACK BTN tapped")
-        dismiss(animated: true)
+        router.back()
     }
     
     @objc private func shoppingCartButtonTapped() {

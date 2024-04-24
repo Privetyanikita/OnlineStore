@@ -13,7 +13,7 @@ protocol BaseViewControllerProtocol: AnyObject {
 }
 
 
-class BaseViewController: UIViewController, BaseViewControllerProtocol {
+class BaseViewController: UIViewController, BaseViewControllerProtocol, CartManagerDelegate {
     
     let customNavigationBar = CustomNavigationBarImplementation()
     let bottomBorder: UIView = {
@@ -27,10 +27,17 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         setupCustomNavigationBar()
         customNavigationBar.setupConfiguration(configureNavigationBar())
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        CartManager.shared.delegate = self
+    }
     
     func configureNavigationBar() -> CustomNavigationBarConfiguration? {
         fatalError("Необходимо переписать этот метод в наследуемом классе")
+    }
+    
+    func getProductsCount(count: Int) {
+        customNavigationBar.shoppingCartButton.badgeLabel.text = String(count)
     }
 }
 
