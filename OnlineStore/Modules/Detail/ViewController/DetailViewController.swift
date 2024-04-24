@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Route
 
 class DetailViewController: BaseViewController {
 
@@ -87,6 +88,7 @@ class DetailViewController: BaseViewController {
     
     @objc private func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        router.push(CartViewController(), animated: true)
     }
     
     

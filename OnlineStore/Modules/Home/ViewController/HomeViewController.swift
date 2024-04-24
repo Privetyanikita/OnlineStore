@@ -64,6 +64,7 @@ private extension HomeViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        router.push(CartViewController(), animated: true)
     }
 }
 
@@ -210,5 +211,6 @@ private extension HomeViewController{
 extension HomeViewController: HomeViewDelegateProtocol{
     func addToCart(item: Product) {
         print("Add To Cart Homev \(item)") //добавляем в корзину
+        CartManager.shared.addProductToCart(item)
     }
 }

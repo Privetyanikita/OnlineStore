@@ -7,13 +7,28 @@
 
 import Foundation
 
+protocol CartManagerDelegate: AnyObject {
+    func getProductsCount(count: Int)
+}
+
 class CartManager {
     
     static let shared = CartManager()
     
-    private (set) var currentProducts = [CartProduct]()
+    weak var delegate: CartManagerDelegate? {
+        didSet {
+            delegate?.getProductsCount(count: currentProducts.count)
+        }
+    }
     
-    func addProductToCart(_ product: ProductsModel) {
+    private (set) var currentProducts = [CartProduct]() {
+        didSet {
+            delegate?.getProductsCount(count: currentProducts.count)
+            StoreManager.shared.saveCustomData(object: currentProducts, forKey: .cart)
+        }
+    }
+    
+    func addProductToCart(_ product: Product) {
         let existingProducts = currentProducts.map { $0.product }
         if let index = existingProducts.firstIndex(of: product) {
             currentProducts[index].count += 1
@@ -58,5 +73,19 @@ class CartManager {
             }
         }
         return totalSum
+    }
+    
+    func setup() {
+        StoreManager.shared.getCustomData(forKey: .cart) { (products: [CartProduct]?) in
+            if let products {
+                DispatchQueue.main.sync {
+                    self.currentProducts = products
+                }
+            } else {
+                DispatchQueue.main.sync {
+                    self.currentProducts = [CartProduct]()
+                }
+            }
+        }
     }
 }
