@@ -22,7 +22,7 @@ class CategoriesCell: UICollectionViewCell {
     
     private let categoryImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.configImageView(cornerRadius: 4, contentMode: .scaleAspectFit)
+        imageView.configImageView(cornerRadius: 4, contentMode: .scaleAspectFill)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -74,14 +74,14 @@ class CategoriesCell: UICollectionViewCell {
 extension CategoriesCell{
     func configCell(categoryLabelText: String, image: String?){
         categoryLabel.text = categoryLabelText.capitalized
+        setDefaultImage(imageView: categoryImage)
         if image == "All"{
-            categoryImage.image = UIImage(systemName: "circle.grid.2x2")?.withTintColor(UIColor(named: "CustomGreen") ?? .gray, renderingMode: .alwaysOriginal)
+            categoryImage.image = UIImage(named: "allCategory")
+            categoryLabel.text = ""
         } else if let image = image{
             categoryImage.kf.indicatorType = .activity
             categoryImage.kf.setImage(with: URL(string: image))
-        } else {
-            setDefaultImage(imageView: categoryImage)
-        }
+        } 
     }
     
     func setDefaultBorder(){

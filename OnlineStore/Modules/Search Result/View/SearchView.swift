@@ -89,7 +89,7 @@ extension SearchView{
         diffableDataSourceResult = .init(collectionView: collectionViewSearchResult, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(type: ProductCell.self,
                                                           for: indexPath)
-            cell.configCell(nameTitle: itemIdentifier.title, priceTitle: itemIdentifier.price, image: itemIdentifier.images[0], isLiked: nil, isRemoveFavor: true)
+            cell.configCell(nameTitle: itemIdentifier.title, priceTitle: itemIdentifier.price, images: itemIdentifier.images, isLiked: nil, isRemoveFavor: true)
             cell.onButtonTap = { event in
                 switch event{
                 case .addToCartTapped:

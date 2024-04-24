@@ -23,12 +23,15 @@ final class CustomTabBar: UITabBarController {
         let navHome = UINavigationController(rootViewController: homeVC)
         let wishListVC = WhishListViewController()
         let navWish = UINavigationController(rootViewController: wishListVC)
+        let managerVC = ManagerViewController()
+        let navManager = UINavigationController(rootViewController: managerVC)
         let profileVC = ProfileViewController()
         let navProfile = UINavigationController(rootViewController: profileVC)
         setUPVC(title: "Home", image: UIImage(named: "Home"), vc: homeVC)
         setUPVC(title: "Wishlist", image: UIImage(named: "Heart"), vc: wishListVC)
+        setUPVC(title: "Manager", image: UIImage(named: "Paper"), vc: managerVC)
         setUPVC(title: "Account", image: UIImage(named: "Profile"), vc: profileVC)
-        self.setViewControllers([navHome, navWish, navProfile], animated: false)
+        self.setViewControllers([navHome, navWish, navManager, navProfile], animated: false)
     }
     
     private func setUPVC( title: String, image: UIImage?, vc: UIViewController){
@@ -59,6 +62,8 @@ extension CustomTabBar: UITabBarControllerDelegate{
         case 1:
             tabBarItem?.image = UIImage(named: "HeartTapped")
         case 2:
+            tabBarItem?.image = UIImage(named: "PaperTapped")
+        case 3:
             tabBarItem?.image = UIImage(named: "ProfileTapped")
         default:
             break
@@ -72,6 +77,8 @@ extension CustomTabBar: UITabBarControllerDelegate{
             case 1:
                 previousTabBarItem?.image = UIImage(named: "Heart")
             case 2:
+                previousTabBarItem?.image = UIImage(named: "Paper")
+            case 3:
                 previousTabBarItem?.image = UIImage(named: "Profile")
             default:
                 break
