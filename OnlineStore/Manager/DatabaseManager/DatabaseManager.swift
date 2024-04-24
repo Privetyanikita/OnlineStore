@@ -7,9 +7,11 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 
 enum DatabaseError: String, Error {
-    case unableToFetch   = "Unable to get your products from database. Please try again"
+    case unableToFetchProducts = "Unable to get your products from database. Please try again"
+    case unableToFetchUsers = "Unable to get users from database. Please try again"
 }
 
 final class DatabaseManager {
@@ -19,11 +21,17 @@ final class DatabaseManager {
     
     
     private init() {}
+    
+    static func safeEmail(emailAddress: String) -> String {
+        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
+        safeEmail = emailAddress.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
 }
 
 
 extension DatabaseManager {
-    
+    // MARK: - Product methods
     public func insertProduct(with product: Product, completion: @escaping (Bool) -> Void) {
         let productDetail: [String: Any] = [
             "product_id": product.id,
@@ -45,7 +53,7 @@ extension DatabaseManager {
     public func getAllProducts(completion: @escaping (Result<[[String: Any]], DatabaseError>) -> Void) {
         database.child("products").observeSingleEvent(of: .value) { snapshot, _  in
             guard let value = snapshot.value as? [[String: Any]] else {
-                completion(.failure(DatabaseError.unableToFetch))
+                completion(.failure(DatabaseError.unableToFetchProducts))
                 return
             }
             completion(.success(value))
