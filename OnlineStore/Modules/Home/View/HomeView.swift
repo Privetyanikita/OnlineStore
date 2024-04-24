@@ -59,7 +59,7 @@ private extension HomeView{
             case .products(let product):
                 let cell = collectionView.dequeueReusableCell(type: ProductCell.self,
                                                               for: indexPath)
-                cell.configCell(nameTitle: product.title, priceTitle: product.price, image: product.images[0], isLiked: nil, isRemoveFavor: true)
+                cell.configCell(nameTitle: product.title, priceTitle: product.price, images: product.images, isLiked: nil, isRemoveFavor: true)
                 cell.onButtonTap = { event in
                     switch event{
                     case .addToCartTapped:

@@ -175,7 +175,6 @@ private extension HomeViewController{
                 guard let self else { return }
                 switch result{
                 case .success(let dataAllProducts):
-                    print(dataAllProducts.count)
                     products = dataAllProducts
                     productsSection = products.map { .products($0)}
                     homeView.applyDiffableSnapShot(products: productsSection,
