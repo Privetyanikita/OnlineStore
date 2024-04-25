@@ -64,6 +64,7 @@ private extension HomeViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        router.push(CartViewController(), animated: true)
     }
 }
 
@@ -175,7 +176,6 @@ private extension HomeViewController{
                 guard let self else { return }
                 switch result{
                 case .success(let dataAllProducts):
-                    print(dataAllProducts.count)
                     products = dataAllProducts
                     productsSection = products.map { .products($0)}
                     homeView.applyDiffableSnapShot(products: productsSection,
@@ -210,5 +210,6 @@ private extension HomeViewController{
 extension HomeViewController: HomeViewDelegateProtocol{
     func addToCart(item: Product) {
         print("Add To Cart Homev \(item)") //добавляем в корзину
+        CartManager.shared.addProductToCart(item)
     }
 }

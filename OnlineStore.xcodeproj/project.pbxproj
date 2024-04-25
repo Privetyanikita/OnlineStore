@@ -17,6 +17,7 @@
 		36651C7C2BD6A041005ADA14 /* UICollectionViewCell + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C7B2BD6A041005ADA14 /* UICollectionViewCell + Ext.swift */; };
 		36651C7F2BD6A167005ADA14 /* SearchResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C7E2BD6A167005ADA14 /* SearchResultManager.swift */; };
 		36651C812BD7BF27005ADA14 /* UICollectionReusableView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C802BD7BF27005ADA14 /* UICollectionReusableView + Ext.swift */; };
+		36651C872BD8ECBB005ADA14 /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C862BD8ECBB005ADA14 /* ManagerViewController.swift */; };
 		366939B72BD295E4002A6549 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B62BD295E4002A6549 /* UIViewController + Ext.swift */; };
 		366939B92BD29846002A6549 /* StoreManagerDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B82BD29846002A6549 /* StoreManagerDefaults.swift */; };
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
@@ -148,6 +149,7 @@
 		36651C7B2BD6A041005ADA14 /* UICollectionViewCell + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Ext.swift"; sourceTree = "<group>"; };
 		36651C7E2BD6A167005ADA14 /* SearchResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultManager.swift; sourceTree = "<group>"; };
 		36651C802BD7BF27005ADA14 /* UICollectionReusableView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView + Ext.swift"; sourceTree = "<group>"; };
+		36651C862BD8ECBB005ADA14 /* ManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
 		366939B62BD295E4002A6549 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
 		366939B82BD29846002A6549 /* StoreManagerDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManagerDefaults.swift; sourceTree = "<group>"; };
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -305,6 +307,38 @@
 				36651C7E2BD6A167005ADA14 /* SearchResultManager.swift */,
 			);
 			path = ResultSearch;
+			sourceTree = "<group>";
+		};
+		36651C822BD8EC45005ADA14 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				36651C842BD8EC81005ADA14 /* Model */,
+				36651C852BD8EC8B005ADA14 /* View */,
+				36651C832BD8EC71005ADA14 /* ViewController */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		36651C832BD8EC71005ADA14 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				36651C862BD8ECBB005ADA14 /* ManagerViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		36651C842BD8EC81005ADA14 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36651C852BD8EC8B005ADA14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		366939BA2BD2B1F3002A6549 /* StoreManager */ = {
@@ -680,6 +714,7 @@
 		84D7BE922BCD90FE00936C69 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				36651C822BD8EC45005ADA14 /* Manager */,
 				84C0ABD42BD03015009076B2 /* Onbording */,
 				8493BB642BCEBFE400E239B4 /* Authorization */,
 				369AE5142BCEA461009157D6 /* TabBar */,
@@ -1076,6 +1111,7 @@
 				833EE2722BCEF8F50011BC4F /* UIButton + Ext.swift in Sources */,
 				366939B92BD29846002A6549 /* StoreManagerDefaults.swift in Sources */,
 				8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */,
+				36651C872BD8ECBB005ADA14 /* ManagerViewController.swift in Sources */,
 				84C0ABDA2BD158B2009076B2 /* PhotoEditViewController.swift in Sources */,
 				84EE8E9D2BD5CDCE008FB910 /* API.swift in Sources */,
 				84C0ABC42BD02FE1009076B2 /* SectionModel.swift in Sources */,

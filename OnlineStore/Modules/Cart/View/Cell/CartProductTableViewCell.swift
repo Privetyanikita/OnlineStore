@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Route
 
 protocol CartProductTableViewCellDelegate: AnyObject {
     func productCheckedStateChanded(_ product: CartProduct)
@@ -99,8 +100,8 @@ class CartProductTableViewCell: UITableViewCell {
     
     func configureCell(with cartProduct: CartProduct) {
         self.cartProduct = cartProduct
-        photoImage.kf.setImage(with: URL(string: cartProduct.product.image))
-        nameLabel.text = cartProduct.product.description
+        photoImage.kf.setImage(with: URL(string: cartProduct.product.images.first!))
+        nameLabel.text = cartProduct.product.title
         priceLabel.text = "$ " + String(cartProduct.product.price)
         countStepper.setValue(Double(cartProduct.count))
         if !cartProduct.isChecked {

@@ -7,8 +7,8 @@
 
 import UIKit
 
-struct CartProduct: Equatable {
-    let product: ProductsModel
+struct CartProduct: Equatable, Codable {
+    let product: Product
     var count = 1
     var isChecked: Bool = true
 }

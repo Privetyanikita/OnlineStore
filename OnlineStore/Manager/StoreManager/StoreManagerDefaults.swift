@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 final class StoreManager{
     public enum Keys: String{
@@ -39,8 +40,8 @@ final class StoreManager{
     func saveCustomData<T>(object: T, forKey key: Keys) where T : Encodable {
         queueStore.async {
             if let jsonData = try? JSONEncoder().encode(object){
-                self.save(object: jsonData, forKey: key.rawValue
-                )
+                guard let currentUserEmail = Auth.auth().currentUser?.email else { return }
+                self.save(object: jsonData, forKey: key.rawValue + currentUserEmail)
                 print("Done Save")
             }
         }
@@ -53,7 +54,8 @@ final class StoreManager{
     
     func getCustomData<T: Decodable>(forKey key: Keys, completion: @escaping (T?) -> Void) {
         queueStore.async {
-            if let savedDataData = self.getSavedObject(forKey: key.rawValue) as? Data{
+            guard let currentUserEmail = Auth.auth().currentUser?.email else { return }
+            if let savedDataData = self.getSavedObject(forKey: key.rawValue + currentUserEmail) as? Data{
                 let decoder = JSONDecoder()
                 if let savedData = try? decoder.decode(T.self, from: savedDataData){
                     completion(savedData)
@@ -72,4 +74,5 @@ final class StoreManager{
             self.userDefaults.removeObject(forKey: key.rawValue)
         }
     }
+
 }

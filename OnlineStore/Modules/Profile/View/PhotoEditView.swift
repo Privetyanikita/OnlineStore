@@ -15,8 +15,11 @@ class PhotoEditView: UIView {
     var onDeletePhotoTap: (() -> Void)?
     var onCloseTap: (() -> Void)?
     
-    private let blurView: UIVisualEffectView = {
+    private lazy var blurView: UIVisualEffectView = {
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+        blurView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapOutside))
+        blurView.addGestureRecognizer(tap)
         
         return blurView
     }()
@@ -40,18 +43,6 @@ class PhotoEditView: UIView {
         titleLabel.text = "Change your picture"
         
         return titleLabel
-    }()
-    
-    private lazy var closeButton: UIButton = {
-        let closeButton = UIButton()
-        closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        closeButton.tintColor = .systemGray
-        closeButton.backgroundColor = .clear
-        closeButton.layer.borderColor = UIColor.systemGray4.cgColor
-        closeButton.layer.borderWidth = 1
-        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        
-        return closeButton
     }()
     
     private let separator: UIView = {
@@ -91,12 +82,6 @@ class PhotoEditView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        closeButton.layer.cornerRadius = closeButton.frame.width / 2
-        closeButton.clipsToBounds = true
-    }
-    
     private func setupUI() {
         let photoEditbuttonStack = UIStackView(arrangedSubviews: [takePhotoButton, chooseFileButton, deletePhotoButton])
         photoEditbuttonStack.spacing = 20
@@ -104,7 +89,6 @@ class PhotoEditView: UIView {
         addSubview(blurView)
         addSubview(backgroundView)
         addSubview(titleLabel)
-        addSubview(closeButton)
         addSubview(separator)
         addSubview(photoEditbuttonStack)
         subviews.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
@@ -122,12 +106,6 @@ class PhotoEditView: UIView {
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(backgroundView)
             make.top.equalTo(backgroundView).offset(20)
-        }
-        
-        closeButton.snp.makeConstraints { make in
-            make.centerX.equalTo(backgroundView.snp.trailing).inset(4)
-            make.centerY.equalTo(backgroundView.snp.top).offset(4)
-            make.width.height.equalTo(32)
         }
         
         separator.snp.makeConstraints { make in
@@ -157,8 +135,8 @@ class PhotoEditView: UIView {
         onDeletePhotoTap?()
     }
     
-    @objc private func closeButtonTapped(_ sender: UIButton) {
-        print("Close button tapped")
+    @objc private func tapOutside() {
+        print("Tapped outside view to close")
         onCloseTap?()
     }
 

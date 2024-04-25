@@ -165,15 +165,28 @@ class ProductCell: UICollectionViewCell {
 }
 //MARK: - Configure Cell UI Public Method
 extension ProductCell{
-    func configCell(nameTitle: String, priceTitle: Int, image: String?, isLiked: Bool?, isRemoveFavor: Bool){
+    func configCell(nameTitle: String, priceTitle: Int, images: [String], isLiked: Bool?, isRemoveFavor: Bool){
         removeButtonFavorite(isRemove: isRemoveFavor, isLiked: isLiked)
         nameLabel.text = nameTitle
         priceLabel.text = String(priceTitle) + " ₽"
-        if let image = image {
-            productImage.kf.indicatorType = .activity
-            productImage.kf.setImage(with: URL(string: image))
-        } else {
-            setDefaultImage(imageView: productImage)
+        setDefaultImage(imageView: productImage)
+        if !images.isEmpty {
+            var urlString = images[0]
+            //print("URL \(urlString)  \(nameTitle)")
+
+            if urlString.first == "[" {
+                urlString = urlString
+                    .replacingOccurrences(of: "[\"", with: "")
+                    .replacingOccurrences(of: "\"]", with: "")
+                //print("newURL \(urlString)  \(nameTitle)")
+            }
+
+            if urlString != "https://placeimg.com/640/480/any" {
+                productImage.kf.indicatorType = .activity
+                productImage.kf.setImage(with: URL(string: urlString))
+            } else {
+                setDefaultImage(imageView: productImage)
+            }
         }
     }
     
