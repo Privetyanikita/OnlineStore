@@ -11,7 +11,8 @@ import Route
 
 class DetailViewController: BaseViewController {
 
-    var colors: [UIColor] = [.systemYellow, .systemOrange,. systemTeal]
+    private let product: Product
+    private var cleanImageArray: [String] = .init()
     
     private let productCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,11 +30,21 @@ class DetailViewController: BaseViewController {
     let scrollView            = UIScrollView()
     let contentView           = UIView()
     
+    init( product: Product) {
+        self.product = product
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScrollView()
         configureViewController()
         setupNavBarItems()
+        cleanImagesArray()
     }
 
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
@@ -110,10 +121,17 @@ class DetailViewController: BaseViewController {
     
     
     private func configureItems() {
-        productTitleView.configure(product: "Air pods max by Apple", price: "$ 1999,99")
-        productDescriptionView.configure(with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+        productTitleView.configure(product: product.title, price: product.price)
+        productDescriptionView.configure(with: product.description)
     }
     
+    private func cleanImagesArray(){
+        cleanImageArray = product.images.map { string in
+            var cleanedString = string.cleanImageUrl()
+            cleanedString = cleanedString.trimmingCharacters(in:  CharacterSet(charactersIn: "\""))
+            return cleanedString
+        }
+    }
     
     private func layoutViews(){
         
@@ -158,17 +176,14 @@ extension DetailViewController: UISearchBarDelegate {
 extension DetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colors.count
+        return product.images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: DetailCollectionViewCell.reuseID, for: indexPath) as? DetailCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(colors[indexPath.item])
+        cell.configure(cleanImageArray[indexPath.item])
         return cell
     }
-    
-
-    
 }
 
 
