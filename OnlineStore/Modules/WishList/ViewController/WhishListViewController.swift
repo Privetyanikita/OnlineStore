@@ -11,7 +11,7 @@ class WhishListViewController: BaseViewController {
     
     private let wishView = WishView()
     
-    private var products: [Product] = [ // подгрузить из БД во ViewDidLoad
+    private var products: [Product] = [ // подгрузить из БД во ViewWillAppear
         .init(id: 1, title: "Hello", price: 100, description: "Hello,Hello", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
         .init(id: 2, title: "sfsdsd", price: 200, description: "fsdfsdmn", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
         .init(id: 3, title: "sdklfafkas", price: 300, description: "fsdfsdmnsfdjsdf", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
@@ -71,7 +71,7 @@ private extension WhishListViewController{
 extension WhishListViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = wishView.getItemWishList(index: indexPath) else { return }
-        router.push(DetailViewController(),animated: true) // переход на детальный экран
+        router.push(DetailViewController(product: item),animated: true) // переход на детальный экран
     }
 }
 

@@ -8,8 +8,13 @@
 
 import Foundation
 
+protocol SearchResultManagerProtocol: AnyObject {
+    func updateSaveSearches()
+}
+
 final class SearchResultManager{
     static let shared = SearchResultManager()
+    weak var delegate: SearchResultManagerProtocol?
     
     private init(){}
     
@@ -20,6 +25,7 @@ final class SearchResultManager{
         switch saveType{
         case .saveSearchWordResult:
             saveSearches.append(objectToSave)
+            self.delegate?.updateSaveSearches()
             StoreManager.shared.saveCustomData(object: saveSearches,
                                                forKey: .saveSearches)
             return saveSearches
@@ -27,6 +33,7 @@ final class SearchResultManager{
             if let index = saveSearches.firstIndex(where: { $0.id == id })
             {
                 saveSearches.remove(at: index)
+                self.delegate?.updateSaveSearches()
                 StoreManager.shared.saveCustomData(object: saveSearches,
                                                    forKey: .saveSearches)
                 return saveSearches
@@ -34,6 +41,7 @@ final class SearchResultManager{
             return saveSearches
         case .deleteAll:
             saveSearches = []
+            self.delegate?.updateSaveSearches()
             StoreManager.shared.remove(forKey: .saveSearches)
             return saveSearches
         }
@@ -44,10 +52,12 @@ final class SearchResultManager{
             if let savedSearches = savedSearches {
                 self.saveSearches = savedSearches
                 self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
+                self.delegate?.updateSaveSearches()
                 StoreManager.shared.saveCustomData(object: self.saveSearches,
                                                    forKey: .saveSearches)
             } else {
                 self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
+                self.delegate?.updateSaveSearches()
                 StoreManager.shared.saveCustomData(object: self.saveSearches,
                                                    forKey: .saveSearches)
             }

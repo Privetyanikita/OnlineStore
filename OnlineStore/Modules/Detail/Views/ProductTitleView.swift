@@ -77,9 +77,9 @@ class ProductTitleView: UIView {
     }
     
     
-    func configure(product name: String, price: String) {
+    func configure(product name: String, price: Int) {
         productNameLabel.text = name
-        priceLabel.text = price
+        priceLabel.configPriceLabel(priceTitle: price)
         favoriteProductButton.addTarget(self, action: #selector(isFavoriteTapped), for: .touchUpInside)
     }
     
