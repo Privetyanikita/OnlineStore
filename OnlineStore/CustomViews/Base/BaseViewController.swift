@@ -37,7 +37,12 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol, CartMana
     }
     
     func getProductsCount(count: Int) {
-        customNavigationBar.shoppingCartButton.badgeLabel.text = String(count)
+        if count != 0 {
+            customNavigationBar.shoppingCartButton.badgeLabel.isHidden = false
+            customNavigationBar.shoppingCartButton.badgeLabel.text = String(count)
+        } else {
+            customNavigationBar.shoppingCartButton.badgeLabel.isHidden = true
+        }
     }
 }
 
