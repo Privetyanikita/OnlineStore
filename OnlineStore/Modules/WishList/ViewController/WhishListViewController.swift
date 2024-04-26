@@ -64,6 +64,7 @@ private extension WhishListViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        router.push(CartViewController(), animated: true)
     }
 }
 
@@ -89,6 +90,7 @@ extension WhishListViewController: UISearchBarDelegate {
 extension WhishListViewController: WishViewDelegateProtocol{
     func addToCart(item: Product) {
         print("add to cart \(item)")
+        CartManager.shared.addProductToCart(item)
     }
     
     func deleteFromWishList(item: Product) {

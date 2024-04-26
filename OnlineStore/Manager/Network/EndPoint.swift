@@ -13,6 +13,7 @@ enum EndPoint {
     case getCategories
     case getFilteredProducts(limit: Int?, offset: Int?, categoryId: Int?)
     case searchProductsByTitle(title: String)
+    case getCurrency(country: String)
 
     var path: String {
         switch self {
@@ -22,6 +23,8 @@ enum EndPoint {
             return "/api/v1/products/\(id)"
         case .getCategories:
             return "/api/v1/categories"
+        case .getCurrency(let country):
+            return "/v3.1/name/\(country)"
         }
     }
 

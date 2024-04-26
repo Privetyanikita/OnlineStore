@@ -101,10 +101,11 @@ class CartProductTableViewCell: UITableViewCell {
     
     func configureCell(with cartProduct: CartProduct) {
         self.cartProduct = cartProduct
-        cleanImagesArray()
-        photoImage.kf.setImage(with: URL(string: cleanImageArray!.first!))
+        let cleanImageURl = cartProduct.product.images.first!.cleanImageUrl()
+        loadImageTableViewCell(url: cleanImageURl, imageView: photoImage)
+        //photoImage.kf.setImage(with: URL(string: cartProduct.product.images.first!))
         nameLabel.text = cartProduct.product.title
-        priceLabel.text = "$ " + String(cartProduct.product.price)
+        priceLabel.configPriceLabel(priceTitle: cartProduct.product.price, type: .left)
         countStepper.setValue(Double(cartProduct.count))
         if !cartProduct.isChecked {
             checkbox.layer.borderWidth = 2

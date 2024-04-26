@@ -11,9 +11,8 @@ import FirebaseCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        LocationManager.shared.getUserLocation()
         FirebaseApp.configure()
         if let app = FirebaseApp.app() {
             print(">> FirebaseApp.app configured")

@@ -21,3 +21,19 @@ struct Category: Codable, Hashable {
     let image: String
 }
 
+struct GeocodingResult: Decodable {
+    let components: GeocodingComponents
+}
+
+struct GeocodingComponents: Decodable {
+    let countryCode: String
+}
+
+struct Country: Decodable {
+    let currencies: [String: Currency]
+}
+
+struct Currency: Decodable {
+    let symbol: String
+}
+

@@ -38,16 +38,7 @@ final class DetailCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func setDefaultImage(imageView: UIImageView){
-        imageView.image = UIImage(systemName: "photo")?.withTintColor(.lightGray,renderingMode: .alwaysOriginal)
-    }
-    
     func configure(_ image: String) {
-        if image != "https://placeimg.com/640/480/any" {
-            productImageView.kf.indicatorType = .activity
-            productImageView.kf.setImage(with: URL(string: image))
-        } else {
-            setDefaultImage(imageView: productImageView)
-        }
+        loadImageCollectionViewCell(url: image, imageView: productImageView)
     }
 }

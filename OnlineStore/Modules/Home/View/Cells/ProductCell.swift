@@ -109,10 +109,6 @@ class ProductCell: UICollectionViewCell {
         onButtonTap?(event)
     }
     
-    private func setDefaultImage(imageView: UIImageView){
-        imageView.image = UIImage(systemName: "photo")?.withTintColor(.lightGray,renderingMode: .alwaysOriginal)
-    }
-    
     private func setViews(){
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 5
@@ -168,14 +164,9 @@ extension ProductCell{
     func configCell(nameTitle: String, priceTitle: Int, image: String, isLiked: Bool?, isRemoveFavor: Bool){
         removeButtonFavorite(isRemove: isRemoveFavor, isLiked: isLiked)
         nameLabel.text = nameTitle
-        priceLabel.configPriceLabel(priceTitle: priceTitle)
+        priceLabel.configPriceLabel(priceTitle: priceTitle, type: .right)
         let cleanImageURl = image.cleanImageUrl()
-        if cleanImageURl != "https://placeimg.com/640/480/any" {
-            productImage.kf.indicatorType = .activity
-            productImage.kf.setImage(with: URL(string: cleanImageURl))
-        } else {
-            setDefaultImage(imageView: productImage)
-        }
+        loadImageCollectionViewCell(url: cleanImageURl, imageView: productImage)
     }
     
     private func removeButtonFavorite(isRemove: Bool, isLiked: Bool?){
@@ -189,9 +180,5 @@ extension ProductCell{
             wishListButton.setBackgroundImage(favoriteImage, for: .normal)
         }
     }
-    
-    func setImageForWishListButton(isLiked: Bool){
-        let favoriteImage: UIImage? = isLiked ? UIImage(named: "HeartTapped") : UIImage(named: "Heart")
-        wishListButton.setBackgroundImage(favoriteImage, for: .normal)
-    }
 }
+

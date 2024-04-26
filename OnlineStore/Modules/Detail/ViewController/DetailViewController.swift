@@ -46,6 +46,11 @@ class DetailViewController: BaseViewController {
         setupNavBarItems()
         cleanImagesArray()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
 
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
        CustomNavigationBarConfiguration(
@@ -105,7 +110,7 @@ class DetailViewController: BaseViewController {
     
     private func  configureViewController() {
         view.backgroundColor = .systemBackground
-        
+        productBottomView.delegate = self
         contentView.addSubview(productCollectionView)
         contentView.addSubview(productTitleView)
         contentView.addSubview(productDescriptionView)
@@ -195,6 +200,18 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension DetailViewController: ProductBottomViewDelegate{
+    func goTocart() {
+        CartManager.shared.addProductToCart(product)
+    }
+    
+    func buyNow() {
+        let paymentVC = PaymentViewController()
+        paymentVC.modalPresentationStyle = .fullScreen
+        present(paymentVC, animated: true)
     }
 }
 
