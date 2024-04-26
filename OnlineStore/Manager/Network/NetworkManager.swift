@@ -20,30 +20,36 @@ struct NetworkManager {
     private init() {}
     
     func fetchProducts(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
-        let url = createURL(for: .getProducts)
+        let url = createURL(for: .getProducts, hostType: .productHost)
         performRequest(with: url, completion: completion)
     }
     
     func fetchCategories(completion: @escaping (Result<[Category], NetworkError>) -> Void) {
-        let url = createURL(for: .getCategories)
+        let url = createURL(for: .getCategories, hostType: .productHost)
         performRequest(with: url, completion: completion)
     }
     
     func fetchFilteredProducts(limit: Int? = nil, offset: Int? = nil, categoryId: Int? = nil, completion: @escaping (Result<[Product], NetworkError>) -> Void) {
         let endPoint = EndPoint.getFilteredProducts(limit: limit, offset: offset, categoryId: categoryId)
-        let url = createURL(for: endPoint)
+        let url = createURL(for: endPoint, hostType: .productHost)
         performRequest(with: url, completion: completion)
     }
     
     func fetchProductDetails(id: Int, completion: @escaping (Result<Product, NetworkError>) -> Void) {
         let endPoint = EndPoint.getProductDetails(id: id)
-        let url = createURL(for: endPoint)
+        let url = createURL(for: endPoint, hostType: .productHost)
         performRequest(with: url, completion: completion)
     }
     
     func searchProductsByTitle(title: String, completion: @escaping (Result<[Product], NetworkError>) -> Void) {
         let endPoint = EndPoint.searchProductsByTitle(title: title)
-        let url = createURL(for: endPoint)
+        let url = createURL(for: endPoint, hostType: .productHost)
+        performRequest(with: url, completion: completion)
+    }
+    
+    func fetchCountryCurrency(country: String, completion: @escaping (Result<[Country], NetworkError> ) -> Void){
+        let endPoint = EndPoint.getCurrency(country: country)
+        let url = createURL(for: endPoint, hostType: .countryHost)
         performRequest(with: url, completion: completion)
     }
     
@@ -72,13 +78,17 @@ struct NetworkManager {
         }.resume()
     }
     
-    private func createURL(for endPoint: EndPoint) -> URL? {
+    private func createURL(for endPoint: EndPoint, hostType: HostType) -> URL? {
         var components = URLComponents()
         components.scheme = API.scheme
-        components.host = API.host
+        switch hostType{
+        case .productHost:
+            components.host = API.host
+        case .countryHost:
+            components.host = API.hostCountry
+        }
         components.path = endPoint.path
         components.queryItems = endPoint.queryItems
-        
         return components.url
     }
 }

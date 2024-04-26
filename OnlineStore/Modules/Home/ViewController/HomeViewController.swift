@@ -71,7 +71,7 @@ private extension HomeViewController{
 // MARK: - Private Methods
 private extension HomeViewController{
     func insertAll(){
-        if categories.count > 5 {
+        if categories.count >= 5 {
             categories.insert(allCategory, at: 4)
         }
     }

@@ -54,7 +54,6 @@ class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
     }
 }
@@ -69,6 +68,7 @@ private extension SearchViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        router.push(CartViewController(), animated: true)
     }
     
     @objc private func backButtonTapped() {
@@ -162,6 +162,7 @@ private extension SearchViewController{
 extension SearchViewController: SearchViewDelegateProtocol{
     func addToCart(item: Product) {
         print("item \(item)")
+        CartManager.shared.addProductToCart(item)
     }
     
     func deleteOneHistorySearch(id: UUID) {

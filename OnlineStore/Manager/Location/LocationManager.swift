@@ -18,7 +18,25 @@ class LocationManager: NSObject {
     
     private override init() {}
     
-    private let europeanCountries = ["France", "Франция", "Germany", "Германия", "Italy", "Италия", "Spain", "Испания", "United Kingdom", "Великобритания", "Ireland", "Ирландия", "Poland", "Польша", "Netherlands", "Недерланды",  "Belgium", "Бельгия", "Austria", "Австрия", "Switzerland", "Швейцария", "Denmark", "Дания", "Norway", "Норвегия", "Sweden", "Швеция", "Finland", "Финляндия", "Portugal", "Португалия", "Greece", "Греция",  "Czech Republic", "Чехия", "Hungary", "Венгрия", "Slovakia", "Словакия",  "Serbia", "Сербия", "Montenegro", "Черногория",  "Bulgaria", "Болгария"]
+    private let currencyMapping: [String : CurrencyType] = [
+        "₽": .russia,
+        "$": .usa,
+        "€": .europe,
+        "дин.": .europe,
+        "den": .europe,
+        "L": .europe,
+        "kr": .europe,
+        "Kč": .europe,
+        "₴": .europe,
+        "lei": .europe,
+        "zł": .europe,
+        "Ft": .europe,
+        "лв": .europe,
+        "Br": .europe,
+        "Fr.": .europe,
+        "Fr": .europe,
+        "£": .europe
+    ]
     
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
@@ -28,17 +46,11 @@ class LocationManager: NSObject {
         locationManager.requestAlwaysAuthorization()
         locationManager.requestLocation()
     }
-
-    private func choseContinent(for country: String) -> CurrencyType {
-        switch country {
-        case "Russia", "Россия":
-            return .russia
-        case "United States", "Соединённые Штаты Америки":
-            return .usa
-        default:
-            let currencyType = europeanCountries.contains(country) ? CurrencyType.europe : CurrencyType.usa
-            return currencyType
-        }
+    
+    private func chooseCurrency(symbol: String) {
+        print(symbol)
+        currency = currencyMapping[symbol] ?? .usa
+        //print("Currency new: \(currency)")
     }
 }
 // MARK: - CLLocationManagerDelegate
@@ -48,9 +60,19 @@ extension LocationManager: CLLocationManagerDelegate {
             geocoder.reverseGeocodeLocation(location) { (placemarks, _) in
                 if let placemark = placemarks?.first {
                     guard let country = placemark.country else { return }
+                    NetworkManager.shared.fetchCountryCurrency(country: country) { [weak self] result in
+                        guard let self else { return }
+                        DispatchQueue.main.async {
+                            switch result{
+                            case .success(let data):
+                                let currency = data.first?.currencies.values.first ?? Currency(symbol: "$")
+                                self.chooseCurrency(symbol: currency.symbol )
+                            case .failure(let error):
+                                print("Currency Fetch Error \(error.localizedDescription)")
+                            }
+                        }
+                    }
                     print(placemark)
-                    let currencyType = self.choseContinent(for: country)
-                    self.currency = currencyType
                 }
             }
         }
