@@ -177,7 +177,6 @@ final class LogInViewController: BaseViewController {
                 let returnedUserData = try await AuthenticationManager.shared.signInUser(email: profileUser.mail, password: profileUser.password)
                 guard let email = returnedUserData.email else { return }
                 print(">> Go to MAIN flow")
-                CartManager.shared.setup()
                 let homeViewController = CustomTabBar()
                 router.replace(with: homeViewController)
             } catch {
