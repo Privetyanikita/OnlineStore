@@ -40,8 +40,8 @@ final class StoreManager{
     func saveCustomData<T>(object: T, forKey key: Keys) where T : Encodable {
         queueStore.async {
             if let jsonData = try? JSONEncoder().encode(object){
-                guard let currentUserEmail = Auth.auth().currentUser?.email else { return }
-                self.save(object: jsonData, forKey: key.rawValue + currentUserEmail)
+                guard let currentUserUId = Auth.auth().currentUser?.uid else { return }
+                self.save(object: jsonData, forKey: key.rawValue + currentUserUId)
                 print("Done Save")
             }
         }
@@ -54,8 +54,8 @@ final class StoreManager{
     
     func getCustomData<T: Decodable>(forKey key: Keys, completion: @escaping (T?) -> Void) {
         queueStore.async {
-            guard let currentUserEmail = Auth.auth().currentUser?.email else { return }
-            if let savedDataData = self.getSavedObject(forKey: key.rawValue + currentUserEmail) as? Data{
+            guard let currentUserUId = Auth.auth().currentUser?.uid else { return }
+            if let savedDataData = self.getSavedObject(forKey: key.rawValue + currentUserUId) as? Data{
                 let decoder = JSONDecoder()
                 if let savedData = try? decoder.decode(T.self, from: savedDataData){
                     completion(savedData)

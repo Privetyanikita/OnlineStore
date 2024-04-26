@@ -43,6 +43,7 @@ class HomeViewController: BaseViewController {
         hookUpNavBarButtons()
         getCategories()
         getAllProducts()
+        CartManager.shared.setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
