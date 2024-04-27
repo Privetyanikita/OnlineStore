@@ -29,6 +29,22 @@ final class WishView: UIView{
         return view
     }()
     
+    private let circleView: UIImageView = {
+        let image = UIImageView()
+        image.configImageView(cornerRadius: 36, contentMode: .scaleAspectFill)
+        image.backgroundColor = Color.customGreen
+        return image
+    }()
+    
+    private let emptyImage = UIImageView(image: Image.isLikedHeart)
+    
+    private let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.configLabel(font: Font.getFont(.regular, size: 16), lines: 0, alignment: .center, color: .lightGray)
+        label.text = "Your WishList is Empty, add your favorite products!"
+        return label
+    }()
+    
     init(){
         super.init(frame: .zero)
         setViews()
@@ -44,8 +60,11 @@ final class WishView: UIView{
 // MARK: - LayOut
 extension WishView{
     private func setViews(){
+        circleView.addSubview(emptyImage)
         [
-            collectionViewWishList
+            circleView,
+            emptyLabel,
+            collectionViewWishList,
         ].forEach { addSubview($0) }
     }
     
@@ -55,6 +74,23 @@ extension WishView{
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide).offset(62)
             make.bottom.equalToSuperview()
+        }
+        
+        circleView.snp.makeConstraints { make in
+            make.width.height.equalTo(72)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        emptyImage.snp.makeConstraints { make in
+            make.width.height.equalTo(24)
+            make.centerX.centerY.equalTo(circleView)
+        }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.top.equalTo(emptyImage.snp.bottom).offset(24)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(200)
+            make.height.equalTo(100)
         }
     }
 }
@@ -98,5 +134,19 @@ extension WishView{
             snapShot.appendItems(products, toSection: .searchResult)
             diffableDataSourceWishList?.apply(snapShot, animatingDifferences: true)
         }
+    }
+    
+    func emptyWishList(){
+        print("hide collectionView")
+        collectionViewWishList.isHidden = true
+        circleView.isHidden = false
+        emptyLabel.isHidden = false
+    }
+    
+    func fillWishList(){
+        print("hide circleView")
+        collectionViewWishList.isHidden = false
+        circleView.isHidden = true
+        emptyLabel.isHidden = true
     }
 }
