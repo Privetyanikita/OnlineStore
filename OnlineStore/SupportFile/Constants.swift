@@ -36,6 +36,7 @@ enum Text {
     static let addToCart = "Add to Cart"
     static let buyNow = "Buy Now"
     static let payment = "Payment method"
+    static let manager = "Manager Screen"
     
     //Registration
     static let login = "Login"
@@ -58,4 +59,12 @@ enum Text {
     static let enterYourPassword = "Enter your password"
     static let confirmPassword = "Confirm password"
     static let confirmYourPassword = "Confirm your password"
+    
+    //Manager
+    static let addNewProduct = "Add new product"
+    static let updateProduct = "Update product"
+    static let deleteProduct = "Delete product"
+    static let createCategory = "Create category"
+    static let updateCategory = "Update category"
+    static let deleteCategory = "Delete category"
 }
