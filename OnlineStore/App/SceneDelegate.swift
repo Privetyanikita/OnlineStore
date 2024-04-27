@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.isShowingHomeVC = authUser == nil ? false : true
 
         window = UIWindow(windowScene: windowScene)
-        LocationManager.shared.getUserLocation()
+       
         let navViewController = UINavigationController()
         navViewController.navigationBar.isHidden = true
 

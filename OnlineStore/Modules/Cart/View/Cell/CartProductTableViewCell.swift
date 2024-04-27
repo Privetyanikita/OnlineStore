@@ -20,6 +20,7 @@ class CartProductTableViewCell: UITableViewCell {
     weak var delegate: CartProductTableViewCellDelegate?
     
     private var cartProduct: CartProduct?
+    private var cleanImageArray: [String]?
     
     private lazy var checkbox: UIButton = {
         let checkbox = UIButton()
@@ -100,9 +101,11 @@ class CartProductTableViewCell: UITableViewCell {
     
     func configureCell(with cartProduct: CartProduct) {
         self.cartProduct = cartProduct
-        photoImage.kf.setImage(with: URL(string: cartProduct.product.images.first!))
+        let cleanImageURl = cartProduct.product.images.first!.cleanImageUrl()
+        loadImageTableViewCell(url: cleanImageURl, imageView: photoImage)
+        //photoImage.kf.setImage(with: URL(string: cartProduct.product.images.first!))
         nameLabel.text = cartProduct.product.title
-        priceLabel.text = "$ " + String(cartProduct.product.price)
+        priceLabel.configPriceLabel(priceTitle: cartProduct.product.price, type: .left)
         countStepper.setValue(Double(cartProduct.count))
         if !cartProduct.isChecked {
             checkbox.layer.borderWidth = 2
@@ -110,6 +113,14 @@ class CartProductTableViewCell: UITableViewCell {
         } else {
             checkbox.layer.borderWidth = 0
             checkbox.backgroundColor = .customGreen
+        }
+    }
+    
+    private func cleanImagesArray() {
+        cleanImageArray = cartProduct?.product.images.map { string in
+            var cleanedString = string.cleanImageUrl()
+            cleanedString = cleanedString.trimmingCharacters(in:  CharacterSet(charactersIn: "\""))
+            return cleanedString
         }
     }
     

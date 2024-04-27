@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol ProductBottomViewDelegate: AnyObject{
+    func goTocart()
+    func buyNow()
+}
+
 class ProductBottomView: UIView {
+    
+    weak var delegate: ProductBottomViewDelegate?
 
     private let separatorView: UIView = {
         let view = UIView()
@@ -32,7 +39,7 @@ class ProductBottomView: UIView {
         button.configuration?.title = Text.buyNow
         button.configuration?.baseForegroundColor = .black.withAlphaComponent(0.8)
         button.configuration?.baseBackgroundColor = Color.customLightGrey
-        
+     
         return button
     }()
     
@@ -46,6 +53,20 @@ class ProductBottomView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+        addTargetButtons()
+    }
+    
+    private func addTargetButtons(){
+        buyNowButton.addTarget(self, action: #selector(tappedBuyNow), for: .touchUpInside)
+        addToCartButton.addTarget(self, action: #selector(tappedAddToCart), for: .touchUpInside)
+    }
+    
+    @objc private func tappedAddToCart(){
+        delegate?.goTocart()
+    }
+    
+    @objc private func tappedBuyNow(){
+        delegate?.buyNow()
     }
     
     

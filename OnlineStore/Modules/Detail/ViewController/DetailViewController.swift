@@ -47,6 +47,11 @@ final class DetailViewController: BaseViewController {
         cleanImagesArray()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
 
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
        CustomNavigationBarConfiguration(
@@ -106,7 +111,8 @@ final class DetailViewController: BaseViewController {
     
     private func  configureViewController() {
         view.backgroundColor = .systemBackground
-        
+        productBottomView.delegate = self
+        productTitleView.delegate = self
         contentView.addSubview(productCollectionView)
         contentView.addSubview(productTitleView)
         contentView.addSubview(productDescriptionView)
@@ -123,9 +129,9 @@ final class DetailViewController: BaseViewController {
     
     
     private func configureItems() {
-        productTitleView.configure(product: product.title, price: product.price, isFavorite: product.isBookmarked)
+        // здесь нужно сделать проверку есть ли в массиве products из WishListManager наш продукт и если есть то у продукта поменять isFavorite на true и уже после конфигурировать productTitleView
+        productTitleView.configure(product: product.title, price: product.price, isFavorite: false)
         productDescriptionView.configure(with: product.description)
-        productTitleView.updateFavoriteImage(isFavorite: product.isBookmarked)
     }
     
     private func cleanImagesArray(){
@@ -200,12 +206,30 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
-
-
-extension DetailViewController: ProductTitleViewDelegate {
+// MARK: - ProductBottomViewDelegate Add to Cart, Go to PaymentVC
+extension DetailViewController: ProductBottomViewDelegate{
+    func goTocart() {
+        CartManager.shared.addProductToCart(product)
+    }
     
-    func favoriteButtonTapped() {
-        product.isBookmarked.toggle()
-        productTitleView.updateFavoriteImage(isFavorite: product.isBookmarked)
+    func buyNow() {
+        let paymentVC = PaymentViewController()
+        paymentVC.modalPresentationStyle = .fullScreen
+        present(paymentVC, animated: true)
     }
 }
+// MARK: - ProductTitleViewDelegateProtocol Save or Delete to WishList
+extension DetailViewController: ProductTitleViewDelegateProtocol{
+    func addToWishList() {
+        WishListManager.shared.saveProduct(item: product)
+        print("Save product")
+    }
+    
+    func deleteFromWishList() {
+        WishListManager.shared.deleteProduct(item: product)
+        print("Delete product")
+    }
+}
+
+
+

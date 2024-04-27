@@ -77,13 +77,13 @@ class CartManager {
     
     func setup() {
         StoreManager.shared.getCustomData(forKey: .cart) { (products: [CartProduct]?) in
-            if let products {
-                DispatchQueue.main.sync {
-                    self.currentProducts = products
-                }
-            } else {
-                DispatchQueue.main.sync {
-                    self.currentProducts = [CartProduct]()
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                switch products {
+                case .some(let cartProducts):
+                    currentProducts = cartProducts
+                case .none:
+                    currentProducts = [CartProduct]()
                 }
             }
         }

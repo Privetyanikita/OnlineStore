@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SearchResultManagerProtocol: AnyObject {
-    func updateSaveSearches()
+    func updateSaveSearches(saveSearches: [SavesSerchesModel] )
 }
 
 final class SearchResultManager{
@@ -18,46 +18,43 @@ final class SearchResultManager{
     
     private init(){}
     
-    private (set) var saveSearches: [SavesSerchesModel] = []
+    private var saveSearches: [SavesSerchesModel] = []
     
-    func saveHistory(saveType: SaveSearchHistory, serchToSave: String, id: UUID?) -> [SavesSerchesModel]{
+    func saveHistory(saveType: SaveSearchHistory, serchToSave: String, id: UUID?){
         let objectToSave = SavesSerchesModel(saveSearch: serchToSave)
         switch saveType{
         case .saveSearchWordResult:
             saveSearches.append(objectToSave)
-            self.delegate?.updateSaveSearches()
+            self.delegate?.updateSaveSearches(saveSearches: saveSearches)
             StoreManager.shared.saveCustomData(object: saveSearches,
                                                forKey: .saveSearches)
-            return saveSearches
         case .deleteOne:
             if let index = saveSearches.firstIndex(where: { $0.id == id })
             {
                 saveSearches.remove(at: index)
-                self.delegate?.updateSaveSearches()
+                self.delegate?.updateSaveSearches(saveSearches: saveSearches)
                 StoreManager.shared.saveCustomData(object: saveSearches,
                                                    forKey: .saveSearches)
-                return saveSearches
             }
-            return saveSearches
         case .deleteAll:
             saveSearches = []
-            self.delegate?.updateSaveSearches()
+            self.delegate?.updateSaveSearches(saveSearches: saveSearches)
             StoreManager.shared.remove(forKey: .saveSearches)
-            return saveSearches
         }
     }
     
     func saveHistorySearchWord(searchWord: String){
-        StoreManager.shared.getCustomData(forKey: .saveSearches) { (savedSearches: [SavesSerchesModel]?) in
+        StoreManager.shared.getCustomData(forKey: .saveSearches) { [ weak self ] (savedSearches: [SavesSerchesModel]?) in
+            guard let self else { return }
             if let savedSearches = savedSearches {
                 self.saveSearches = savedSearches
                 self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
-                self.delegate?.updateSaveSearches()
+                self.delegate?.updateSaveSearches(saveSearches: self.saveSearches)
                 StoreManager.shared.saveCustomData(object: self.saveSearches,
                                                    forKey: .saveSearches)
             } else {
                 self.saveSearches.append(SavesSerchesModel(saveSearch: searchWord))
-                self.delegate?.updateSaveSearches()
+                self.delegate?.updateSaveSearches(saveSearches: self.saveSearches)
                 StoreManager.shared.saveCustomData(object: self.saveSearches,
                                                    forKey: .saveSearches)
             }

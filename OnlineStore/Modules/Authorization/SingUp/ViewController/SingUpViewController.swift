@@ -283,7 +283,6 @@ final class SingUpViewController: BaseViewController {
                 let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password, name: userName)
                 print(">> SUCCESS!")
                 guard let email = returnedUserData.email else { return }
-                CartManager.shared.setup()
                 let homeViewController = CustomTabBar()
                 router.replace(with: homeViewController)
             } catch {

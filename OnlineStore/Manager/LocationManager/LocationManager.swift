@@ -2,7 +2,7 @@
 //  LocationManager.swift
 //  OnlineStore
 //
-//  Created by Polina on 25.04.2024.
+//  Created by Mikhail Ustyantsev on 27.04.2024.
 //
 
 import Foundation
@@ -60,5 +60,3 @@ extension LocationManager: CLLocationManagerDelegate {
         print(error.localizedDescription)
     }
 }
-
-

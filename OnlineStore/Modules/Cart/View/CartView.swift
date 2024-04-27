@@ -15,7 +15,7 @@ class CartView: UIView {
     
     var totalSum: Int = 0 {
         didSet {
-            sumLabel.text = "$ " + String(totalSum)
+            sumLabel.configPriceLabel(priceTitle: totalSum, type: .left)
         }
     }
     

@@ -7,19 +7,9 @@
 
 import UIKit
 
-class WhishListViewController: BaseViewController {
+class WishListViewController: BaseViewController {
     
     private let wishView = WishView()
-    
-    private var products: [Product] = [ // подгрузить из БД во ViewWillAppear
-        .init(id: 1, title: "Hello", price: 100, description: "Hello,Hello", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
-        .init(id: 2, title: "sfsdsd", price: 200, description: "fsdfsdmn", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
-        .init(id: 3, title: "sdklfafkas", price: 300, description: "fsdfsdmnsfdjsdf", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
-        .init(id: 4, title: "AAAA", price: 400, description: "fsdfsdmnsfdjsdf", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
-        .init(id: 5, title: "BBB", price: 500, description: "fsdfsdmnsfdjsdf", images: ["https://i.imgur.com/ZANVnHE.jpeg"]),
-    ]
-    private var filterProducts: [Product] = .init()
-    private var filter: Bool = false
     
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
         CustomNavigationBarConfiguration(
@@ -40,23 +30,24 @@ class WhishListViewController: BaseViewController {
         super.viewDidLoad()
         hookUpNavBar()
         customNavigationBar.searchTextField.text = ""
-        wishView.applySnapShotWishList(products: products)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        WishListManager.shared.delegate = self
+        WishListManager.shared.getWishList()  // подгружаем WishList
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //сохранить в бд массив products
+        WishListManager.shared.saveProducts()
     }
 }
 
 // MARK: - SetUP NavBar
-private extension WhishListViewController{
+private extension WishListViewController{
     func hookUpNavBar() {
         customNavigationBar.searchTextField.delegate = self
         customNavigationBar.shoppingCartButton.addTarget(self, action: #selector(shoppingCartButtonTapped), for: .touchUpInside)
@@ -64,11 +55,12 @@ private extension WhishListViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        router.push(CartViewController(), animated: true)
     }
 }
 
 // MARK: - UICollectionViewDelegate
-extension WhishListViewController: UICollectionViewDelegate{
+extension WishListViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = wishView.getItemWishList(index: indexPath) else { return }
         router.push(DetailViewController(product: item),animated: true) // переход на детальный экран
@@ -76,29 +68,27 @@ extension WhishListViewController: UICollectionViewDelegate{
 }
 
 // MARK: - UISearchBarDelegate
-extension WhishListViewController: UISearchBarDelegate {
+extension WishListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let text = searchBar.text else {return}
-        filter = text.isEmpty ? false : true
-        filterProducts = filter ? products.filter { $0.title.contains(text) } : products
-        wishView.applySnapShotWishList(products: filterProducts)
+        WishListManager.shared.filterProductsInWishLIst(text: text)
     }
 }
 
 // MARK: - SearchViewDelegateProtocol
-extension WhishListViewController: WishViewDelegateProtocol{
+extension WishListViewController: WishViewDelegateProtocol{
     func addToCart(item: Product) {
         print("add to cart \(item)")
+        CartManager.shared.addProductToCart(item)
     }
     
     func deleteFromWishList(item: Product) {
-        if filter{
-            filterProducts = filterProducts.filter{ $0.id != item.id }
-            products = products.filter{ $0.id != item.id } // чтобы удаление при поиске применилось к основному массиву
-            wishView.applySnapShotWishList(products: filterProducts) //чтобы увидеть удаление еще при поиске
-        } else { // если удаляем вне поиска
-            products = products.filter{ $0.id != item.id }
-            wishView.applySnapShotWishList(products: products)
-        }
+        WishListManager.shared.deleteOneProductFromWishList(item: item)
+    }
+}
+
+extension WishListViewController: WishListManagerProtocol{
+    func updateProducts(products: [Product]) {
+        wishView.applySnapShotWishList(products: products)
     }
 }

@@ -54,7 +54,6 @@ class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
     }
 }
@@ -69,6 +68,7 @@ private extension SearchViewController{
     
     @objc func shoppingCartButtonTapped() {
         print(">> SHOPPING CART BTN tapped")
+        router.push(CartViewController(), animated: true)
     }
     
     @objc private func backButtonTapped() {
@@ -116,8 +116,8 @@ extension SearchViewController: HeaderProductsDelegate{
 // MARK: - HeaderSearchResultDelegate
 extension SearchViewController: HeaderSavesSerchesDelegate{
     func cancelButtontapped() {
-        let history =  SearchResultManager.shared.saveHistory(saveType: .deleteAll,  serchToSave: "", id: nil)
-       searchView.applySnapShotSaves(saveSearches: history)
+        SearchResultManager.shared.saveHistory(saveType: .deleteAll,  serchToSave: "", id: nil)
+       //searchView.applySnapShotSaves(saveSearches: history)
     }
 }
 // MARK: - UISearchBarDelegate
@@ -132,7 +132,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text
         if let searchText{
-            _ = SearchResultManager.shared.saveHistory(saveType: .saveSearchWordResult, serchToSave: searchText, id: nil)  //cохраняем в UserDefaults
+            SearchResultManager.shared.saveHistory(saveType: .saveSearchWordResult, serchToSave: searchText, id: nil)  //cохраняем в UserDefaults
             searchView.headerDelegate?.changeHeaderTitle(serchWord: searchText) // меняем title у header
             getProductsByTitle(title: searchText) //запрос в сеть передаем searchText
         }
@@ -162,16 +162,17 @@ private extension SearchViewController{
 extension SearchViewController: SearchViewDelegateProtocol{
     func addToCart(item: Product) {
         print("item \(item)")
+        CartManager.shared.addProductToCart(item)
     }
     
     func deleteOneHistorySearch(id: UUID) {
-        let history = SearchResultManager.shared.saveHistory(saveType: .deleteOne,  serchToSave: "", id: id)
-        searchView.applySnapShotSaves(saveSearches: history)
+        SearchResultManager.shared.saveHistory(saveType: .deleteOne,  serchToSave: "", id: id)
+        //searchView.applySnapShotSaves(saveSearches: history)
     }
 }
 
 extension SearchViewController: SearchResultManagerProtocol{
-    func updateSaveSearches() {
-        searchView.applySnapShotSaves(saveSearches: SearchResultManager.shared.saveSearches)
+    func updateSaveSearches(saveSearches: [SavesSerchesModel]) {
+        searchView.applySnapShotSaves(saveSearches: saveSearches)
     }
 }

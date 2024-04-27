@@ -21,7 +21,7 @@ final class CustomTabBar: UITabBarController {
     private func generateTabBar(){
         let homeVC = HomeViewController()
         let navHome = UINavigationController(rootViewController: homeVC)
-        let wishListVC = WhishListViewController()
+        let wishListVC = WishListViewController()
         let navWish = UINavigationController(rootViewController: wishListVC)
         let managerVC = ManagerViewController()
         let navManager = UINavigationController(rootViewController: managerVC)

@@ -74,13 +74,11 @@ class CategoriesCell: UICollectionViewCell {
 extension CategoriesCell{
     func configCell(categoryLabelText: String, image: String?){
         categoryLabel.text = categoryLabelText.capitalized
-        setDefaultImage(imageView: categoryImage)
         if image == "All"{
             categoryImage.image = UIImage(named: "allCategory")
             categoryLabel.text = ""
         } else if let image = image{
-            categoryImage.kf.indicatorType = .activity
-            categoryImage.kf.setImage(with: URL(string: image))
+            loadImageCollectionViewCell(url: image, imageView: categoryImage)
         }
     }
     

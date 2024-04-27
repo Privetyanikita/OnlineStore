@@ -28,6 +28,11 @@ class CartViewController: BaseViewController, CartProductTableViewCellDelegate {
         view = cartView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
        CustomNavigationBarConfiguration(
         title: Text.cart,
