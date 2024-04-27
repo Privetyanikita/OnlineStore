@@ -15,10 +15,29 @@ struct Product: Codable, Hashable {
     let images: [String]
 }
 
+struct ProductPost: Codable, Hashable {
+    var title: String?
+    var price: Int?
+    var description: String?
+    var categoryID: Int?
+    var images: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case title, price, description
+        case categoryID = "categoryId"
+        case images
+    }
+}
+
 struct Category: Codable, Hashable {
     let id: Int
     let name: String
     let image: String
+}
+
+struct CategoryPost: Codable, Hashable {
+    var name: String?
+    var image: String?
 }
 
 struct GeocodingResult: Decodable {

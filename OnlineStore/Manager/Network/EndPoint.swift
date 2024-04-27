@@ -8,21 +8,38 @@
 import Foundation
 
 enum EndPoint {
+    //get
     case getProducts
     case getProductDetails(id: Int)
     case getCategories
     case getFilteredProducts(limit: Int?, offset: Int?, categoryId: Int?)
     case searchProductsByTitle(title: String)
     case getCurrency(country: String)
+    //post
+    case createProduct
+    case createCategory
+    case uploadImage
+    //put
+    case changeProduct(id: Int)
+    case changeCategory(id: Int)
+    //delete
+    case deleteProduct(id: Int)
+    case deleteCategory(id: Int)
 
     var path: String {
         switch self {
-        case .getProducts, .getFilteredProducts, .searchProductsByTitle:
+        case .getProducts, .getFilteredProducts, .searchProductsByTitle, .createProduct:
             return "/api/v1/products"
-        case .getProductDetails(let id):
+        case .getProductDetails(let id), .changeProduct(let id), .deleteProduct(let id):
             return "/api/v1/products/\(id)"
         case .getCategories:
             return "/api/v1/categories"
+        case .createCategory:
+            return "/api/v1/categories/"
+        case .changeCategory(let id), .deleteCategory(let id):
+            return "/api/v1/categories/\(id)"
+        case .uploadImage:
+            return "/api/v1/files/upload"
         case .getCurrency(let country):
             return "/v3.1/name/\(country)"
         }
