@@ -109,7 +109,7 @@ extension HomeViewController: UICollectionViewDelegate{
             updateProductsSection(categoryNumber: indexPath.item, categoryId: category.id)
         case .products(let product):
             print("tapped Products \(product)") // идем на детальный экран
-            router.push(DetailViewController(),animated: true)
+            router.push(DetailViewController(product: product),animated: true)
         case .searchBar:
             break
         }

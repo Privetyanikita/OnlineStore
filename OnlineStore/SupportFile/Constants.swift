@@ -22,7 +22,7 @@ enum Image {
     static let systemCart = UIImage(systemName: "cart")
     static let chevronDown = UIImage(systemName: "chevron.down")
     static let emptyHeart = UIImage(named: "Heart")
-    static let isLikedHeart = UIImage(named: "liked")
+    static let isLikedHeart = UIImage(named: "HeartTapped")
     static let hide = UIImage(named: "Hide")
     static let angleRight = UIImage(named: "angle-right")
 }

@@ -81,7 +81,7 @@ extension CategoriesCell{
         } else if let image = image{
             categoryImage.kf.indicatorType = .activity
             categoryImage.kf.setImage(with: URL(string: image))
-        } 
+        }
     }
     
     func setDefaultBorder(){

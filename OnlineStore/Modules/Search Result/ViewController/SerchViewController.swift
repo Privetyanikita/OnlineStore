@@ -45,6 +45,7 @@ class SearchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        SearchResultManager.shared.delegate = self
         SearchResultManager.shared.saveHistorySearchWord(searchWord: searchWord)
         hookUpNavBar()
         getProductsByTitle(title: searchWord)
@@ -82,7 +83,7 @@ extension SearchViewController: UICollectionViewDelegate{
         if collectionView.tag == 0{
             guard let item = searchView.getItemResult(index: indexPath) else { return }
             print(item)
-            router.push(DetailViewController(),animated: true) // переход на детальный экран
+            router.push(DetailViewController(product: item),animated: true) // переход на детальный экран
         } else if collectionView.tag == 1 {
             guard let item = searchView.getItemSerch(index: indexPath) else { return }
             customNavigationBar.searchTextField.text = item.saveSearch
@@ -122,7 +123,7 @@ extension SearchViewController: HeaderSavesSerchesDelegate{
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchView.applySnapShotSaves(saveSearches: SearchResultManager.shared.saveSearches)
+        //searchView.applySnapShotSaves(saveSearches: SearchResultManager.shared.saveSearches)
         searchView.hideCollectionView(isHideSavesCollection: false,
                                       isHideResultCollection: true)
         return true
@@ -166,5 +167,11 @@ extension SearchViewController: SearchViewDelegateProtocol{
     func deleteOneHistorySearch(id: UUID) {
         let history = SearchResultManager.shared.saveHistory(saveType: .deleteOne,  serchToSave: "", id: id)
         searchView.applySnapShotSaves(saveSearches: history)
+    }
+}
+
+extension SearchViewController: SearchResultManagerProtocol{
+    func updateSaveSearches() {
+        searchView.applySnapShotSaves(saveSearches: SearchResultManager.shared.saveSearches)
     }
 }

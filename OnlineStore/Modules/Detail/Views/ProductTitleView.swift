@@ -7,9 +7,14 @@
 
 import UIKit
 
-class ProductTitleView: UIView {
+protocol ProductTitleViewDelegate: AnyObject {
+    func favoriteButtonTapped()
+}
 
-    var isFavoriteProduct: Bool = false
+
+final class ProductTitleView: UIView {
+    
+    weak var delegate: ProductTitleViewDelegate?
     
     private let productNameLabel: UILabel = {
         let view = UILabel()
@@ -77,15 +82,20 @@ class ProductTitleView: UIView {
     }
     
     
-    func configure(product name: String, price: String) {
+    func configure(product name: String, price: Int, isFavorite: Bool) {
         productNameLabel.text = name
-        priceLabel.text = price
+        priceLabel.configPriceLabel(priceTitle: price)
+        updateFavoriteImage(isFavorite: isFavorite)
         favoriteProductButton.addTarget(self, action: #selector(isFavoriteTapped), for: .touchUpInside)
     }
     
     
     @objc private func isFavoriteTapped() {
-        isFavoriteProduct = !isFavoriteProduct
-        favoriteProductButton.configuration?.image = isFavoriteProduct == true ? Image.isLikedHeart : Image.emptyHeart
+        delegate?.favoriteButtonTapped()
+    }
+    
+    
+    func updateFavoriteImage(isFavorite: Bool) {
+        favoriteProductButton.configuration?.image = isFavorite == true ? Image.isLikedHeart : Image.emptyHeart
     }
 }

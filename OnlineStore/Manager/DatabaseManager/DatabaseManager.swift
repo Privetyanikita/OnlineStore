@@ -40,7 +40,7 @@ extension DatabaseManager {
             "product_description": product.description,
             "product_images": product.images
         ]
-        database.child("products").setValue(productDetail) { error, _ in
+        database.child("Products").childByAutoId().setValue(productDetail) { error, _ in
             guard error == nil else {
                 completion(false)
                 return
@@ -50,9 +50,9 @@ extension DatabaseManager {
     }
     
     
-    public func getAllProducts(completion: @escaping (Result<[[String: Any]], DatabaseError>) -> Void) {
-        database.child("products").observeSingleEvent(of: .value) { snapshot, _  in
-            guard let value = snapshot.value as? [[String: Any]] else {
+    public func getAllProducts(completion: @escaping (Result<[String: Any], DatabaseError>) -> Void) {
+        database.child("Products").observeSingleEvent(of: .value) { snapshot, _  in
+            guard let value = snapshot.value as? [String: Any] else {
                 completion(.failure(DatabaseError.unableToFetchProducts))
                 return
             }
@@ -63,7 +63,7 @@ extension DatabaseManager {
     
     
     public func getProductByID(with uid: String, completion: @escaping (Result<[String: Any], Error>) -> Void) {
-            let query: DatabaseQuery = database.child("products").queryOrdered(byChild: "product_id").queryEqual(toValue: uid)
+            let query: DatabaseQuery = database.child("Products").queryOrdered(byChild: "product_id").queryEqual(toValue: uid)
             query.observeSingleEvent(of: .value, with: { (snapshot) in
                 for child in snapshot.children {
                     let key = (child as AnyObject).key as String

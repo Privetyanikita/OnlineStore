@@ -65,7 +65,7 @@ extension WishView{
         diffableDataSourceWishList = .init(collectionView: collectionViewWishList, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(type: ProductCell.self,
                                                           for: indexPath)
-            cell.configCell(nameTitle: itemIdentifier.title, priceTitle: itemIdentifier.price, images: itemIdentifier.images, isLiked: true,  isRemoveFavor: false) // заменить потом на значение с модели isLiked
+            cell.configCell(nameTitle: itemIdentifier.title, priceTitle: itemIdentifier.price, image: itemIdentifier.images[0], isLiked: true,  isRemoveFavor: false) // заменить потом на значение с модели isLiked
             cell.onButtonTap = { event in
                 switch event{
                 case .addToCartTapped:

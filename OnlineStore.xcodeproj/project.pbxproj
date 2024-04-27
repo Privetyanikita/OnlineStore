@@ -18,6 +18,7 @@
 		36651C7F2BD6A167005ADA14 /* SearchResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C7E2BD6A167005ADA14 /* SearchResultManager.swift */; };
 		36651C812BD7BF27005ADA14 /* UICollectionReusableView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C802BD7BF27005ADA14 /* UICollectionReusableView + Ext.swift */; };
 		36651C872BD8ECBB005ADA14 /* ManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C862BD8ECBB005ADA14 /* ManagerViewController.swift */; };
+		36651C902BDA8490005ADA14 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C8F2BDA8490005ADA14 /* String + Ext.swift */; };
 		366939B72BD295E4002A6549 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B62BD295E4002A6549 /* UIViewController + Ext.swift */; };
 		366939B92BD29846002A6549 /* StoreManagerDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B82BD29846002A6549 /* StoreManagerDefaults.swift */; };
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
@@ -36,6 +37,7 @@
 		83708C5A2BD445C2009D71CD /* NSCoder + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C592BD445C2009D71CD /* NSCoder + Ext.swift */; };
 		83708C5C2BD44E3C009D71CD /* ProductBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C5B2BD44E3C009D71CD /* ProductBottomView.swift */; };
 		83708CF42BD7D6F6009D71CD /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708CF32BD7D6F6009D71CD /* DatabaseManager.swift */; };
+		83708CF72BDAD8E7009D71CD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708CF62BDAD8E7009D71CD /* LocationManager.swift */; };
 		8493BB2F2BCEBF1D00E239B4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB2E2BCEBF1D00E239B4 /* FirebaseAnalytics */; };
 		8493BB312BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB302BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion */; };
 		8493BB332BCEBF1D00E239B4 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB322BCEBF1D00E239B4 /* FirebaseAnalyticsSwift */; };
@@ -150,6 +152,7 @@
 		36651C7E2BD6A167005ADA14 /* SearchResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultManager.swift; sourceTree = "<group>"; };
 		36651C802BD7BF27005ADA14 /* UICollectionReusableView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView + Ext.swift"; sourceTree = "<group>"; };
 		36651C862BD8ECBB005ADA14 /* ManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewController.swift; sourceTree = "<group>"; };
+		36651C8F2BDA8490005ADA14 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
 		366939B62BD295E4002A6549 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
 		366939B82BD29846002A6549 /* StoreManagerDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManagerDefaults.swift; sourceTree = "<group>"; };
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 		83708C592BD445C2009D71CD /* NSCoder + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCoder + Ext.swift"; sourceTree = "<group>"; };
 		83708C5B2BD44E3C009D71CD /* ProductBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBottomView.swift; sourceTree = "<group>"; };
 		83708CF32BD7D6F6009D71CD /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		83708CF62BDAD8E7009D71CD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8493BB6C2BCEC0A800E239B4 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		8493BB6E2BCEC10000E239B4 /* LogInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModel.swift; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 				36651C792BD6A01A005ADA14 /* UICollectionView + Ext.swift */,
 				36651C7B2BD6A041005ADA14 /* UICollectionViewCell + Ext.swift */,
 				36651C802BD7BF27005ADA14 /* UICollectionReusableView + Ext.swift */,
+				36651C8F2BDA8490005ADA14 /* String + Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -432,6 +437,14 @@
 				83708CF32BD7D6F6009D71CD /* DatabaseManager.swift */,
 			);
 			path = DatabaseManager;
+			sourceTree = "<group>";
+		};
+		83708CF82BDAD8EF009D71CD /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				83708CF62BDAD8E7009D71CD /* LocationManager.swift */,
+			);
+			path = LocationManager;
 			sourceTree = "<group>";
 		};
 		8493BB642BCEBFE400E239B4 /* Authorization */ = {
@@ -516,6 +529,7 @@
 		8493BB792BCEC2F300E239B4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				83708CF82BDAD8EF009D71CD /* LocationManager */,
 				83708CF22BD7D65F009D71CD /* DatabaseManager */,
 				36651C7D2BD6A14E005ADA14 /* ResultSearch */,
 				CB5E1A512BD3B7BC006B827F /* Cart */,
@@ -1077,6 +1091,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36651C902BDA8490005ADA14 /* String + Ext.swift in Sources */,
 				84C0ABC52BD02FE1009076B2 /* CategoriesCell.swift in Sources */,
 				833EE27C2BCF0CF70011BC4F /* UIImage + Ext.swift in Sources */,
 				84C0ABD52BD03015009076B2 /* OnbordingModel.swift in Sources */,
@@ -1155,6 +1170,7 @@
 				84EE8EA92BD6F4C6008FB910 /* BaseRegistrationCell.swift in Sources */,
 				84EE8EAB2BD6F50B008FB910 /* FBButton.swift in Sources */,
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,
+				83708CF72BDAD8E7009D71CD /* LocationManager.swift in Sources */,
 				84C0ABE02BD158E1009076B2 /* TermsView.swift in Sources */,
 				366939B72BD295E4002A6549 /* UIViewController + Ext.swift in Sources */,
 				362AF0252BD113FA002D74FF /* SectionSearchModel.swift in Sources */,
