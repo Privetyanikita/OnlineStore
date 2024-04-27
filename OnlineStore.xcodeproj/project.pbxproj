@@ -21,6 +21,7 @@
 		36651C8E2BDA6D53005ADA14 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C8D2BDA6D53005ADA14 /* LocationManager.swift */; };
 		36651C902BDA8490005ADA14 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C8F2BDA8490005ADA14 /* String + Ext.swift */; };
 		36651C922BDBE6D3005ADA14 /* UITableViewCell + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C912BDBE6D2005ADA14 /* UITableViewCell + Ext.swift */; };
+		36651C942BDCD753005ADA14 /* WishListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36651C932BDCD752005ADA14 /* WishListManager.swift */; };
 		366939B72BD295E4002A6549 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B62BD295E4002A6549 /* UIViewController + Ext.swift */; };
 		366939B92BD29846002A6549 /* StoreManagerDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366939B82BD29846002A6549 /* StoreManagerDefaults.swift */; };
 		369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369AE5162BCEA54C009157D6 /* CustomTabBar.swift */; };
@@ -115,7 +116,7 @@
 		84D7BEBB2BCDA9B300936C69 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEBA2BCDA9B300936C69 /* CartModel.swift */; };
 		84D7BEBD2BCDA9C000936C69 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEBC2BCDA9C000936C69 /* CartView.swift */; };
 		84D7BEBF2BCDA9E500936C69 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEBE2BCDA9E500936C69 /* CartViewController.swift */; };
-		84D7BEC42BCDAA2800936C69 /* WhishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEC32BCDAA2800936C69 /* WhishListViewController.swift */; };
+		84D7BEC42BCDAA2800936C69 /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEC32BCDAA2800936C69 /* WishListViewController.swift */; };
 		84D7BEC62BCDAA4100936C69 /* WishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEC52BCDAA4100936C69 /* WishView.swift */; };
 		84D7BEC82BCDAA6000936C69 /* WishModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BEC72BCDAA6000936C69 /* WishModel.swift */; };
 		84D7BECD2BCDAB1300936C69 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D7BECC2BCDAB1300936C69 /* ProfileViewController.swift */; };
@@ -160,6 +161,7 @@
 		36651C8D2BDA6D53005ADA14 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		36651C8F2BDA8490005ADA14 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
 		36651C912BDBE6D2005ADA14 /* UITableViewCell + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Ext.swift"; sourceTree = "<group>"; };
+		36651C932BDCD752005ADA14 /* WishListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListManager.swift; sourceTree = "<group>"; };
 		366939B62BD295E4002A6549 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
 		366939B82BD29846002A6549 /* StoreManagerDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManagerDefaults.swift; sourceTree = "<group>"; };
 		369AE5162BCEA54C009157D6 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -238,7 +240,7 @@
 		84D7BEBA2BCDA9B300936C69 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		84D7BEBC2BCDA9C000936C69 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		84D7BEBE2BCDA9E500936C69 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		84D7BEC32BCDAA2800936C69 /* WhishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishListViewController.swift; sourceTree = "<group>"; };
+		84D7BEC32BCDAA2800936C69 /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
 		84D7BEC52BCDAA4100936C69 /* WishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishView.swift; sourceTree = "<group>"; };
 		84D7BEC72BCDAA6000936C69 /* WishModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishModel.swift; sourceTree = "<group>"; };
 		84D7BECC2BCDAB1300936C69 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -366,6 +368,14 @@
 				36651C8D2BDA6D53005ADA14 /* LocationManager.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		36651C952BDCE197005ADA14 /* WishList */ = {
+			isa = PBXGroup;
+			children = (
+				36651C932BDCD752005ADA14 /* WishListManager.swift */,
+			);
+			path = WishList;
 			sourceTree = "<group>";
 		};
 		366939BA2BD2B1F3002A6549 /* StoreManager */ = {
@@ -537,6 +547,7 @@
 		8493BB792BCEC2F300E239B4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				36651C952BDCE197005ADA14 /* WishList */,
 				36651C8C2BDA6D36005ADA14 /* Location */,
 				36651C7D2BD6A14E005ADA14 /* ResultSearch */,
 				CB5E1A512BD3B7BC006B827F /* Cart */,
@@ -888,7 +899,7 @@
 		84D7BEC02BCDA9EB00936C69 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				84D7BEC32BCDAA2800936C69 /* WhishListViewController.swift */,
+				84D7BEC32BCDAA2800936C69 /* WishListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1126,7 +1137,7 @@
 				833EE2682BCEEA7C0011BC4F /* Constants.swift in Sources */,
 				84C0ABD72BD03015009076B2 /* UIPageControl + ext.swift in Sources */,
 				84D7BEA82BCDA8A000936C69 /* SerchViewController.swift in Sources */,
-				84D7BEC42BCDAA2800936C69 /* WhishListViewController.swift in Sources */,
+				84D7BEC42BCDAA2800936C69 /* WishListViewController.swift in Sources */,
 				362AF0342BD136C4002D74FF /* SavesSearchesCollectionView.swift in Sources */,
 				8493BB742BCEC15C00E239B4 /* SingUpViewController.swift in Sources */,
 				CB5E1A482BD39678006B827F /* PaymentViewController.swift in Sources */,
@@ -1191,6 +1202,7 @@
 				36651C7A2BD6A01A005ADA14 /* UICollectionView + Ext.swift in Sources */,
 				362AF0272BD11557002D74FF /* SearchResultCollectionView.swift in Sources */,
 				8495630D2BDD3AE500E12960 /* ManagerProductView.swift in Sources */,
+				36651C942BDCD753005ADA14 /* WishListManager.swift in Sources */,
 				362AF0322BD135E3002D74FF /* SectionsSavesModel.swift in Sources */,
 				84EE8EA12BD5D1C4008FB910 /* Model.swift in Sources */,
 				84D7BE7F2BCD8F9500936C69 /* SceneDelegate.swift in Sources */,

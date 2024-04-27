@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol ProductTitleViewDelegateProtocol: AnyObject{
+    func addToWishList()
+    func deleteFromWishList()
+}
+
 class ProductTitleView: UIView {
 
     var isFavoriteProduct: Bool = false
+    weak var delegate: ProductTitleViewDelegateProtocol?
     
     private let productNameLabel: UILabel = {
         let view = UILabel()
@@ -87,5 +93,10 @@ class ProductTitleView: UIView {
     @objc private func isFavoriteTapped() {
         isFavoriteProduct = !isFavoriteProduct
         favoriteProductButton.configuration?.image = isFavoriteProduct == true ? Image.isLikedHeart : Image.emptyHeart
+        if isFavoriteProduct == true{
+            delegate?.addToWishList()
+        } else {
+            delegate?.deleteFromWishList()
+        }
     }
 }

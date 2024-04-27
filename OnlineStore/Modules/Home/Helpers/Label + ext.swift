@@ -36,7 +36,7 @@ extension UILabel {
                 self.text = currencySymbol.europe.0 + String(Int(Double(priceTitle) * 1.11)) + currencySymbol.europe.1
             }
         } else {
-            print("Default")
+//            print("Default")
             self.text = currencySymbol.usa.0 + String(priceTitle) + currencySymbol.usa.1
         }
     }
