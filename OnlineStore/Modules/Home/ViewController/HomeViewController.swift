@@ -44,6 +44,7 @@ class HomeViewController: BaseViewController {
         getCategories()
         getAllProducts()
         CartManager.shared.setup()
+        WishListManager.shared.getWishList()
     }
     
     override func viewWillAppear(_ animated: Bool) {

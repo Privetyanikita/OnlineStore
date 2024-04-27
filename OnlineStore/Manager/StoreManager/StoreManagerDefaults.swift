@@ -13,6 +13,7 @@ final class StoreManager{
         case onbording
         case cart
         case saveSearches
+        case wishList
     }
     
     static let shared = StoreManager()

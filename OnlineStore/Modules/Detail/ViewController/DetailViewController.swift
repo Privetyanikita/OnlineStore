@@ -111,6 +111,7 @@ class DetailViewController: BaseViewController {
     private func  configureViewController() {
         view.backgroundColor = .systemBackground
         productBottomView.delegate = self
+        productTitleView.delegate = self
         contentView.addSubview(productCollectionView)
         contentView.addSubview(productTitleView)
         contentView.addSubview(productDescriptionView)
@@ -126,6 +127,7 @@ class DetailViewController: BaseViewController {
     
     
     private func configureItems() {
+        // здесь нужно сделать проверку есть ли в массиве products из WishListManager наш продукт и если есть то у продукта поменять isFavorite на true и уже после конфигурировать productTitleView
         productTitleView.configure(product: product.title, price: product.price)
         productDescriptionView.configure(with: product.description)
     }
@@ -202,7 +204,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
-
+// MARK: - ProductBottomViewDelegate Add to Cart, Go to PaymentVC
 extension DetailViewController: ProductBottomViewDelegate{
     func goTocart() {
         CartManager.shared.addProductToCart(product)
@@ -212,6 +214,18 @@ extension DetailViewController: ProductBottomViewDelegate{
         let paymentVC = PaymentViewController()
         paymentVC.modalPresentationStyle = .fullScreen
         present(paymentVC, animated: true)
+    }
+}
+// MARK: - ProductTitleViewDelegateProtocol Save or Delete to WishList
+extension DetailViewController: ProductTitleViewDelegateProtocol{
+    func addToWishList() {
+        WishListManager.shared.saveProduct(item: product)
+        print("Save product")
+    }
+    
+    func deleteFromWishList() {
+        WishListManager.shared.deleteProduct(item: product)
+        print("Delete product")
     }
 }
 
