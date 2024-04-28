@@ -18,7 +18,7 @@ extension FilterModel{
         case .priceDescending:
             return "Price Descending"
         case .noFilter:
-            return "Switch Off Filter"
+            return "Switch Of Filter"
         case .priceAscending:
             return "Price Ascending"
         }
