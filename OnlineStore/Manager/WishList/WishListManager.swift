@@ -54,36 +54,6 @@ final class WishListManager{
         delegate?.updateProducts(products: filterProducts)
     }
     
-    func getWishList(){ // вызываем во viewDidLoad HomeVC и во viewWillAppear WishListVC
-//        StoreManager.shared.getCustomData(forKey: .wishList) { [ weak self ] (productsData: [Product]?) in
-//            guard let self else { return }
-//            if let productsData{
-//                self.products = productsData
-//                self.delegate?.updateProducts(products: self.products)
-//            } else {
-//                self.products = []
-//                self.delegate?.updateProducts(products: self.products)
-//            }
-//        }
-        
-        DatabaseManager.shared.getAllProducts { result in
-            switch result {
-            case .success(let success):
-                for (_, data) in success {
-                    guard let productData = data as? [String: Any] else { return }
-                    if let title = productData["product_title"] as? String,
-                       let price = productData["product_price"] as? Int,
-                       let images = productData["product_images"] as? [String],
-                       let id = productData["product_id"] as? Int,
-                       let description = productData["product_description"] as? String {
-                        let product = Product(id: id, title: title, price: price, description: description, images: images)
-                        self.products.append(product)
-                    }
-                }
-                self.delegate?.updateProducts(products: self.products)
-            case .failure(let failure):
-                break //show alert
-
     func checkWishListFillOrEmpty(){ // вызываем во viewWillAppear
         products.isEmpty ? delegate?.emptyWishList() : delegate?.fillWishList()
     }
