@@ -39,6 +39,8 @@
 		83708C582BD44186009D71CD /* ProductDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C572BD44186009D71CD /* ProductDescriptionView.swift */; };
 		83708C5A2BD445C2009D71CD /* NSCoder + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C592BD445C2009D71CD /* NSCoder + Ext.swift */; };
 		83708C5C2BD44E3C009D71CD /* ProductBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708C5B2BD44E3C009D71CD /* ProductBottomView.swift */; };
+		83708D052BDECFB9009D71CD /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708D042BDECFB9009D71CD /* DatabaseManager.swift */; };
+		83708D072BDED007009D71CD /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83708D062BDED007009D71CD /* SingUpViewController.swift */; };
 		8493BB2F2BCEBF1D00E239B4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB2E2BCEBF1D00E239B4 /* FirebaseAnalytics */; };
 		8493BB312BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB302BCEBF1D00E239B4 /* FirebaseAnalyticsOnDeviceConversion */; };
 		8493BB332BCEBF1D00E239B4 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8493BB322BCEBF1D00E239B4 /* FirebaseAnalyticsSwift */; };
@@ -69,7 +71,6 @@
 		8493BB6B2BCEC08200E239B4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */; };
 		8493BB6D2BCEC0A800E239B4 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB6C2BCEC0A800E239B4 /* LogInView.swift */; };
 		8493BB6F2BCEC10000E239B4 /* LogInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB6E2BCEC10000E239B4 /* LogInModel.swift */; };
-		8493BB742BCEC15C00E239B4 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB732BCEC15C00E239B4 /* SingUpViewController.swift */; };
 		8493BB782BCEC17C00E239B4 /* SingUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB772BCEC17C00E239B4 /* SingUpModel.swift */; };
 		8493BB7D2BCEC37D00E239B4 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB7C2BCEC37D00E239B4 /* AuthenticationManager.swift */; };
 		8493BB7F2BCEC39800E239B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB7E2BCEC39800E239B4 /* NetworkManager.swift */; };
@@ -179,10 +180,11 @@
 		83708C572BD44186009D71CD /* ProductDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionView.swift; sourceTree = "<group>"; };
 		83708C592BD445C2009D71CD /* NSCoder + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCoder + Ext.swift"; sourceTree = "<group>"; };
 		83708C5B2BD44E3C009D71CD /* ProductBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBottomView.swift; sourceTree = "<group>"; };
+		83708D042BDECFB9009D71CD /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		83708D062BDED007009D71CD /* SingUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		8493BB6A2BCEC08200E239B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		8493BB6C2BCEC0A800E239B4 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		8493BB6E2BCEC10000E239B4 /* LogInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModel.swift; sourceTree = "<group>"; };
-		8493BB732BCEC15C00E239B4 /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		8493BB772BCEC17C00E239B4 /* SingUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpModel.swift; sourceTree = "<group>"; };
 		8493BB7C2BCEC37D00E239B4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		8493BB7E2BCEC39800E239B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -465,6 +467,14 @@
 			path = LocationView;
 			sourceTree = "<group>";
 		};
+		83708D032BDECFA5009D71CD /* DatabaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				83708D042BDECFB9009D71CD /* DatabaseManager.swift */,
+			);
+			path = DatabaseManager;
+			sourceTree = "<group>";
+		};
 		8493BB642BCEBFE400E239B4 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,7 +531,7 @@
 		8493BB702BCEC10600E239B4 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				8493BB732BCEC15C00E239B4 /* SingUpViewController.swift */,
+				83708D062BDED007009D71CD /* SingUpViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -547,6 +557,7 @@
 		8493BB792BCEC2F300E239B4 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				83708D032BDECFA5009D71CD /* DatabaseManager */,
 				36651C952BDCE197005ADA14 /* WishList */,
 				36651C8C2BDA6D36005ADA14 /* Location */,
 				36651C7D2BD6A14E005ADA14 /* ResultSearch */,
@@ -1139,7 +1150,6 @@
 				84D7BEA82BCDA8A000936C69 /* SerchViewController.swift in Sources */,
 				84D7BEC42BCDAA2800936C69 /* WishListViewController.swift in Sources */,
 				362AF0342BD136C4002D74FF /* SavesSearchesCollectionView.swift in Sources */,
-				8493BB742BCEC15C00E239B4 /* SingUpViewController.swift in Sources */,
 				CB5E1A482BD39678006B827F /* PaymentViewController.swift in Sources */,
 				84D7BEBF2BCDA9E500936C69 /* CartViewController.swift in Sources */,
 				CB5E1A502BD3B7B6006B827F /* CartManager.swift in Sources */,
@@ -1176,6 +1186,7 @@
 				84EE8EB12BD6F584008FB910 /* PasswordCell.swift in Sources */,
 				84EE8EAF2BD6F558008FB910 /* EmailAddressCell.swift in Sources */,
 				84C0ABD82BD03015009076B2 /* OnbordingViewController.swift in Sources */,
+				83708D072BDED007009D71CD /* SingUpViewController.swift in Sources */,
 				84EE8EA42BD6F115008FB910 /* CustomTextField.swift in Sources */,
 				84EE8EB32BD6F5B4008FB910 /* UserNameCell.swift in Sources */,
 				833EE26F2BCEF7FA0011BC4F /* CustomNavigationBarButton.swift in Sources */,
@@ -1189,6 +1200,7 @@
 				84EE8E9F2BD5CF4F008FB910 /* EndPoint.swift in Sources */,
 				84D7BEBB2BCDA9B300936C69 /* CartModel.swift in Sources */,
 				369AE5172BCEA54C009157D6 /* CustomTabBar.swift in Sources */,
+				83708D052BDECFB9009D71CD /* DatabaseManager.swift in Sources */,
 				84EE8EA92BD6F4C6008FB910 /* BaseRegistrationCell.swift in Sources */,
 				84EE8EAB2BD6F50B008FB910 /* FBButton.swift in Sources */,
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,

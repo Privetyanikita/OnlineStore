@@ -260,6 +260,12 @@ final class SingUpViewController: BaseViewController {
         let password = profileUser.password
         let repeatPassword = profileUser.repeatPassword
         
+        guard let userName = profileUser.name, !userName.isEmpty else {
+            print("Please enter user name!")
+            self.dismissLoadingView()
+            return
+        }
+        
         guard !email.isEmpty, !password.isEmpty else {
             print("No email or password found!")
             self.dismissLoadingView()
@@ -274,7 +280,7 @@ final class SingUpViewController: BaseViewController {
         
         Task {
             do {
-                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
+                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password, name: userName)
                 print(">> SUCCESS!")
                 guard let email = returnedUserData.email else { return }
                 let homeViewController = CustomTabBar()
