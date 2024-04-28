@@ -35,14 +35,10 @@ class WishListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         WishListManager.shared.delegate = self
-        WishListManager.shared.getWishList()  // подгружаем WishList
+        WishListManager.shared.appearWishListUpdate() // обновляем WishList
+        WishListManager.shared.checkWishListFillOrEmpty() // проверяем пустой WishList или нет
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        WishListManager.shared.saveProducts()
     }
 }
 
@@ -86,8 +82,16 @@ extension WishListViewController: WishViewDelegateProtocol{
         WishListManager.shared.deleteOneProductFromWishList(item: item)
     }
 }
-
+// MARK: - WishListManagerProtocol
 extension WishListViewController: WishListManagerProtocol{
+    func fillWishList() {
+        wishView.fillWishList()
+    }
+    
+    func emptyWishList() {
+        wishView.emptyWishList()
+    }
+    
     func updateProducts(products: [Product]) {
         wishView.applySnapShotWishList(products: products)
     }

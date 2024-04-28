@@ -75,6 +75,11 @@
 		8493BB7D2BCEC37D00E239B4 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB7C2BCEC37D00E239B4 /* AuthenticationManager.swift */; };
 		8493BB7F2BCEC39800E239B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB7E2BCEC39800E239B4 /* NetworkManager.swift */; };
 		8493BB8B2BCEF6D600E239B4 /* FontEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8493BB8A2BCEF6D600E239B4 /* FontEnum.swift */; };
+		8495630C2BDD3AE500E12960 /* ManagerCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495630A2BDD3AE500E12960 /* ManagerCategoryView.swift */; };
+		8495630D2BDD3AE500E12960 /* ManagerProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495630B2BDD3AE500E12960 /* ManagerProductView.swift */; };
+		8495630F2BDD3AF700E12960 /* ManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495630E2BDD3AF600E12960 /* ManagerView.swift */; };
+		849563122BDD3B0200E12960 /* ManagerCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849563102BDD3B0200E12960 /* ManagerCategoryViewController.swift */; };
+		849563132BDD3B0200E12960 /* ManagerProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849563112BDD3B0200E12960 /* ManagerProductViewController.swift */; };
 		84C0ABBD2BD02FE1009076B2 /* CompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABA72BD02FE1009076B2 /* CompositionalLayout.swift */; };
 		84C0ABBE2BD02FE1009076B2 /* Label + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABA82BD02FE1009076B2 /* Label + ext.swift */; };
 		84C0ABBF2BD02FE1009076B2 /* UIImage + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0ABA92BD02FE1009076B2 /* UIImage + ext.swift */; };
@@ -193,6 +198,11 @@
 		8493BB882BCEF6AF00E239B4 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
 		8493BB892BCEF6AF00E239B4 /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
 		8493BB8A2BCEF6D600E239B4 /* FontEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontEnum.swift; sourceTree = "<group>"; };
+		8495630A2BDD3AE500E12960 /* ManagerCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerCategoryView.swift; sourceTree = "<group>"; };
+		8495630B2BDD3AE500E12960 /* ManagerProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerProductView.swift; sourceTree = "<group>"; };
+		8495630E2BDD3AF600E12960 /* ManagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerView.swift; sourceTree = "<group>"; };
+		849563102BDD3B0200E12960 /* ManagerCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerCategoryViewController.swift; sourceTree = "<group>"; };
+		849563112BDD3B0200E12960 /* ManagerProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerProductViewController.swift; sourceTree = "<group>"; };
 		84C0ABA72BD02FE1009076B2 /* CompositionalLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionalLayout.swift; sourceTree = "<group>"; };
 		84C0ABA82BD02FE1009076B2 /* Label + ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Label + ext.swift"; sourceTree = "<group>"; };
 		84C0ABA92BD02FE1009076B2 /* UIImage + ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage + ext.swift"; sourceTree = "<group>"; };
@@ -330,6 +340,8 @@
 		36651C832BD8EC71005ADA14 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				849563102BDD3B0200E12960 /* ManagerCategoryViewController.swift */,
+				849563112BDD3B0200E12960 /* ManagerProductViewController.swift */,
 				36651C862BD8ECBB005ADA14 /* ManagerViewController.swift */,
 			);
 			path = ViewController;
@@ -345,6 +357,9 @@
 		36651C852BD8EC8B005ADA14 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8495630A2BDD3AE500E12960 /* ManagerCategoryView.swift */,
+				8495630B2BDD3AE500E12960 /* ManagerProductView.swift */,
+				8495630E2BDD3AF600E12960 /* ManagerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1131,9 +1146,11 @@
 				84C0ABD62BD03015009076B2 /* OnbordingCell.swift in Sources */,
 				84D7BEB62BCDA95900936C69 /* DetailModel.swift in Sources */,
 				CB5E1A4C2BD397D0006B827F /* CartProductStepper.swift in Sources */,
+				8495630F2BDD3AF700E12960 /* ManagerView.swift in Sources */,
 				84C0ABC12BD02FE1009076B2 /* FilterModel.swift in Sources */,
 				84C0ABC62BD02FE1009076B2 /* HeaderProductsView.swift in Sources */,
 				84D7BEAA2BCDA8B200936C69 /* SearchView.swift in Sources */,
+				849563122BDD3B0200E12960 /* ManagerCategoryViewController.swift in Sources */,
 				84D7BEAC2BCDA8C700936C69 /* SavesSerchesModel.swift in Sources */,
 				833EE2782BCF06740011BC4F /* BaseViewController.swift in Sources */,
 				83708C582BD44186009D71CD /* ProductDescriptionView.swift in Sources */,
@@ -1203,12 +1220,15 @@
 				84D7BEB12BCDA92B00936C69 /* DetailViewController.swift in Sources */,
 				83708D012BDD6F63009D71CD /* LocationManager.swift in Sources */,
 				84C0ABE02BD158E1009076B2 /* TermsView.swift in Sources */,
+				8495630C2BDD3AE500E12960 /* ManagerCategoryView.swift in Sources */,
 				366939B72BD295E4002A6549 /* UIViewController + Ext.swift in Sources */,
 				362AF0252BD113FA002D74FF /* SectionSearchModel.swift in Sources */,
 				83708C542BD2EDED009D71CD /* ProductTitleView.swift in Sources */,
+				849563132BDD3B0200E12960 /* ManagerProductViewController.swift in Sources */,
 				84C0ABC32BD02FE1009076B2 /* ItemModel.swift in Sources */,
 				36651C7A2BD6A01A005ADA14 /* UICollectionView + Ext.swift in Sources */,
 				362AF0272BD11557002D74FF /* SearchResultCollectionView.swift in Sources */,
+				8495630D2BDD3AE500E12960 /* ManagerProductView.swift in Sources */,
 				36651C942BDCD753005ADA14 /* WishListManager.swift in Sources */,
 				362AF0322BD135E3002D74FF /* SectionsSavesModel.swift in Sources */,
 				84EE8EA12BD5D1C4008FB910 /* Model.swift in Sources */,

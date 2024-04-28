@@ -9,6 +9,8 @@ import Foundation
 
 protocol WishListManagerProtocol: AnyObject {
     func updateProducts(products: [Product] )
+    func fillWishList()
+    func emptyWishList()
 }
 
 final class WishListManager{
@@ -17,7 +19,7 @@ final class WishListManager{
     
     private init(){}
     
-    private var products: [Product] = []
+    private (set) var products: [Product] = []
     private var filterProducts: [Product] = .init()
     private var filter: Bool = false
     
@@ -27,8 +29,8 @@ final class WishListManager{
     }
     
     func deleteProduct(item: Product){ // удаляем в DetailVC
-        let newPducts = products.filter { $0.id != item.id }
-        StoreManager.shared.saveCustomData(object: newPducts, forKey: .wishList)
+        products = products.filter { $0.id != item.id }
+        StoreManager.shared.saveCustomData(object: products, forKey: .wishList)
     }
     
     func deleteOneProductFromWishList(item: Product){ // из WishListVC
@@ -36,14 +38,14 @@ final class WishListManager{
             filterProducts = filterProducts.filter{ $0.id != item.id }
             products = products.filter{ $0.id != item.id } // чтобы удаление при поиске применилось к основному массиву
             delegate?.updateProducts(products: filterProducts) //чтобы увидеть удаление еще при поиске
+            StoreManager.shared.saveCustomData(object: products, forKey: .wishList) // сохраняем в бд
+            checkWishListEmpty()
         } else { // если удаляем вне поиска
             products = products.filter{ $0.id != item.id }
             delegate?.updateProducts(products: products)
+            StoreManager.shared.saveCustomData(object: products, forKey: .wishList) // сохраняем в бд
+            checkWishListEmpty()
         }
-    }
-    
-    func saveProducts(){ // вызываем во viewWillDisspear WishListVC
-        StoreManager.shared.saveCustomData(object: products, forKey: .wishList) // сохраняем в бд
     }
     
     func filterProductsInWishLIst(text: String){ // поиск по WishList в WishListVC
@@ -81,7 +83,29 @@ final class WishListManager{
                 self.delegate?.updateProducts(products: self.products)
             case .failure(let failure):
                 break //show alert
+
+    func checkWishListFillOrEmpty(){ // вызываем во viewWillAppear
+        products.isEmpty ? delegate?.emptyWishList() : delegate?.fillWishList()
+    }
+    
+    func appearWishListUpdate(){ // вызываем во viewWillAppear
+        delegate?.updateProducts(products: self.products)
+    }
+    
+    func getWishList(){ // вызываем во viewDidLoad HomeVC
+        StoreManager.shared.getCustomData(forKey: .wishList) { [ weak self ] (productsData: [Product]?) in
+            guard let self else { return }
+            if let productsData{
+                self.products = productsData
+            } else {
+                self.products = []
             }
+        }
+    }
+    
+    private func checkWishListEmpty(){
+        if products.isEmpty{
+            delegate?.emptyWishList()
         }
     }
 }
