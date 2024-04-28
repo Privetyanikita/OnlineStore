@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 import Route
 
-class DetailViewController: BaseViewController {
+final class DetailViewController: BaseViewController {
 
-    private let product: Product
+    private var product: Product
     private var cleanImageArray: [String] = .init()
     
     private let productCollectionView: UICollectionView = {
@@ -45,6 +45,7 @@ class DetailViewController: BaseViewController {
         configureViewController()
         setupNavBarItems()
         cleanImagesArray()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,6 +118,7 @@ class DetailViewController: BaseViewController {
         contentView.addSubview(productDescriptionView)
         contentView.addSubview(productBottomView)
         
+        productTitleView.delegate = self
         productCollectionView.dataSource = self
         productCollectionView.delegate = self
         productCollectionView.register(DetailCollectionViewCell.self, forCellWithReuseIdentifier: DetailCollectionViewCell.reuseID)
@@ -128,7 +130,7 @@ class DetailViewController: BaseViewController {
     
     private func configureItems() {
         // здесь нужно сделать проверку есть ли в массиве products из WishListManager наш продукт и если есть то у продукта поменять isFavorite на true и уже после конфигурировать productTitleView
-        productTitleView.configure(product: product.title, price: product.price)
+        productTitleView.configure(product: product.title, price: product.price, isFavorite: false)
         productDescriptionView.configure(with: product.description)
     }
     
@@ -158,7 +160,7 @@ class DetailViewController: BaseViewController {
             make.top.equalTo(productTitleView.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(290)
+            make.height.equalTo(200)
         }
         
         productBottomView.snp.makeConstraints { make in
@@ -228,4 +230,6 @@ extension DetailViewController: ProductTitleViewDelegateProtocol{
         print("Delete product")
     }
 }
+
+
 

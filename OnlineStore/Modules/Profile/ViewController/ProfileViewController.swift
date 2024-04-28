@@ -8,8 +8,17 @@
 import UIKit
 
 final class ProfileViewController: BaseViewController {
-    
-    private var user = ProfileUser(name: "User Name", mail: "newuser@gmail.com", password: "12345678", repeatPassword: "12345678")
+   
+    private var user: ProfileUser {
+        get {
+            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+            return ProfileUser(name: authUser?.name ?? "Unknown name", mail: authUser?.email ?? "Unknown email", password: "", repeatPassword: "", photo: nil)
+        }
+        set {
+            
+        }
+        
+    }
     
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
        CustomNavigationBarConfiguration(
