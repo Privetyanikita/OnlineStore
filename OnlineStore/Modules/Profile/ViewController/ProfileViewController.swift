@@ -12,13 +12,13 @@ final class ProfileViewController: BaseViewController {
     private var user = ProfileUser(name: "User Name", mail: "newuser@gmail.com", password: "12345678", repeatPassword: "12345678")
     
     override func configureNavigationBar() -> CustomNavigationBarConfiguration? {
-       CustomNavigationBarConfiguration(
-        title: Text.profile,
-        withSearchTextField: false,
-        isSetupBackButton: false,
-        rightButtons: [])
+        CustomNavigationBarConfiguration(
+            title: Text.profile,
+            withSearchTextField: false,
+            isSetupBackButton: false,
+            rightButtons: [])
     }
-
+    
     override func loadView() {
         super.loadView()
         setupView()
@@ -31,7 +31,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     private func setupView() {
-        let profileView = ProfileView(user: user)
+        let profileView = ProfileView(user: CurentUser())
         profileView.onEditPhotoTap = goToPhotoEdit
         profileView.onAccountTypeTap = goToAccountType
         profileView.onTermsTap = goToTerms
@@ -74,7 +74,7 @@ final class ProfileViewController: BaseViewController {
     
     private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message:
-          message, preferredStyle: .alert)
+                                                    message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: Text.cancel, style: .cancel))
         alertController.addAction(UIAlertAction(title: Text.signOut, style: .destructive
                                                 , handler: { _ in
@@ -94,5 +94,26 @@ final class ProfileViewController: BaseViewController {
             }
         }))
         self.present(alertController, animated: true, completion: nil)
-      }
+    }
+    
+    private func getCurrentUser() -> AuthDataResultModel? {
+        var currentUser: AuthDataResultModel?
+
+        do {
+            currentUser = try AuthenticationManager.shared.getAuthenticatedUser()
+            if let email = currentUser?.email {
+                print("Authenticated user: \(email)")
+            } else {
+                print("No email available")
+            }
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+        return currentUser
+    }
+    
+    private func CurentUser() -> ProfileUser {
+        let data = getCurrentUser()
+        return ProfileUser(name: data?.name, mail: (data?.email)!, password: "12345678", repeatPassword: "12345678")
+    }
 }
