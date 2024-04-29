@@ -68,6 +68,16 @@ struct NetworkManager {
         performRequest(with: request, completion: completion)
     }
     
+    func searchCategoriesByTitle(title: String, completion: @escaping (Result<[Product], NetworkError>) -> Void) {
+        let endPoint = EndPoint.searchCategoriesByTitle(title: title)
+        guard let url = createURL(for: endPoint, hostType: .productHost) else {
+            completion(.failure(.noData))
+            return
+        }
+        let request = URLRequest(url: url)
+        performRequest(with: request, completion: completion)
+    }
+    
     func fetchCountryCurrency(country: String, completion: @escaping (Result<[Country], NetworkError>) -> Void){
         let endPoint = EndPoint.getCurrency(country: country)
         guard let url = createURL(for: endPoint, hostType: .countryHost) else {

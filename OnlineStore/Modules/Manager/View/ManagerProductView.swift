@@ -7,24 +7,37 @@
 
 import UIKit
 import SnapKit
-
-protocol ManagerProductViewDelegate: AnyObject {
-    func changeProductCategoryTapped()
-}
+import Kingfisher
 
 class ManagerProductView: UIView {
     
     var onSelectImageTap: (() -> Void)?
-    var onMainActionButtonTap: (() -> Void)?
+    var onMainActionButtonTap: ((ProductPost?) -> Void)?
+    var setDelegate: (() -> (BaseViewController & UISearchBarDelegate))? {
+        didSet {
+            searchBar.delegate = setDelegate?()
+        }
+    }
     
     private let flow: ManagerFlow
-    private var product: Product?
+    private var productToChange: Product? {
+        didSet {
+            setupUpdateProductLayout()
+        }
+    }
+    private var product: ProductPost?
+    private var categories = [Category]() {
+        didSet {
+            self.category = categories.first?.name ?? ""
+            changeProductCategoryButton.showsMenuAsPrimaryAction = true
+            changeProductCategoryButton.menu = buttonMenu()
+        }
+    }
     
-    weak var delegate: ManagerProductViewDelegate?
-    
-    private var category = "Electronics" {
+    private var category = String() {
         didSet {
             changeProductCategoryButton.configuration?.attributedTitle = AttributedString(category, attributes: AttributeContainer([NSAttributedString.Key.font: Font.getFont(.medium, size: 14)]))
+            changeProductCategoryButton.configuration?.image = Image.chevronDown?.resizedImage(Size: CGSize(width: 14, height: 8))
         }
     }
     
@@ -44,7 +57,7 @@ class ManagerProductView: UIView {
     private lazy var priceLabel = managerProductLabel(title: "Price")
     private lazy var categoryLabel = managerProductLabel(title: "Category")
     private lazy var descriptionLabel = managerProductLabel(title: "Description")
-    private lazy var imagesLabel = managerProductLabel(title: "Images")
+    private lazy var imagesLabel = managerProductLabel(title: "Image")
     
     private lazy var titleField = managerProductField(placeholder: "Product title")
     private lazy var priceField = managerProductField(placeholder: "Product price", isNumField: true)
@@ -85,7 +98,7 @@ class ManagerProductView: UIView {
         descriptionTextView.layer.cornerRadius = 8
         descriptionTextView.layer.borderColor = UIColor.customLightGrey.cgColor
         descriptionTextView.layer.borderWidth = 2
-        descriptionTextView.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
+        descriptionTextView.textContainerInset = .init(top: 10, left: 3, bottom: 10, right: 3)
         
         return descriptionTextView
     }()
@@ -97,7 +110,6 @@ class ManagerProductView: UIView {
         button.configuration?.baseForegroundColor = .label
         button.configuration?.title = category
         button.contentHorizontalAlignment = .fill
-        button.configuration?.image = Image.chevronDown?.resizedImage(Size: CGSize(width: 14, height: 8))
         button.configuration?.imagePlacement = .trailing
         button.configuration?.imagePadding = 5
         button.layer.cornerRadius = 8
@@ -136,10 +148,22 @@ class ManagerProductView: UIView {
         return button
     }()
     
+    private let productImage: UIImageView = {
+        let productImage = UIImageView()
+        productImage.layer.cornerRadius = 8
+        productImage.clipsToBounds = true
+        productImage.contentMode = .scaleAspectFill
+        
+        return productImage
+    }()
+    
     init(flow: ManagerFlow) {
         self.flow = flow
         super.init(frame: .zero)
         setupUI()
+        if flow != .addNewProduct {
+            setupUpdateProductLayout()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -152,8 +176,6 @@ class ManagerProductView: UIView {
             setupFields()
             addSubview(searchBar)
         }
-        changeProductCategoryButton.showsMenuAsPrimaryAction = true
-        changeProductCategoryButton.menu = buttonMenu()
         let titleStack = UIStackView(arrangedSubviews: [titleLabel, priceLabel, categoryLabel, descriptionLabel, imagesLabel])
         titleStack.axis = .vertical
         titleStack.spacing = 20
@@ -164,6 +186,7 @@ class ManagerProductView: UIView {
         mainStack.axis = .horizontal
         mainStack.spacing = 20
         addSubview(mainStack)
+        addSubview(productImage)
         addSubview(mainActionButton)
         
         titleStack.arrangedSubviews.forEach({
@@ -200,7 +223,6 @@ class ManagerProductView: UIView {
             }
         }
         
-        
         mainStack.snp.makeConstraints { make in
             if flow != .addNewProduct {
                 make.top.equalTo(searchBar.snp.bottom).offset(20)
@@ -210,6 +232,12 @@ class ManagerProductView: UIView {
             make.leading.trailing.equalToSuperview().inset(20)
         }
         
+        productImage.snp.makeConstraints { make in
+            make.top.equalTo(mainStack.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(fieldStack)
+            make.height.equalTo(128)
+        }
+        
         mainActionButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(mainStack)
             make.bottom.equalTo(safeAreaLayoutGuide).inset(30)
@@ -217,33 +245,15 @@ class ManagerProductView: UIView {
     }
     
     private func buttonMenu() -> UIMenu {
-        let category1 = UIAction(title: "Clothes", image: nil) { action in
-            self.category = action.title
-        }
+        var actions = [UIAction]()
         
-        let category2 = UIAction(title: "Furniture", image: nil) { action in
-            self.category = action.title
+        for cat in categories {
+            let action = UIAction(title: cat.name, image: nil) { action in
+                self.category = action.title
+            }
+            actions.append(action)
         }
-        
-        let category3 = UIAction(title: "Shoes", image: nil) { action in
-            self.category = action.title
-        }
-        
-        let category4 = UIAction(title: "Miscellaneous", image: nil) { action in
-            self.category = action.title
-        }
-        
-        let category5 = UIAction(title: "Books", image: nil) { action in
-            self.category = action.title
-        }
-        
-        return UIMenu(title: "", options: .displayInline, children: [
-            category1,
-            category2,
-            category3,
-            category4,
-            category5
-        ])
+        return UIMenu(title: "", options: .displayInline, children: actions)
     }
     
     private func setupFields() {
@@ -264,13 +274,60 @@ class ManagerProductView: UIView {
         
         guard let product else { return }
         titleField.text = product.title
-        priceField.text = String(product.price)
+        priceField.text = "\(product.price ?? 0)"
         descriptionTextView.text = product.description
+    }
+    
+    func setupCategories(_ categories: [Category]) {
+        self.categories = categories
+    }
+    
+    func setupImage(image: UIImage?) {
+        productImage.image = image
+        if productImage.image != nil {
+            selectImageButton.setTitle("Change image", for: .normal)
+        } else {
+            selectImageButton.setTitle("Select image", for: .normal)
+        }
+    }
+    
+    func setupProductToChange(_ product: Product) {
+        self.productToChange = product
+    }
+    
+    private func setupUpdateProductLayout() {
+        if let productToChange {
+            subviews.forEach({
+                $0.isHidden = false
+            })
+            if flow == .deleteCategory {
+                selectImageButton.setTitle(nil, for: .normal)
+            }
+            titleField.text = productToChange.title
+            priceField.text = String(productToChange.price)
+            category = productToChange.category?.name ?? "no category"
+            descriptionTextView.text = productToChange.description
+            let cleanImageURl = productToChange.images.first!.cleanImageUrl()
+            productImage.kf.setImage(with: URL(string: cleanImageURl))
+            if productImage.image != nil {
+                selectImageButton.setTitle("Change image", for: .normal)
+            } else {
+                selectImageButton.setTitle("Select image", for: .normal)
+            }
+            
+        } else {
+            subviews.forEach({
+                if $0 == searchBar || $0 == mainActionButton {
+                    return
+                } else {
+                    $0.isHidden = true
+                }
+            })
+        }
     }
     
     @objc private func changeProductCategory(_ sender: UIButton) {
         print("Change Product Category button tapped")
-        delegate?.changeProductCategoryTapped()
     }
     
     @objc private func selectImageButtonTapped(_ sender: UIButton) {
@@ -279,8 +336,32 @@ class ManagerProductView: UIView {
     }
     
     @objc private func mainActionButtonTapped(_ sender: UIButton) {
-        print("\(mainActionButton.currentTitle!) button tapped")
-        onMainActionButtonTap?()
+        print("\(mainActionButton.currentTitle ?? "") button tapped")
+        var catID: Int?
+        categories.forEach({
+            if $0.name == category {
+                catID = $0.id
+            }
+        })
+        if let image = productImage.image {
+            NetworkManager.shared.uploadImage(image: image) { result in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    switch result {
+                    case .success(let url):
+                        print(url)
+                        product = ProductPost(title: titleField.text, price: Int(priceField.text ?? "0"), description: descriptionTextView.text, categoryID: catID, images: [url])
+                        onMainActionButtonTap?(product)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        product = ProductPost(title: titleField.text, price: Int(priceField.text ?? "0"), description: descriptionTextView.text, categoryID: catID, images: ["https://placeimg.com/640/480/any"])
+                        onMainActionButtonTap?(product)
+                    }
+                }
+            }
+        } else {
+            onMainActionButtonTap?(product)
+        }
     }
 
 }
