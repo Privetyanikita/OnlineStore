@@ -128,6 +128,14 @@ class DetailViewController: BaseViewController {
     
     private func configureItems() {
         // здесь нужно сделать проверку есть ли в массиве products из WishListManager наш продукт и если есть то у продукта поменять isFavorite на true и уже после конфигурировать productTitleView
+        WishListManager.shared.getWishList()
+        let wishList = WishListManager.shared.products
+        wishList.forEach({
+            if $0.id == product.id {
+                productTitleView.isFavoriteProduct = true
+                print(productTitleView.isFavoriteProduct)
+            }
+        })
         productTitleView.configure(product: product.title, price: product.price)
         productDescriptionView.configure(with: product.description)
     }

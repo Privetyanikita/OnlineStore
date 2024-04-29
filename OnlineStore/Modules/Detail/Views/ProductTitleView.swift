@@ -87,6 +87,7 @@ class ProductTitleView: UIView {
         productNameLabel.text = name
         priceLabel.configPriceLabel(priceTitle: price, type: .left)
         favoriteProductButton.addTarget(self, action: #selector(isFavoriteTapped), for: .touchUpInside)
+        favoriteProductButton.configuration?.image = isFavoriteProduct == true ? Image.isLikedHeart : Image.emptyHeart
     }
     
     

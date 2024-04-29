@@ -48,7 +48,12 @@ final class ProfileViewController: BaseViewController {
     }
     
     private func goToAccountType() {
-        
+        let actionSheet = UIAlertController(title: "Select Account Type", message: nil, preferredStyle: .actionSheet)
+        let managerAction = UIAlertAction(title: "Manager", style: .default)
+        let userAction = UIAlertAction(title: "User", style: .default)
+        actionSheet.addAction(managerAction)
+        actionSheet.addAction(userAction)
+        present(actionSheet, animated: true)
     }
     
     private func goToTerms() {
@@ -62,8 +67,9 @@ final class ProfileViewController: BaseViewController {
     }
     
     private func finishPhotoEditing(photo: UIImage?) {
-        user.photo = photo
-        setupView()
+        if let profileView = view as? ProfileView {
+            profileView.setupImage(photo)
+        }
     }
     
     private func showAlert(title: String, message: String) {
