@@ -64,16 +64,7 @@ struct NetworkManager {
             completion(.failure(.noData))
             return
         }
-        let request = URLRequest(url: url)
-        performRequest(with: request, completion: completion)
-    }
-    
-    func searchCategoriesByTitle(title: String, completion: @escaping (Result<[Product], NetworkError>) -> Void) {
-        let endPoint = EndPoint.searchCategoriesByTitle(title: title)
-        guard let url = createURL(for: endPoint, hostType: .productHost) else {
-            completion(.failure(.noData))
-            return
-        }
+        print(url)
         let request = URLRequest(url: url)
         performRequest(with: request, completion: completion)
     }

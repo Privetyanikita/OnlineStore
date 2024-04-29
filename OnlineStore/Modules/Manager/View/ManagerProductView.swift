@@ -13,9 +13,11 @@ class ManagerProductView: UIView {
     
     var onSelectImageTap: (() -> Void)?
     var onMainActionButtonTap: ((ProductPost?) -> Void)?
-    var setDelegate: (() -> (BaseViewController & UISearchBarDelegate))? {
+    var setDelegate: (() -> (BaseViewController & UISearchBarDelegate & UITextFieldDelegate))? {
         didSet {
             searchBar.delegate = setDelegate?()
+            titleField.delegate = setDelegate?()
+            priceField.delegate = setDelegate?()
         }
     }
     
@@ -171,6 +173,9 @@ class ManagerProductView: UIView {
     }
     
     private func setupUI() {
+        isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapOutsideTF))
+        addGestureRecognizer(tap)
         backgroundColor = .systemBackground
         if flow == .updateProduct || flow == .deleteProduct {
             setupFields()
@@ -300,8 +305,8 @@ class ManagerProductView: UIView {
             subviews.forEach({
                 $0.isHidden = false
             })
-            if flow == .deleteCategory {
-                selectImageButton.setTitle(nil, for: .normal)
+            if flow == .deleteProduct {
+                selectImageButton.setTitle("", for: .normal)
             }
             titleField.text = productToChange.title
             priceField.text = String(productToChange.price)
@@ -326,12 +331,12 @@ class ManagerProductView: UIView {
         }
     }
     
-    @objc private func changeProductCategory(_ sender: UIButton) {
-        print("Change Product Category button tapped")
+    @objc private func tapOutsideTF() {
+        descriptionTextView.resignFirstResponder()
     }
     
     @objc private func selectImageButtonTapped(_ sender: UIButton) {
-        print("Change Product Category button tapped")
+        print("Select image button tapped")
         onSelectImageTap?()
     }
     

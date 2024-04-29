@@ -14,7 +14,6 @@ enum EndPoint {
     case getCategories
     case getFilteredProducts(limit: Int?, offset: Int?, categoryId: Int?)
     case searchProductsByTitle(title: String)
-    case searchCategoriesByTitle(title: String)
     case getCurrency(country: String)
     //post
     case createProduct
@@ -33,7 +32,7 @@ enum EndPoint {
             return "/api/v1/products"
         case .getProductDetails(let id), .changeProduct(let id), .deleteProduct(let id):
             return "/api/v1/products/\(id)"
-        case .getCategories, .searchCategoriesByTitle:
+        case .getCategories:
             return "/api/v1/categories"
         case .createCategory:
             return "/api/v1/categories/"

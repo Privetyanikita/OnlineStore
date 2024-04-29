@@ -34,8 +34,13 @@ class ManagerProductViewController: BaseViewController {
        return CustomNavigationBarConfiguration(
         title: navBarTitle,
         withSearchTextField: false,
-        isSetupBackButton: false,
+        isSetupBackButton: true,
         rightButtons: [])
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        hookUpNavBarButtons()
     }
     
     init(flow: ManagerFlow) {
@@ -55,6 +60,10 @@ class ManagerProductViewController: BaseViewController {
         managerProductView.onMainActionButtonTap = handleProduct(product:)
         managerProductView.setDelegate = {self}
         view = managerProductView
+    }
+    
+    private func hookUpNavBarButtons() {
+        customNavigationBar.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     private func setupCategories() {
@@ -193,6 +202,11 @@ class ManagerProductViewController: BaseViewController {
             }
         }
     }
+    
+    @objc private func backButtonTapped() {
+        print("Back button tapped")
+        dismiss(animated: true)
+    }
 
 }
 
@@ -214,4 +228,11 @@ extension ManagerProductViewController: UISearchBarDelegate {
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }
+}
+
+extension ManagerProductViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+    }
+
 }
