@@ -104,7 +104,11 @@ class ProfileView: UIView {
     }
     
     func setupImage(_ image: UIImage?) {
-        
+        if let image {
+            profileImage.image = image
+        } else {
+            profileImage.image = .onlineStoreIconGreen
+        }
     }
     
     private func setupUI(with user: ProfileUser) {
