@@ -64,6 +64,7 @@ struct NetworkManager {
             completion(.failure(.noData))
             return
         }
+        print(url)
         let request = URLRequest(url: url)
         performRequest(with: request, completion: completion)
     }

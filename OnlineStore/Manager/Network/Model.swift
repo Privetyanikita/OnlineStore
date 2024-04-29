@@ -13,6 +13,7 @@ struct Product: Codable, Hashable {
     let price: Int
     let description: String
     let images: [String]
+    let category: Category?
 }
 
 struct ProductPost: Codable, Hashable {

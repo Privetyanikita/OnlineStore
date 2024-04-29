@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 enum ManagerFlow {
     case addNewProduct
     case updateProduct
@@ -81,5 +79,6 @@ class ManagerViewController: BaseViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
+
 
 }

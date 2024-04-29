@@ -40,7 +40,7 @@ class PhotoEditView: UIView {
         titleLabel.font = Font.getFont(.medium, size: 24)
         titleLabel.textColor = .darkGray
         titleLabel.textAlignment = .center
-        titleLabel.text = "Change your picture"
+        titleLabel.text = "Change picture"
         
         return titleLabel
     }()
