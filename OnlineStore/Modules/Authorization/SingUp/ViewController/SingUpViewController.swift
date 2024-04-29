@@ -257,6 +257,7 @@ final class SingUpViewController: BaseViewController {
     @objc func signUpTapped(_ sender: UIButton) {
         self.showLoadingView()
         let email = profileUser.mail
+        let name = profileUser.name
         let password = profileUser.password
         let repeatPassword = profileUser.repeatPassword
         
@@ -272,9 +273,15 @@ final class SingUpViewController: BaseViewController {
             return
         }
         
+        guard let name else {
+            print("Name is empty!")
+            self.dismissLoadingView()
+            return
+        }
+        
         Task {
             do {
-                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
+                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password, name: name)
                 print(">> SUCCESS!")
                 guard let email = returnedUserData.email else { return }
                 let homeViewController = CustomTabBar()
