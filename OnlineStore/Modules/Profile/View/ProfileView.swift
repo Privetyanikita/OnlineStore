@@ -103,6 +103,10 @@ class ProfileView: UIView {
         addGestureRecognizer(tap)
     }
     
+    func setupImage(_ image: UIImage?) {
+        
+    }
+    
     private func setupUI(with user: ProfileUser) {
         backgroundColor = .white
         if let photo = user.photo {
