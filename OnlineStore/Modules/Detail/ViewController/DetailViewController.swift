@@ -11,7 +11,7 @@ import Route
 
 class DetailViewController: BaseViewController {
 
-    private let product: Product
+    private var product: Product
     private var cleanImageArray: [String] = .init()
     
     private let productCollectionView: UICollectionView = {
@@ -128,7 +128,13 @@ class DetailViewController: BaseViewController {
     
     private func configureItems() {
         // здесь нужно сделать проверку есть ли в массиве products из WishListManager наш продукт и если есть то у продукта поменять isFavorite на true и уже после конфигурировать productTitleView
-        productTitleView.configure(product: product.title, price: product.price)
+        if WishListManager.shared.products.contains(product) {
+            product.isFavorite = true
+        } else {
+            product.isFavorite = false
+        }
+        guard let isFavorite = product.isFavorite else { return }
+        productTitleView.configure(product: product.title, price: product.price, isFavorite: isFavorite)
         productDescriptionView.configure(with: product.description)
     }
     
@@ -219,8 +225,16 @@ extension DetailViewController: ProductBottomViewDelegate{
 // MARK: - ProductTitleViewDelegateProtocol Save or Delete to WishList
 extension DetailViewController: ProductTitleViewDelegateProtocol{
     func addToWishList() {
-        WishListManager.shared.saveProduct(item: product)
-        print("Save product")
+//        WishListManager.shared.saveProduct(item: product)
+        print("\(WishListManager.shared.products.count)")
+        if !WishListManager.shared.products.contains(product) {
+            DatabaseManager.shared.insertProduct(with: product) { bool in
+                if bool {
+                    print("Product saved")
+                }
+            }
+        }
+        print(">>> already saved!")
     }
     
     func deleteFromWishList() {

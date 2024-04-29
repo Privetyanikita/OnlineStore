@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct Product: Codable, Hashable {
     let id: Int
@@ -13,6 +14,44 @@ struct Product: Codable, Hashable {
     let price: Int
     let description: String
     let images: [String]
+    var isFavorite: Bool?
+    
+    public static func == (lhs: Product, rhs: Product) -> Bool {
+        return lhs.title == rhs.title
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    // MARK: Initialize with Raw Data
+    init(id: Int, title: String, price: Int, description: String, images: [String], isFavorite: Bool? = false) {
+        self.id = id
+        self.title = title
+        self.price = price
+        self.description = description
+        self.images = images
+        self.isFavorite = isFavorite
+    }
+    
+    // MARK: Initialize with Firebase DataSnapshot
+    init?(snapshot: DataSnapshot) {
+      guard
+        let value = snapshot.value as? [String: AnyObject],
+        let title = value["product_title"] as? String,
+        let price = value["product_price"] as? Int,
+        let images = value["product_images"] as? [String],
+        let id = value["product_id"] as? Int,
+        let description = value["product_description"] as? String
+      else {
+        return nil
+      }
+      self.id = id
+      self.title = title
+      self.price = price
+      self.images = images
+      self.description = description
+    }
 }
 
 struct ProductPost: Codable, Hashable {

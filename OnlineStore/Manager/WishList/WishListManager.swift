@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 protocol WishListManagerProtocol: AnyObject {
     func updateProducts(products: [Product] )
@@ -22,6 +23,8 @@ final class WishListManager{
     private (set) var products: [Product] = []
     private var filterProducts: [Product] = .init()
     private var filter: Bool = false
+    var refObservers: [DatabaseHandle] = []
+    let ref = Database.database().reference(withPath: "Products")
     
     func saveProduct(item: Product){ // сохраняем в DetailVC
         products.append(item)
@@ -59,18 +62,23 @@ final class WishListManager{
     }
     
     func appearWishListUpdate(){ // вызываем во viewWillAppear
+        let completed = ref.observe(.value, with: { snapshot in
+            var newItems: [Product] = []
+            
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let productItem = Product(snapshot: snapshot) {
+                    newItems.append(productItem)
+                }
+            }
+            self.products = newItems
+        })
+        refObservers.append(completed)
         delegate?.updateProducts(products: self.products)
     }
-    
+
     func getWishList(){ // вызываем во viewDidLoad HomeVC
-//        StoreManager.shared.getCustomData(forKey: .wishList) { [ weak self ] (productsData: [Product]?) in
-//            guard let self else { return }
-//            if let productsData{
-//                self.products = productsData
-//            } else {
-//                self.products = []
-//            }
-//        }
+
         DatabaseManager.shared.getAllProducts { result in
                     switch result {
                     case .success(let success):

@@ -83,20 +83,22 @@ class ProductTitleView: UIView {
     }
     
     
-    func configure(product name: String, price: Int) {
+    func configure(product name: String, price: Int, isFavorite: Bool) {
         productNameLabel.text = name
         priceLabel.configPriceLabel(priceTitle: price, type: .left)
         favoriteProductButton.addTarget(self, action: #selector(isFavoriteTapped), for: .touchUpInside)
+        favoriteProductButton.configuration?.image = isFavorite == true ? Image.isLikedHeart : Image.emptyHeart
+        isFavoriteProduct = isFavorite
     }
     
     
     @objc private func isFavoriteTapped() {
+        if isFavoriteProduct == true {
+            delegate?.deleteFromWishList()
+        } else {
+            delegate?.addToWishList()
+        }
         isFavoriteProduct = !isFavoriteProduct
         favoriteProductButton.configuration?.image = isFavoriteProduct == true ? Image.isLikedHeart : Image.emptyHeart
-        if isFavoriteProduct == true{
-            delegate?.addToWishList()
-        } else {
-            delegate?.deleteFromWishList()
-        }
     }
 }

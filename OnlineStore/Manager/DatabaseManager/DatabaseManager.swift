@@ -40,7 +40,7 @@ extension DatabaseManager {
             "product_description": product.description,
             "product_images": product.images
         ]
-        database.child("Products").childByAutoId().setValue(productDetail) { error, _ in
+        database.child("Products").child("\(product.title)").setValue(productDetail) { error, _ in
             guard error == nil else {
                 completion(false)
                 return
@@ -51,7 +51,7 @@ extension DatabaseManager {
     
     
     public func getAllProducts(completion: @escaping (Result<[String: Any], DatabaseError>) -> Void) {
-        database.child("Products").observeSingleEvent(of: .value) { snapshot, _  in
+        database.child("Products").observe(.value) { snapshot, _  in
             guard let value = snapshot.value as? [String: Any] else {
                 completion(.failure(DatabaseError.unableToFetchProducts))
                 return
@@ -81,6 +81,9 @@ extension DatabaseManager {
         }
     
     
+    public func removeProduct(with id: String) {
+       // remove item from Firebase database
+    }
     
     
 }
