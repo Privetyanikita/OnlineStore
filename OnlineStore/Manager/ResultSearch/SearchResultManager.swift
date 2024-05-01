@@ -39,7 +39,8 @@ final class SearchResultManager{
         case .deleteAll:
             saveSearches = []
             self.delegate?.updateSaveSearches(saveSearches: saveSearches)
-            StoreManager.shared.remove(forKey: .saveSearches)
+            StoreManager.shared.saveCustomData(object: saveSearches,
+                                               forKey: .saveSearches)
         }
     }
     
