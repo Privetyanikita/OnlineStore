@@ -31,6 +31,6 @@
 - [Polychh](https://github.com/Polychh)
 - [ridebyhorse](https://github.com/ridebyhorse)
 ---
-<img src="https://github.com/Privetyanikita/OnlineStore/tree/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/FirstGif.GIF" width="300"/>
-<img src="https://github.com/Privetyanikita/OnlineStore/tree/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/SecondGif.GIF" width="300"/>
-<img src="https://github.com/Privetyanikita/OnlineStore/tree/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ThirdGif.GIF" width="300"/>
+<img src="https://github.com/Privetyanikita/OnlineStore/tree/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/FirstGif.dataset/FirstGif.GIF" width="300"/>
+<img src="https://github.com/Privetyanikita/OnlineStore/tree/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/SecondGif.dataset/SecondGif.GIF" width="300"/>
+<img src="https://github.com/Privetyanikita/OnlineStore/tree/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ThirdGif.dataset/ThirdGif.GIF" width="300"/>
