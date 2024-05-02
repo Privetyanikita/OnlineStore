@@ -21,6 +21,7 @@ final class ProfileViewController: BaseViewController {
     
     override func loadView() {
         super.loadView()
+        getUserRoleWithID()
         setupView()
     }
     
@@ -28,6 +29,16 @@ final class ProfileViewController: BaseViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func getUserRoleWithID(){
+        StoreManager.shared.getUserRole(forKey: .userRoleID) { role in
+            guard role != nil else {
+                print("Set Default Role User")
+                StoreManager.shared.saveUserRole(Text.roleUser, forKey: .userRoleID) // сохраняем для существующих пользователей(аккаунты до доавления смены роли для пользователя), или для пользователей, которые не выбрали роль при регистрации  роль по умолчанию - User с учетом их id
+                return
+            }
+        }
     }
     
     private func setupView() {
@@ -49,11 +60,50 @@ final class ProfileViewController: BaseViewController {
     
     private func goToAccountType() {
         let actionSheet = UIAlertController(title: "Select Account Type", message: nil, preferredStyle: .actionSheet)
-        let managerAction = UIAlertAction(title: "Manager", style: .default)
-        let userAction = UIAlertAction(title: "User", style: .default)
+        let managerAction = UIAlertAction(title: "Manager",  style: .default) { _ in
+            let managerAlert = UIAlertController(title: "Manager Account", message: "Enter Manager Password", preferredStyle: .alert)
+            
+            managerAlert.addTextField { textField in
+                textField.placeholder = "Password"
+                textField.isSecureTextEntry = true
+            }
+            
+            let submitAction = UIAlertAction(title: "Submit", style: .default) { _ in
+                let password = managerAlert.textFields?.first?.text ?? ""
+                if password == Text.managerPassword{
+                    print("correct password")
+                    self.saveNewRoleForUser(role: Text.roleManager)// сохранить роль Manager и после проверку есть в таб баре манеджер
+                } else {
+                    let errorAlert = UIAlertController(title: "Error", message: "Incorrect Manager Password", preferredStyle: .alert)
+                    let cancel = UIAlertAction(title: "OK", style: .cancel)
+                    errorAlert.addAction(cancel)
+                    self.present(errorAlert, animated: true)
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            managerAlert.addAction(submitAction)
+            managerAlert.addAction(cancelAction)
+            
+            self.present(managerAlert, animated: true)
+        }
+        
+        let userAction = UIAlertAction(title: "User", style: .default) { _ in
+            self.saveNewRoleForUser(role: Text.roleUser)// сохранить роль User и после проверку есть в таб баре манеджер
+        }
+        
         actionSheet.addAction(managerAction)
         actionSheet.addAction(userAction)
+        
         present(actionSheet, animated: true)
+    }
+    
+    private func saveNewRoleForUser(role: String){
+        StoreManager.shared.saveUserRole(role, forKey: .userRoleID)
+        if let tabBar = self.tabBarController as? CustomTabBar {
+            tabBar.updateTabBarAccordingUserRole()
+        }
     }
     
     private func goToTerms() {
@@ -79,6 +129,7 @@ final class ProfileViewController: BaseViewController {
         alertController.addAction(UIAlertAction(title: Text.signOut, style: .destructive
                                                 , handler: { _ in
             print(">> Go to SIGN OUT flow")
+            AuthenticationManager.shared.setUserRoleWhenRegistration(role: "") // чистим роль текущего пользователя в AuthenticationManager, чтобы при смене аккаунта не подтягивалась роль предыдущего пользователя в методе reSaveUserRoleWithID() в СustomTabBar
             do {
                 try AuthenticationManager.shared.signOut()
                 //go to ondoarding + login flow

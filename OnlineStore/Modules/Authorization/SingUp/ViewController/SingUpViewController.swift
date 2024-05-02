@@ -302,12 +302,25 @@ final class SingUpViewController: BaseViewController {
     
     @objc func typeOfAccountTapped(_ sender: UIButton) {
         print(">> Go to TYPE OF ACCOUNT flow")
+        let actionSheet = UIAlertController(title: "Select Account Type", message: nil, preferredStyle: .actionSheet)
+        let managerAction = UIAlertAction(title: "Manager",  style: .default) { _ in
+            AuthenticationManager.shared.setUserRoleWhenRegistration(role: Text.roleManager)
+        }
+        
+        let userAction = UIAlertAction(title: "User", style: .default) { _ in
+            AuthenticationManager.shared.setUserRoleWhenRegistration(role: Text.roleUser)
+        }
+        
+        actionSheet.addAction(managerAction)
+        actionSheet.addAction(userAction)
+        
+        present(actionSheet, animated: true)
     }
-    
     
     deinit {
         print(">> deinit from SingUpViewController")
     }
+    
 }
 
 

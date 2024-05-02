@@ -67,4 +67,7 @@ enum Text {
     static let createCategory = "Create category"
     static let updateCategory = "Update category"
     static let deleteCategory = "Delete category"
+    static let roleUser = "User"
+    static let roleManager = "Manager"
+    static let managerPassword = "manager123"
 }
