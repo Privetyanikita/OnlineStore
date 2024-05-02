@@ -35,6 +35,16 @@ final class AuthenticationManager {
     
     private init() {}
     
+    private var userRole: String = .init()
+    
+    func setUserRoleWhenRegistration(role: String){
+         userRole = role
+    }
+    
+    func getUserRoleAfterRegistration() -> String{
+        userRole
+    }
+    
     func getAuthenticatedUser() throws -> AuthDataResultModel {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)

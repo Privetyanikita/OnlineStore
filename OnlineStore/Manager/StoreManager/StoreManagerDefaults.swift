@@ -10,7 +10,7 @@ import FirebaseAuth
 
 final class StoreManager{
     public enum Keys: String{
-        case onbording
+        case userRoleID
         case cart
         case saveSearches
         case wishList
@@ -32,9 +32,11 @@ final class StoreManager{
         userDefaults.object(forKey: key)
     }
 
-    func saveOnbording(_ object: Any?, forKey key: Keys) {
+    func saveUserRole(_ object: Any?, forKey key: Keys) {
         queueStore.async {
-            self.save(object: object, forKey: key.rawValue)
+            guard let currentUserUId = Auth.auth().currentUser?.uid else { return }
+            self.save(object: object, forKey: key.rawValue + currentUserUId)
+            print("Save UserWithId Role")
         }
     }
 
@@ -48,9 +50,13 @@ final class StoreManager{
         }
     }
     
-    func getOnbording(forKey key: Keys, completion: @escaping (Bool?) -> Void){
-        let status = getSavedObject(forKey: key.rawValue) as? Bool
-        completion(status)
+    func getUserRole(forKey key: Keys, completion: @escaping (String?) -> Void){
+        queueStore.async {
+            guard let currentUserUId = Auth.auth().currentUser?.uid else { return }
+            let role = self.getSavedObject(forKey: key.rawValue + currentUserUId) as? String
+            print("Get UserWithId Role")
+            completion(role)
+        }
     }
     
     func getCustomData<T: Decodable>(forKey key: Keys, completion: @escaping (T?) -> Void) {
@@ -73,6 +79,7 @@ final class StoreManager{
     func remove(forKey key:  Keys){
         queueStore.async {
             self.userDefaults.removeObject(forKey: key.rawValue)
+            print("remove for \(key.rawValue)")
         }
     }
 
