@@ -35,5 +35,5 @@
 <img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/FirstGif.dataset/FirstGif.GIF?raw=true" width="300">
 <img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/SecondGif.dataset/SecondGif.GIF?raw=true" width="300">
 <img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ThirdGif.dataset/ThirdGif.GIF?raw=true" width="300">
-<img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ThirdGif.dataset/ManagerUserType.gif?raw=true" width="300">
+<img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ManagerUserType.dataset/ManagerUserType.gif?raw=true" width="300">
 </div>
