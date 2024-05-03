@@ -32,7 +32,8 @@
 - [ridebyhorse](https://github.com/ridebyhorse)
 ---
 <div style="display: flex; flex-direction: row; justify-content: space-between;">
-  <img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/FirstGif.dataset/FirstGif.GIF?raw=true" width="300">
-  <img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/SecondGif.dataset/SecondGif.GIF?raw=true" width="300">
-  <img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ThirdGif.dataset/ThirdGif.GIF?raw=true" width="300">
+<img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/FirstGif.dataset/FirstGif.GIF?raw=true" width="300">
+<img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/SecondGif.dataset/SecondGif.GIF?raw=true" width="300">
+<img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ThirdGif.dataset/ThirdGif.GIF?raw=true" width="300">
+<img src="https://github.com/Privetyanikita/OnlineStore/blob/develop/OnlineStore/SupportFile/Assets.xcassets/Readme/ThirdGif.dataset/ManagerUserType.gif?raw=true" width="300">
 </div>
